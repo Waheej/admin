@@ -1,30 +1,13 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Dashboard\ActivityLogController;
 use App\Http\Controllers\Dashboard\AdminController;
-use App\Http\Controllers\Dashboard\AmenityController;
-use App\Http\Controllers\Dashboard\AppSettingController;
-use App\Http\Controllers\Dashboard\AreaController;
-use App\Http\Controllers\Dashboard\CareerController;
-use App\Http\Controllers\Dashboard\CashDiscountController;
-use App\Http\Controllers\Dashboard\CompoundController;
 use App\Http\Controllers\Dashboard\ContactMessageController;
-use App\Http\Controllers\Dashboard\DeveloperController;
-use App\Http\Controllers\Dashboard\DownPaymentController;
 use App\Http\Controllers\Dashboard\InfoPageController;
-use App\Http\Controllers\Dashboard\InstallmentController;
-use App\Http\Controllers\Dashboard\LaunchController;
-use App\Http\Controllers\Dashboard\MediaFolderController;
-use App\Http\Controllers\Dashboard\MeetingController;
-use App\Http\Controllers\Dashboard\PaymentComponentController;
-use App\Http\Controllers\Dashboard\PaymentPlanController;
-use App\Http\Controllers\Dashboard\PropertyController;
+use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\Dashboard\RoleController;
-use App\Http\Controllers\Dashboard\SellRequestController;
 use App\Http\Controllers\HomeController;
 use App\Models\Admin;
-use App\Models\InfoPage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -78,6 +61,16 @@ Route::group(['middleware' => ['localization']], function () {
         Route::resource('info_pages', InfoPageController::class);
         Route::put('/info_pages/{id}/toggleActivity', [InfoPageController::class, 'toggleActivity'])->name('info_pages.toggleActivity');
 
+        // ContactMessages
+        Route::get('/contact_messages', [ContactMessageController::class, 'index'])->name('contact_messages.index');
+        Route::get('/contact_messages/{contact_message}', [ContactMessageController::class, 'show'])->name('contact_messages.show');
+        Route::get('/contact_messages/{contact_message}/edit', [ContactMessageController::class, 'edit'])->name('contact_messages.edit');
+        Route::put('/contact_messages/{contact_message}', [ContactMessageController::class, 'update'])->name('contact_messages.update');
+
+
+        // Projects
+        Route::resource('projects', ProjectController::class);
+        Route::put('/projects/{id}/toggleActivity', [ProjectController::class, 'toggleActivity'])->name('projects.toggleActivity');
         // end
     });
 });

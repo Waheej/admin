@@ -23,5 +23,6 @@ enum MapEnums
         'Currencies' => GeneralEnums::Currencies,
         'LogActionsMap' => GeneralEnums::LogActionsMap,
         'PermissionActions' => GeneralEnums::PermissionActions,
+        'ProjectStatuses' => GeneralEnums::ProjectStatuses,
     ];
 }

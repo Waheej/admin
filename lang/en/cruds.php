@@ -2,13 +2,13 @@
 
 return array (
   'home' => 'Home',
-  'menu' =>
+  'menu' => 
   array (
     'dashboard' => 'Dashboard',
     'user_management' => 'User Management',
     'support' => 'Support',
   ),
-  'admins' =>
+  'admins' => 
   array (
     'title_plural' => 'Admins',
     'title_singular' => 'Admin',
@@ -24,7 +24,7 @@ return array (
     'module' => 'Module',
     'permissions' => 'Permissions',
   ),
-  'roles' =>
+  'roles' => 
   array (
     'title_plural' => 'Roles',
     'title_singular' => 'Role',
@@ -36,7 +36,7 @@ return array (
     'module' => 'Module',
     'permissions' => 'Permissions',
   ),
-  'info_pages' =>
+  'info_pages' => 
   array (
     'title_plural' => 'InfoPages',
     'title_singular' => 'InfoPage',
@@ -54,6 +54,35 @@ return array (
     'media_path' => 'Media',
     'file_not_supported' => 'File Not Supported',
   ),
-  
+  'projects' => 
+  array (
+    'title_plural' => 'Projects',
+    'title_singular' => 'Project',
+    'name_en' => 'NameEn',
+    'name_ar' => 'NameAr',
+    'description_en' => 'DescriptionEn',
+    'description_ar' => 'DescriptionAr',
+    'status' => 'Status',
+    'lat' => 'Lat',
+    'long' => 'Long',
+    'price' => 'Price',
+    'location' => 'Location',
+    'is_active' => 'IsActive',
+    'created_at' => 'CreatedAt',
+    'updated_at' => 'UpdatedAt',
+    'deleted_at' => 'DeletedAt',
+  ),
+  'contact_messages' =>
+  array (
+    'title_plural' => 'ContactMessages',
+    'title_singular' => 'ContactMessage',
+    'name' => 'Name',
+    'country_code' => 'CountryCode',
+    'mobile' => 'Mobile',
+    'email' => 'Email',
+    'message' => 'Message',
+    'status' => 'Status',
+    'project_id' => 'Project',
+  ),
 );
 // end

@@ -1,15 +1,15 @@
 <?php
 
-return array(
+return array (
   'home' => 'الرئيسيه',
-  'menu' =>
-  array(
+  'menu' => 
+  array (
     'dashboard' => 'لوحة التحكم',
     'user_management' => 'ادارة المستخدمين',
     'support' => 'الدعم',
   ),
-  'admins' =>
-  array(
+  'admins' => 
+  array (
     'title_plural' => 'المديرين',
     'title_singular' => 'المدير',
     'full_name' => 'اﻻسم بالكامل ',
@@ -24,8 +24,8 @@ return array(
     'module' => 'الوحدة',
     'permissions' => 'الأذونات',
   ),
-  'roles' =>
-  array(
+  'roles' => 
+  array (
     'title_plural' => 'الأدوار',
     'title_singular' => 'دور',
     'title_en' => 'العنوان بالإنجليزية',
@@ -36,8 +36,8 @@ return array(
     'module' => 'الوحدة',
     'permissions' => 'الأذونات',
   ),
-  'info_pages' =>
-  array(
+  'info_pages' => 
+  array (
     'title_plural' => 'صفحات المعلومات',
     'title_singular' => 'صفحة المعلومات',
     'title_en' => 'العنوان بالإنجليزية',
@@ -53,6 +53,37 @@ return array(
     'deleted_at' => 'تاريخ الحذف',
     'media_path' => 'الميديا',
     'file_not_supported' => 'الملف غير مدعوم',
+  ),
+  'projects' => 
+  array (
+    'title_plural' => 'المشاريع',
+    'title_singular' => 'المشروع',
+    'name_en' => 'الاسم بالإنجليزية',
+    'name_ar' => 'الاسم بالعربية',
+    'description_en' => 'الوصف بالإنجليزية',
+    'description_ar' => 'الوصف بالعربية',
+    'status' => 'الحالة',
+    'lat' => 'خط العرض',
+    'long' => 'خط الطول',
+    'price' => 'السعر',
+    'location' => 'الموقع',
+    'is_active' => 'نشط',
+    'created_at' => 'تاريخ الإنشاء',
+    'updated_at' => 'تاريخ التحديث',
+    'deleted_at' => 'تاريخ الحذف',
+  ),
+
+  'contact_messages' =>
+  array(
+    'title_plural' => 'رسائل التواصل',
+    'title_singular' => 'رسالة تواصل',
+    'name' => 'الاسم',
+    'country_code' => 'رمز الدولة',
+    'mobile' => 'رقم الجوال',
+    'email' => 'البريد الإلكتروني',
+    'message' => 'الرسالة',
+    'status' => 'الحالة',
+    'project_id' => 'المشروع',
   ),
 );
 // end

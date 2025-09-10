@@ -45,7 +45,7 @@
         @else
         @endif
 
-      
+
 
         @if (canPass('info_pages_index'))
             <li class="nav-item">
@@ -57,7 +57,28 @@
             </li>
         @endif
 
-      
+        @if (canPass('contact_messages_index'))
+            <li class="nav-item">
+                <a href="{{ route('admin.contact_messages.index') }}"
+                    class="{{ str_contains($currentRoute, 'contact_messages') ? 'nav-link active' : 'nav-link' }}">
+                    <i class="nav-icon fas fa-headset"></i>
+                    <p>{{ trans('cruds.contact_messages.title_plural') }}</p>
+                </a>
+            </li>
+        @endif
+
+
+
+        @if (canPass('projects_index'))
+
+            <li class="nav-item">
+                <a href="{{ route('admin.projects.index') }}"
+                    class="{{ str_contains($currentRoute, 'projects') ? 'nav-link active' : 'nav-link'}}">
+                    <i class="nav-icon fas fa-solid fa-city"></i>
+                    <p>{{ trans('cruds.projects.title_plural') }}</p>
+                </a>
+            </li>
+        @endif
         {{-- end --}}
     </ul>
 </nav>

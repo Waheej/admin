@@ -100,6 +100,19 @@ enum GeneralEnums
         ],
     ];
 
+    // Project Status
+    const ProjectStatuses = [
+        'en' => [
+            'upcoming' => 'Upcoming',
+            'active' => 'Active',
+            'completed' => 'Completed',
+        ],
+        'ar' => [
+            'upcoming' => 'قادم',
+            'active' => 'نشط',
+            'completed' => 'مكتمل',
+        ],
+    ];
 
 
     // Property Sale Types

@@ -41,3 +41,5 @@ Route::get('/allModels', function () {
 Route::get("/modelDDLList", [GeneralController::class, 'modelDDLList'])->name('modelDDLList');
 Route::get("/enumDDLList", [GeneralController::class, 'enumDDLList'])->name('enumDDLList');
 
+// Contact Message
+Route::post("/contact_messages/request", [PortalController::class, 'createContactMessage'])->name('createContactMessage');
