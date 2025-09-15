@@ -67,11 +67,17 @@ enum GeneralEnums
             'privacy_policy' => 'Privacy Policy',
             'terms_conditions' => 'Terms Conditions',
             'faq' => 'FAQ',
+            'news' => 'News',
+            'mission' => 'Our Mission',
+            'vision' => 'Our Vision',
         ],
         'ar' => [
             'privacy_policy' => 'سياسة الخصوصيه',
             'terms_conditions' => 'الشروط و الأحكام',
             'faq' => 'الاسئله المتكرره',
+            'news' => 'الأخبار',
+            'mission' => 'مهمتنا',
+            'vision' => 'رؤيتنا',
         ]
     ];
 
