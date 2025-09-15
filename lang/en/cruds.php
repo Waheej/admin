@@ -1,15 +1,15 @@
 <?php
 
-return array (
+return array(
   'home' => 'Home',
-  'menu' => 
-  array (
+  'menu' =>
+  array(
     'dashboard' => 'Dashboard',
     'user_management' => 'User Management',
     'support' => 'Support',
   ),
-  'admins' => 
-  array (
+  'admins' =>
+  array(
     'title_plural' => 'Admins',
     'title_singular' => 'Admin',
     'full_name' => 'Full Name',
@@ -24,8 +24,8 @@ return array (
     'module' => 'Module',
     'permissions' => 'Permissions',
   ),
-  'roles' => 
-  array (
+  'roles' =>
+  array(
     'title_plural' => 'Roles',
     'title_singular' => 'Role',
     'title_en' => 'TitleEn',
@@ -36,8 +36,8 @@ return array (
     'module' => 'Module',
     'permissions' => 'Permissions',
   ),
-  'info_pages' => 
-  array (
+  'info_pages' =>
+  array(
     'title_plural' => 'InfoPages',
     'title_singular' => 'InfoPage',
     'title_en' => 'TitleEn',
@@ -54,8 +54,8 @@ return array (
     'media_path' => 'Media',
     'file_not_supported' => 'File Not Supported',
   ),
-  'projects' => 
-  array (
+  'projects' =>
+  array(
     'title_plural' => 'Projects',
     'title_singular' => 'Project',
     'name_en' => 'NameEn',
@@ -73,7 +73,7 @@ return array (
     'deleted_at' => 'DeletedAt',
   ),
   'contact_messages' =>
-  array (
+  array(
     'title_plural' => 'ContactMessages',
     'title_singular' => 'ContactMessage',
     'name' => 'Name',
@@ -83,6 +83,19 @@ return array (
     'message' => 'Message',
     'status' => 'Status',
     'project_id' => 'Project',
+  ),
+  'app_settings' =>
+  array(
+    'title_plural' => 'AppSettings',
+    'title_singular' => 'AppSetting',
+    'key' => 'Key',
+    'title_en' => 'TitleEn',
+    'title_ar' => 'TitleAr',
+    'value' => 'Value',
+    'active' => 'Active',
+    'created_at' => 'CreatedAt',
+    'updated_at' => 'UpdatedAt',
+    'deleted_at' => 'DeletedAt',
   ),
 );
 // end

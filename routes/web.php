@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\AdminController;
+use App\Http\Controllers\Dashboard\AppSettingController;
 use App\Http\Controllers\Dashboard\ContactMessageController;
 use App\Http\Controllers\Dashboard\InfoPageController;
 use App\Http\Controllers\Dashboard\ProjectController;
@@ -71,6 +72,11 @@ Route::group(['middleware' => ['localization']], function () {
         // Projects
         Route::resource('projects', ProjectController::class);
         Route::put('/projects/{id}/toggleActivity', [ProjectController::class, 'toggleActivity'])->name('projects.toggleActivity');
+
+         // AppSettings
+        Route::resource('app_settings', AppSettingController::class);
+        Route::put('/app_settings/{id}/toggleActivity', [AppSettingController::class, 'toggleActivity'])->name('app_settings.toggleActivity');
+
         // end
     });
 });

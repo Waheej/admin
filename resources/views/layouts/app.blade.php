@@ -210,7 +210,7 @@
 
         <!-- Main Footer -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2024 Waheej.</strong>
+            <strong>Copyright &copy; 2025 Waheej.</strong>
             All rights reserved.
         </footer>
     </div>

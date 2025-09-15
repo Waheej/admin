@@ -79,6 +79,16 @@
                 </a>
             </li>
         @endif
+
+         @if (canPass('app_settings_index'))
+            <li class="nav-item">
+                <a href="{{ route('admin.app_settings.index') }}"
+                    class="{{ str_contains($currentRoute, 'app_settings') ? 'nav-link active' : 'nav-link' }}">
+                    <i class="nav-icon fas fa-cogs"></i>
+                    <p>{{ trans('cruds.app_settings.title_plural') }}</p>
+                </a>
+            </li>
+        @endif
         {{-- end --}}
     </ul>
 </nav>
