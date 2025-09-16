@@ -30,30 +30,37 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form role="form" method="POST" action="{{ route('admin.info_pages.store') }}"
+                <form role="form" method="POST" action="{{ route('admin.partners_and_subsidiaries.store') }}"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
 
                         <div class="form-group">
-                            <label for="exampleInputTitleEn">{{ trans('cruds.' . $path . '.' . 'title_en') }}</label>
-                            <input type="text" class="form-control" id="exampleInputTitleEn" name="title_en"
-                                value="{{ old('title_en') }}"
-                                placeholder="{{ trans('cruds.' . $path . '.' . 'title_en') }}">
-                            @if ($errors->has('title_en'))
-                                <span class="text-danger">{{ $errors->first('title_en') }}</span>
+                            <label for="exampleInputUrl">{{ trans('cruds.' . $path . '.' . 'url') }}</label>
+                            <input type="text" class="form-control" id="exampleInputUrl" name="{{ 'url' }}"
+                                value="{{ old('url') }}" placeholder="{{ trans('cruds.' . $path . '.' . 'url') }}">
+                            @if ($errors->has('url'))
+                                <span class="text-danger">{{ $errors->first('url') }}</span>
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputTitleAr">{{ trans('cruds.' . $path . '.' . 'title_ar') }}</label>
-                            <input type="text" class="form-control" id="exampleInputTitleAr" name="title_ar"
-                                value="{{ old('title_ar') }}"
-                                placeholder="{{ trans('cruds.' . $path . '.' . 'title_ar') }}">
-                            @if ($errors->has('title_ar'))
-                                <span class="text-danger">{{ $errors->first('title_ar') }}</span>
+                            <label for="exampleInputNameEn">{{ trans('cruds.' . $path . '.' . 'name_en') }}</label>
+                            <input type="text" class="form-control" id="exampleInputNameEn" name="{{ 'name_en' }}"
+                                value="{{ old('name_en') }}"
+                                placeholder="{{ trans('cruds.' . $path . '.' . 'name_en') }}">
+                            @if ($errors->has('name_en'))
+                                <span class="text-danger">{{ $errors->first('name_en') }}</span>
                             @endif
                         </div>
-
+                        <div class="form-group">
+                            <label for="exampleInputNameAr">{{ trans('cruds.' . $path . '.' . 'name_ar') }}</label>
+                            <input type="text" class="form-control" id="exampleInputNameAr" name="{{ 'name_ar' }}"
+                                value="{{ old('name_ar') }}"
+                                placeholder="{{ trans('cruds.' . $path . '.' . 'name_ar') }}">
+                            @if ($errors->has('name_ar'))
+                                <span class="text-danger">{{ $errors->first('name_ar') }}</span>
+                            @endif
+                        </div>
                         <div class="form-group">
                             <label for="description_en">
                                 {{ trans('cruds.' . $path . '.' . 'description_en') }}
@@ -67,7 +74,6 @@
                                 <span class="text-danger">{{ $errors->first('description_en') }}</span>
                             @endif
                         </div>
-
                         <div class="form-group">
                             <label for="description_ar">
                                 {{ trans('cruds.' . $path . '.' . 'description_ar') }}
@@ -81,14 +87,13 @@
                                 <span class="text-danger">{{ $errors->first('description_ar') }}</span>
                             @endif
                         </div>
-
                         <div class="form-group">
                             <label for="exampleInputType">{{ trans('cruds.' . $path . '.' . 'type') }}</label>
                             <select class="form-control" id="exampleInputType" name="type">
                                 <option value="" disabled selected>
                                     {{ __('global.please_select', ['col' => trans('cruds.' . $path . '.type')]) }}
                                 </option>
-                                @php $types = \App\Enums\GeneralEnums::InfoPageTypes[app()->getLocale()]; @endphp
+                                @php $types = \App\Enums\GeneralEnums::SubsidiaryTypes[app()->getLocale()]; @endphp
                                 @foreach ($types as $key => $value)
                                     <option value="{{ $key }}" {{ old('type') == $key ? 'selected' : '' }}>
                                         {{ $value }}
@@ -100,21 +105,12 @@
                             @endif
                         </div>
 
+                          <!-- Img Upload -->
                         <div class="form-group">
-                            <label for="exampleInputOrder">{{ trans('cruds.' . $path . '.' . 'order') }}</label>
-                            <input type="number" class="form-control" id="exampleInputOrder" name="order"
-                                value="{{ old('order') }}" placeholder="{{ trans('cruds.' . $path . '.' . 'order') }}">
-                            @if ($errors->has('order'))
-                                <span class="text-danger">{{ $errors->first('order') }}</span>
-                            @endif
-                        </div>
-
-                        <!-- Media Path Upload -->
-                        <div class="form-group">
-                            <label for="mediaPath">{{ trans('cruds.' . $path . '.' . 'media_path') }}</label>
-                            <input type="file" class="form-control-file" id="mediaPath" name="media_path">
-                            @if ($errors->has('media_path'))
-                                <span class="text-danger">{{ $errors->first('media_path') }}</span>
+                            <label for="img">{{ trans('cruds.' . $path . '.' . 'img') }}</label>
+                            <input type="file" class="form-control-file" id="img" name="img">
+                            @if ($errors->has('img'))
+                                <span class="text-danger">{{ $errors->first('img') }}</span>
                             @endif
                         </div>
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\AdminController;
 use App\Http\Controllers\Dashboard\AppSettingController;
 use App\Http\Controllers\Dashboard\ContactMessageController;
 use App\Http\Controllers\Dashboard\InfoPageController;
+use App\Http\Controllers\Dashboard\PartnersAndSubsidiaryController;
 use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\HomeController;
@@ -73,10 +74,13 @@ Route::group(['middleware' => ['localization']], function () {
         Route::resource('projects', ProjectController::class);
         Route::put('/projects/{id}/toggleActivity', [ProjectController::class, 'toggleActivity'])->name('projects.toggleActivity');
 
-         // AppSettings
+        // AppSettings
         Route::resource('app_settings', AppSettingController::class);
         Route::put('/app_settings/{id}/toggleActivity', [AppSettingController::class, 'toggleActivity'])->name('app_settings.toggleActivity');
 
+        // PartnersAndSubsidiaries
+        Route::resource('partners_and_subsidiaries', PartnersAndSubsidiaryController::class);
+        Route::put('/partners_and_subsidiaries/{id}/toggleActivity', [PartnersAndSubsidiaryController::class, 'toggleActivity'])->name('partners_and_subsidiaries.toggleActivity');
         // end
     });
 });

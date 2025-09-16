@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class InfoPage extends Model
+class PartnerAndSubsidiaries extends Model
 {
     use SoftDeletes;
 
@@ -17,9 +16,9 @@ class InfoPage extends Model
     public const FILE_RELATION_NAME = "attachments";
 
     /**
-     * The upload path for info_pages files.
+     * The upload path for partners_and_subsidiaries files.
      */
-    public const FILE_UPLOAD_PATH = 'info_pages';
+    public const FILE_UPLOAD_PATH = 'partners_and_subsidiaries';
 
     /**
      * The attributes that are mass assignable.
@@ -27,36 +26,36 @@ class InfoPage extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'title_en',
-        'title_ar',
+        'url',
+        'name_en',
+        'name_ar',
         'description_en',
         'description_ar',
-        'type',
-        'order',
+        'type', // 'partner' or 'subsidiary'
         'is_active',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
-    protected $appends = ['media_path'];
+    protected $appends = ['img'];
 
     /**
-     * Get the media_path attribute.
+     * Get the img attribute.
      *
-     * @param string $value The original media_path.
-     * @return string|null The media_path attribute.
+     * @param string $value The original img.
+     * @return string|null The img attribute.
      */
-    public function getMediaPathAttribute($value): string |null
+    public function getImgAttribute($value): string |null
     {
         $record = File::where('folder', self::FILE_UPLOAD_PATH)
-            ->where('label', 'media_path')
+            ->where('label', 'img')
             ->where('fileable_type', self::class)
             ->where('fileable_id', $this->id)
             ->whereIsActive(true)
             ->first();
 
-        return $record ?  env('APP_URL') . '/storage/' . $record->file_name : null;
+        return $record ? env('APP_URL') . '/storage/' . $record->file_name : null;
     }
 
     /**

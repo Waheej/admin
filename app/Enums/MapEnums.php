@@ -19,10 +19,9 @@ enum MapEnums
         'ContactMessageTypes' => GeneralEnums::ContactMessageTypes,
         'ContactMessageStatuses' => GeneralEnums::ContactMessageStatuses,
         'PropertySaleType' => GeneralEnums::PropertySaleType,
-        'PropertyTypes' => GeneralEnums::PropertyTypes,
         'Currencies' => GeneralEnums::Currencies,
-        'LogActionsMap' => GeneralEnums::LogActionsMap,
         'PermissionActions' => GeneralEnums::PermissionActions,
         'ProjectStatuses' => GeneralEnums::ProjectStatuses,
+        'SubsidiaryTypes' => GeneralEnums::SubsidiaryTypes,
     ];
 }

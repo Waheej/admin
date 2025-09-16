@@ -42,15 +42,17 @@ class CreateInfoPageRequest extends FormRequest
             'type' => [
                 'required',
                 'string',
+                Rule::in(array_keys(\App\Enums\GeneralEnums::InfoPageTypes['en'])),
             ],
             'order' => [
                 'required',
-                'string',
+                'integer',
             ],
             'media_path' => [
                 'nullable',
                 'file',
-                'mimes:jpg,jpeg,png'
+                'mimes:jpeg,png,jpg,gif,svg,webp',
+                'max:10000', // Max size in KB
             ]
         ];
     }

@@ -72,7 +72,6 @@ return array(
     'updated_at' => 'تاريخ التحديث',
     'deleted_at' => 'تاريخ الحذف',
   ),
-
   'contact_messages' =>
   array(
     'title_plural' => 'رسائل التواصل',
@@ -94,6 +93,22 @@ return array(
     'title_ar' => 'العنوان بالعربية',
     'value' => 'القيمة',
     'active' => 'نشط',
+    'created_at' => 'تاريخ الإنشاء',
+    'updated_at' => 'تاريخ التحديث',
+    'deleted_at' => 'تاريخ الحذف',
+  ),
+  'partners_and_subsidiaries' =>
+  array(
+    'title_plural' => 'الشركاء و الشركات التابعة',
+    'title_singular' => 'شريك و شركة تابعة',
+    'url' => 'رابط الموقع',
+    'name_en' => 'الاسم بالإنجليزية',
+    'name_ar' => 'الاسم بالعربية',
+    'description_en' => 'الوصف بالإنجليزية',
+    'description_ar' => 'الوصف بالعربية',
+    'type' => 'النوع',
+    'is_active' => 'نشط',
+    'img' => 'الصورة',
     'created_at' => 'تاريخ الإنشاء',
     'updated_at' => 'تاريخ التحديث',
     'deleted_at' => 'تاريخ الحذف',

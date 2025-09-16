@@ -20,6 +20,12 @@ return new class extends Migration
             $table->string('type')->nullable(); //enum
             $table->unsignedInteger('order')->default(0);
             $table->boolean('is_active')->default(1);
+            $table->unsignedBigInteger('project_id')->nullable();
+             $table->foreign('project_id')
+            ->references('id')
+            ->on('projects')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->timestamps();
 			$table->softDeletes();
         });

@@ -5,7 +5,7 @@ namespace App\Http\Requests\Dashboard\Update;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateInfoPageRequest extends FormRequest
+class UpdatePartnerAndSubsidiariesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,33 +23,31 @@ class UpdateInfoPageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title_en' => [
+            'url' => [
                 'string',
             ],
-            'title_ar' => [
+            'name_en' => [
+                'string',
+            ],
+            'name_ar' => [
                 'string',
             ],
             'description_en' => [
                 'string',
-                'nullable',
             ],
             'description_ar' => [
                 'string',
-                'nullable',
             ],
             'type' => [
                 'string',
-                Rule::in(array_keys(\App\Enums\GeneralEnums::InfoPageTypes['en'])),
+                Rule::in(array_keys(\App\Enums\GeneralEnums::SubsidiaryTypes['en'])),
             ],
-            'order' => [
-                'integer',
-            ],
-            'media_path' => [
+            'img' => [
                 'nullable',
                 'file',
                 'mimes:jpeg,png,jpg,gif,svg,webp',
                 'max:10000', // Max size in KB
-            ]
+            ],
         ];
     }
 }

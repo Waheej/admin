@@ -70,22 +70,31 @@
 
 
         @if (canPass('projects_index'))
-
             <li class="nav-item">
                 <a href="{{ route('admin.projects.index') }}"
-                    class="{{ str_contains($currentRoute, 'projects') ? 'nav-link active' : 'nav-link'}}">
+                    class="{{ str_contains($currentRoute, 'projects') ? 'nav-link active' : 'nav-link' }}">
                     <i class="nav-icon fas fa-solid fa-city"></i>
                     <p>{{ trans('cruds.projects.title_plural') }}</p>
                 </a>
             </li>
         @endif
 
-         @if (canPass('app_settings_index'))
+        @if (canPass('app_settings_index'))
             <li class="nav-item">
                 <a href="{{ route('admin.app_settings.index') }}"
                     class="{{ str_contains($currentRoute, 'app_settings') ? 'nav-link active' : 'nav-link' }}">
                     <i class="nav-icon fas fa-cogs"></i>
                     <p>{{ trans('cruds.app_settings.title_plural') }}</p>
+                </a>
+            </li>
+        @endif
+
+        @if (canPass('partners_and_subsidiaries_index'))
+            <li class="nav-item">
+                <a href="{{ route('admin.partners_and_subsidiaries.index') }}"
+                    class="{{ str_contains($currentRoute, 'partners_and_subsidiaries') ? 'nav-link active' : 'nav-link' }}">
+                    <i class="nav-icon fas fa-solid fa-handshake"></i>
+                    <p>{{ trans('cruds.partners_and_subsidiaries.title_plural') }}</p>
                 </a>
             </li>
         @endif

@@ -2,9 +2,6 @@
 
 namespace App\Enums;
 
-use App\Models\Area;
-use App\Models\Compound;
-use App\Models\Property;
 
 /**
  * Class GeneralEnums
@@ -81,9 +78,7 @@ enum GeneralEnums
         ]
     ];
 
-
     // Contact Messages
-
     const ContactMessageTypes = [
         'en' => [
             'contact_us' => 'Contact Us',
@@ -120,6 +115,17 @@ enum GeneralEnums
         ],
     ];
 
+    // SubsidiaryTypes
+    const SubsidiaryTypes = [
+        'en' => [
+            'subsidiary' => 'Subsidiary',
+            'partner' => 'Partner'
+        ],
+        'ar' => [
+           'subsidiary' => 'شركة تابعة',
+            'partner' => 'شريك',
+        ],
+    ];
 
     // Property Sale Types
     const PropertySaleType = [
@@ -131,148 +137,6 @@ enum GeneralEnums
             'developer_sale' => 'بيع من المطور',
             'resale' => 'إعادة بيع',
         ],
-    ];
-
-    // finishing types
-    const FinishingTypes = [
-        'en' => [
-            'fully_finished' => 'Fully Finished',
-            'semi_finished' => 'Semi Finished',
-            'without_finished' => 'Without Finished',
-            'furnished' => 'Furnished',
-        ],
-        'ar' => [
-            'fully_finished' => 'تشطيب كامل',
-            'semi_finished' => 'نصف تشطيب',
-            'without_finished' => 'بدون تشطيب',
-            'furnished' => 'مفروش',
-        ],
-    ];
-
-    const PropertyTypes = [
-        'en' => [
-            'apartment' => [
-                'title' => 'Apartment',
-                'logo' => 'apartment.svg',
-            ],
-            'villa' => [
-                'title' => 'Villa',
-                'logo' => 'villa.svg',
-            ],
-            'twinhouse' => [
-                'title' => 'Twinhouse',
-                'logo' => 'twinhouse.svg',
-            ],
-            'townhouse' => [
-                'title' => 'Townhouse',
-                'logo' => 'townhouse.svg',
-            ],
-            'duplex' => [
-                'title' => 'Duplex',
-                'logo' => 'duplex.svg',
-            ],
-            'penthouse' => [
-                'title' => 'Penthouse',
-                'logo' => 'penthouse.svg',
-            ],
-            'chalet' => [
-                'title' => 'Chalet',
-                'logo' => 'chalet.svg',
-            ],
-            'studio' => [
-                'title' => 'Studio',
-                'logo' => 'studio.svg',
-            ],
-            'cabin' => [
-                'title' => 'Cabin',
-                'logo' => 'cabin.svg',
-            ],
-            'clinic' => [
-                'title' => 'Clinic',
-                'logo' => 'clinic.svg',
-            ],
-            'office' => [
-                'title' => 'Office',
-                'logo' => 'office.svg',
-            ],
-            'retail' => [
-                'title' => 'Retail',
-                'logo' => 'retail.svg',
-            ],
-        ],
-        'ar' => [
-            'apartment' => [
-                'title' => 'شقة',
-                'logo' => 'apartment.svg',
-            ],
-            'villa' => [
-                'title' => 'فيلا',
-                'logo' => 'villa.svg',
-            ],
-            'twinhouse' => [
-                'title' => 'توين هاوس',
-                'logo' => 'twinhouse.svg',
-            ],
-            'townhouse' => [
-                'title' => 'تاون هاوس',
-                'logo' => 'townhouse.svg',
-            ],
-            'duplex' => [
-                'title' => 'دوبلكس',
-                'logo' => 'duplex.svg',
-            ],
-            'penthouse' => [
-                'title' => 'بنتهاوس',
-                'logo' => 'penthouse.svg',
-            ],
-            'chalet' => [
-                'title' => 'شاليه',
-                'logo' => 'chalet.svg',
-            ],
-            'studio' => [
-                'title' => 'ستوديو',
-                'logo' => 'studio.svg',
-            ],
-            'cabin' => [
-                'title' => 'كابينة',
-                'logo' => 'cabin.svg',
-            ],
-            'clinic' => [
-                'title' => 'عيادة',
-                'logo' => 'clinic.svg',
-            ],
-            'office' => [
-                'title' => 'مكتب',
-                'logo' => 'office.svg',
-            ],
-            'retail' => [
-                'title' => 'متجر',
-                'logo' => 'retail.svg',
-            ],
-        ],
-    ];
-
-    const LogActionsMap = [
-        'en' => [
-            'GET' => 'Viewed',
-            'POST' => 'Created',
-            'PUT' => 'Updated',
-            'DELETE' => 'Deleted',
-            'LOGIN' => 'Logged in',
-            'ATTACH' => 'Attached files',
-            'EXPORT' => 'Exported',
-            'IMPORT' => 'Imported',
-        ],
-        'ar' => [
-            'GET' => 'تم عرض',
-            'POST' => 'تم إنشاء',
-            'PUT' => 'تم تعديل',
-            'DELETE' => 'تم حذف',
-            'LOGIN' => 'تسجيل دخول',
-            'ATTACH' => 'تم ارفاق ملفات',
-            'EXPORT' => 'تم تصدير',
-            'IMPORT' => 'تم استيراد',
-        ]
     ];
 
     const Currencies = [
