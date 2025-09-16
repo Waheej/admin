@@ -85,7 +85,7 @@
                         <div class="form-group">
                             <label for="exampleInputType">{{ trans('cruds.' . $path . '.' . 'type') }}</label>
                             <select class="form-control" id="exampleInputType" name="type">
-                                <option value="" disabled selected>
+                                <option value="" disabled>
                                     {{ __('global.please_select', ['col' => trans('cruds.' . $path . '.type')]) }}
                                 </option>
                                 @php $types = \App\Enums\GeneralEnums::InfoPageTypes[app()->getLocale()]; @endphp
@@ -106,6 +106,25 @@
                                 value="{{ old('order') }}" placeholder="{{ trans('cruds.' . $path . '.' . 'order') }}">
                             @if ($errors->has('order'))
                                 <span class="text-danger">{{ $errors->first('order') }}</span>
+                            @endif
+                        </div>
+
+                        <div class="form-group">
+                            @php $name = "name_" . app()->getLocale(); @endphp
+                            <label for="exampleInputProjectId">{{ trans('cruds.' . $path . '.project_id') }}</label>
+                            <select class="form-control" id="exampleInputProjectId" name="project_id">
+                                <option value="" disabled selected>
+                                    {{ __('global.please_select', ['col' => trans('cruds.' . $path . '.project_id')]) }}
+                                </option>
+                                @foreach ($projects as $project)
+                                    <option value="{{ $project->id }}"
+                                        {{ old('project_id') == $project->id ? 'selected' : '' }}>
+                                        {{ $project->$name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('project_id'))
+                                <span class="text-danger">{{ $errors->first('project_id') }}</span>
                             @endif
                         </div>
 

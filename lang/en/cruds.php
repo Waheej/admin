@@ -53,6 +53,7 @@ return array (
     'deleted_at' => 'DeletedAt',
     'media_path' => 'Media',
     'file_not_supported' => 'File Not Supported',
+    'project_id' => 'Project',
   ),
   'projects' => 
   array (

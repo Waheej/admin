@@ -4,6 +4,7 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -34,6 +35,7 @@ class InfoPage extends Model
         'type',
         'order',
         'is_active',
+        'project_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -67,5 +69,15 @@ class InfoPage extends Model
     public function attachments(): MorphOne
     {
         return $this->morphOne(File::class, "fileable");
+    }
+
+    /**
+     * Get the project associated with the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
     }
 }

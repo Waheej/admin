@@ -53,6 +53,7 @@ return array(
     'deleted_at' => 'تاريخ الحذف',
     'media_path' => 'الميديا',
     'file_not_supported' => 'الملف غير مدعوم',
+    'project_id' => 'المشروع',
   ),
   'projects' =>
   array(

@@ -99,8 +99,7 @@
                                         style="max-width: 300px; height: auto;">
                                 @elseif (in_array($fileExtension, ['mp4', 'mov', 'avi']))
                                     <video width="320" height="240" controls>
-                                        <source src="{{ $record->media_path }}"
-                                            type="video/{{ $fileExtension }}">
+                                        <source src="{{ $record->media_path }}" type="video/{{ $fileExtension }}">
                                         Your browser does not support the video tag.
                                     </video>
                                 @else
@@ -108,7 +107,6 @@
                                 @endif
                             </div>
                         </div>
-
                         <label>{{ trans('cruds.' . $path . '.is_active') }}</label>
                         <div class="form-group">
                             <label class="switch">
@@ -121,6 +119,12 @@
                             <label for="exampleInputCreatedAt">{{ trans('cruds.' . $path . '.' . 'created_at') }}</label>
                             <input type="text" class="form-control" id="exampleInputCreatedAt"
                                 value="{{ \Carbon\Carbon::parse($record->created_at)->diffForHumans() ?? '' }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            @php $name = "name_".app()->getLocale(); @endphp
+                            <label for="exampleInputProjectId">{{ trans('cruds.' . $path . '.project_id') }}</label>
+                            <input type="text" class="form-control" id="exampleInputproject"
+                                value="{{ $record->project?->$name }}" disabled>
                         </div>
                     </div>
                 </form>

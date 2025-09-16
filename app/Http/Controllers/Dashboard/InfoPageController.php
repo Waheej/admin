@@ -7,6 +7,7 @@ use App\Models\InfoPage as Model;
 use App\Http\Requests\Dashboard\Create\CreateInfoPageRequest as CreateRequest;
 use App\Http\Requests\Dashboard\Update\UpdateInfoPageRequest as UpdateRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use App\Services\FileService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -70,7 +71,8 @@ class InfoPageController extends Controller
         abort_if(!canPass($this->path . '_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         try {
             $path = Model::FILE_UPLOAD_PATH;
-            return view('dashboard.' . $this->path . '.create', compact('path'));
+            $projects = Project::whereIsActive(true)->get();
+            return view('dashboard.' . $this->path . '.create', compact('path', 'projects'));
         } catch (\Throwable $th) {
             Log::error($th);
             abort(500);
@@ -118,7 +120,8 @@ class InfoPageController extends Controller
         try {
             $path = Model::FILE_UPLOAD_PATH;
             $record = Model::findOrFail($id);
-            return view('dashboard.' . $this->path . '.edit', compact('record', 'path'));
+            $projects = Project::whereIsActive(true)->get();
+            return view('dashboard.' . $this->path . '.edit', compact('record', 'path', 'projects'));
         } catch (\Throwable $th) {
             Log::error($th);
             abort(500);

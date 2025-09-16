@@ -80,7 +80,9 @@
                         <div class="form-group">
                             <label for="exampleInputType">{{ trans('cruds.' . $path . '.' . 'type') }}</label>
                             <select class="form-control" id="exampleInputType" name="type">
-                                <option value="">{{ trans('cruds.' . $path . '.' . 'type') }}</option>
+                                 <option value="" disabled>
+                                    {{ __('global.please_select', ['col' => trans('cruds.' . $path . '.type')]) }}
+                                </option>
                                 @php $types = \App\Enums\GeneralEnums::InfoPageTypes[app()->getLocale()]; @endphp
                                 @foreach ($types as $key => $value)
                                     <option value="{{ $key }}"
@@ -101,7 +103,24 @@
                                 <span class="text-danger">{{ $errors->first('order') }}</span>
                             @endif
                         </div>
-
+                        <div class="form-group">
+                            @php $name = "name_" . app()->getLocale(); @endphp
+                            <label for="exampleInputProjectId">{{ trans('cruds.' . $path . '.project_id') }}</label>
+                            <select class="form-control" id="exampleInputProjectId" name="project_id">
+                                <option value="{{ null }}">
+                                    {{ __('global.please_select', ['col' => trans('cruds.' . $path . '.project_id')]) }}
+                                </option>
+                                @foreach ($projects as $project)
+                                    <option value="{{ $project->id }}"
+                                        {{ old('project_id', $record->project_id) == $project->id ? 'selected' : '' }}>
+                                        {{ $project->$name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('role_id'))
+                                <span class="text-danger">{{ $errors->first('role_id') }}</span>
+                            @endif
+                        </div>
                         <div class="form-group">
                             <label for="mediaPath">{{ trans('cruds.' . $path . '.' . 'media_path') }}</label>
                             <input type="file" class="form-control-file" id="mediaPath" name="media_path">
