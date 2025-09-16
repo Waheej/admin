@@ -58,7 +58,7 @@ class InfoPage extends Model
             ->whereIsActive(true)
             ->first();
 
-        return $record ?  env('APP_URL') . '/storage/' . $record->file_name : null;
+        return $record ?  $record->file_name : null;
     }
 
     /**

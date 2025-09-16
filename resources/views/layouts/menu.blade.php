@@ -98,6 +98,16 @@
                 </a>
             </li>
         @endif
+
+        @if (canPass('page_sections_index'))
+            <li class="nav-item">
+                <a href="{{ route('admin.page_sections.index') }}"
+                    class="{{ str_contains($currentRoute, 'page_sections') ? 'nav-link active' : 'nav-link' }}">
+                    <i class="nav-icon fas fa-solid fa-home"></i>
+                    <p>{{ trans('cruds.page_sections.title_plural') }}</p>
+                </a>
+            </li>
+        @endif
         {{-- end --}}
     </ul>
 </nav>

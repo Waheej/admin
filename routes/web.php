@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\AdminController;
 use App\Http\Controllers\Dashboard\AppSettingController;
 use App\Http\Controllers\Dashboard\ContactMessageController;
+use App\Http\Controllers\Dashboard\HomePageSectionController;
 use App\Http\Controllers\Dashboard\InfoPageController;
 use App\Http\Controllers\Dashboard\PartnersAndSubsidiaryController;
 use App\Http\Controllers\Dashboard\ProjectController;
@@ -81,6 +82,11 @@ Route::group(['middleware' => ['localization']], function () {
         // PartnersAndSubsidiaries
         Route::resource('partners_and_subsidiaries', PartnersAndSubsidiaryController::class);
         Route::put('/partners_and_subsidiaries/{id}/toggleActivity', [PartnersAndSubsidiaryController::class, 'toggleActivity'])->name('partners_and_subsidiaries.toggleActivity');
+
+        // HomePageSections
+        Route::resource('page_sections', HomePageSectionController::class);
+        Route::put('/page_sections/{id}/toggleActivity', [HomePageSectionController::class, 'toggleActivity'])->name('page_sections.toggleActivity');
+        Route::get('/page_sections/{id}/delete_image', [HomePageSectionController::class, 'deleteImage'])->name('page_sections.delete_image');
         // end
     });
 });

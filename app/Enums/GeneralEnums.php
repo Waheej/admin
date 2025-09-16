@@ -150,4 +150,28 @@ enum GeneralEnums
         ],
     ];
 
+    // Home page sections
+    const HomePageSectionTypes = [
+        'en' => [
+            'hero' => 'Hero',
+            'featured_projects' => 'Featured Projects',
+            'news' => 'News',
+            'map' => 'Map',
+            'stats' => 'Stats',
+            'testimonials' => 'Testimonials',
+            'cta' => 'Call To Action',
+            'newsletter' => 'Newsletter',
+        ],
+        'ar' => [
+            'hero' => 'الرئيسية',
+            'featured_projects' => 'مشاريع مميزة',
+            'news' => 'الأخبار',
+            'map' => 'الخريطة',
+            'stats' => 'الإحصائيات',
+            'testimonials' => 'الشهادات',
+            'cta' => 'دعوة لاتخاذ إجراء',
+            'newsletter' => 'النشرة الإخبارية',
+        ],
+    ];
+
 }

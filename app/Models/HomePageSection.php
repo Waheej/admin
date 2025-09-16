@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PartnerAndSubsidiaries extends Model
+class HomePageSection extends Model
 {
     use SoftDeletes;
 
-    /**
+     /**
      * The name of the relation for file attachments.
      */
     public const FILE_RELATION_NAME = "attachments";
@@ -18,7 +18,7 @@ class PartnerAndSubsidiaries extends Model
     /**
      * The upload path for partners_and_subsidiaries files.
      */
-    public const FILE_UPLOAD_PATH = 'partners_and_subsidiaries';
+    public const FILE_UPLOAD_PATH = 'page_sections';
 
     /**
      * The attributes that are mass assignable.
@@ -26,36 +26,36 @@ class PartnerAndSubsidiaries extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'url',
-        'name_en',
-        'name_ar',
+        'title_en',
+        'title_ar',
         'description_en',
         'description_ar',
-        'type', // 'partner' or 'subsidiary'
+        'type', // hero, featured_projects, news, map, stats, testimonials, cta, newsletter
+        'order',
         'is_active',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
-    protected $appends = ['img'];
+    protected $appends = ['media'];
 
     /**
-     * Get the img attribute.
+     * Get the media attribute.
      *
-     * @param string $value The original img.
-     * @return string|null The img attribute.
+     * @param string $value The original media.
+     * @return string|null The media attribute.
      */
-    public function getImgAttribute($value): string |null
+    public function getMediaAttribute($value): array | null
     {
-        $record = File::where('folder', self::FILE_UPLOAD_PATH)
-            ->where('label', 'img')
+        return File::where('folder', self::FILE_UPLOAD_PATH)
+            ->where('label', 'media')
             ->where('fileable_type', self::class)
             ->where('fileable_id', $this->id)
-            ->whereIsActive(true)
-            ->first();
-
-        return $record ? $record->file_name : null;
+            ->where('is_active', true)
+            ->get()
+            ->pluck('file_name')
+            ->toArray();
     }
 
     /**

@@ -56,7 +56,7 @@ class File extends Model
         // Check if the file exists in the storage.
         if (Storage::disk($filesystemDisk)->exists('public/' . $checkPath)) {
             if (env('APP_ENV') == 'local') {
-                return $checkPath;
+                return env('APP_URL') . '/storage/' . $checkPath;
             }
             return env('APP_URL') . Storage::disk($filesystemDisk)->url($checkPath);
         }
