@@ -23,7 +23,6 @@
 
         <!-- Main content -->
         <section class="content">
-
             <!-- Default box -->
             <div class="{{ 'card card-' . PRIMARY_COLOR }}">
                 <div class="card-header">
@@ -61,6 +60,7 @@
                                 <span class="text-danger">{{ $errors->first('description_en') }}</span>
                             @endif
                         </div>
+
                         <div class="form-group">
                             <label for="description_ar">
                                 {{ trans('cruds.' . $path . '.' . 'description_ar') }}
@@ -73,16 +73,33 @@
                                 <span class="text-danger">{{ $errors->first('description_ar') }}</span>
                             @endif
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputType">{{ trans('cruds.' . $path . '.' . 'type') }}</label>
-                            <input type="text" class="form-control" id="exampleInputType"
-                                value="{{ \App\Enums\GeneralEnums::HomePageSectionTypes[app()->getLocale()][$record->type] ?? '' }}"
-                                disabled>
-                        </div>
+
                         <div class="form-group">
                             <label for="exampleInputOrder">{{ trans('cruds.' . $path . '.' . 'order') }}</label>
                             <input type="text" class="form-control" id="exampleInputOrder"
                                 value="{{ $record->order ?? '' }}" disabled>
+                        </div>
+
+                        <!-- Media Path Display -->
+                        <div class="form-group">
+                            <label for="mediaPath">{{ trans('cruds.' . $path . '.' . 'media_path') }}</label>
+                            <div>
+                                @php
+                                    $fileExtension = pathinfo($record->media_path, PATHINFO_EXTENSION);
+                                @endphp
+
+                                @if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif']))
+                                    <img src="{{ $record->media_path }}" alt="Media Image"
+                                        style="max-width: 300px; height: auto;">
+                                @elseif (in_array($fileExtension, ['mp4', 'mov', 'avi']))
+                                    <video width="320" height="240" controls>
+                                        <source src="{{ $record->media_path }}" type="video/{{ $fileExtension }}">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                @else
+                                    <p>{{ trans('cruds.' . $path . '.file_not_supported') }}</p>
+                                @endif
+                            </div>
                         </div>
                         <label>{{ trans('cruds.' . $path . '.is_active') }}</label>
                         <div class="form-group">
@@ -102,28 +119,6 @@
                             <label for="exampleInputProjectId">{{ trans('cruds.' . $path . '.project_id') }}</label>
                             <input type="text" class="form-control" id="exampleInputproject"
                                 value="{{ $record->project?->$name }}" disabled>
-                        </div>
-                        {{-- Media --}}
-                        <div class="form-group">
-                            <div>
-                                @if ($record->media)
-                                    <p><strong>{{ trans('cruds.' . $path . '.' . 'media') }} :</strong></p>
-                                    @foreach ($record->media as $image)
-                                        <img src="{{ $image }}" alt="Cover Image"
-                                            style="max-width: 100%; height: auto; margin-bottom: 10px;">
-                                    @endforeach
-                                @endif
-
-                                @if ($record->videos)
-                                    <p><strong>{{ trans('cruds.' . $path . '.' . 'videos') }} :</strong></p>
-                                    @foreach ($record->videos as $video)
-                                        <video controls style="max-width: 100%; height: auto; margin-bottom: 10px;">
-                                            <source src="{{ $video }}" type="video/mp4">
-                                            Your browser does not support the video tag.
-                                        </video>
-                                    @endforeach
-                                @endif
-                            </div>
                         </div>
                     </div>
                 </form>

@@ -52,16 +52,10 @@
                                 </th>
 
                                 <th class="text-center">
-                                    {{ trans('cruds.' . $path . '.' . 'name_en') }}
+                                    {{ trans('cruds.' . $path . '.' . 'title_en') }}
                                 </th>
                                 <th class="text-center">
-                                    {{ trans('cruds.' . $path . '.' . 'name_ar') }}
-                                </th>
-                                <th class="text-center">
-                                    {{ trans('cruds.' . $path . '.' . 'status') }}
-                                </th>
-                                <th class="text-center">
-                                    {{ trans('cruds.' . $path . '.' . 'price') }}
+                                    {{ trans('cruds.' . $path . '.' . 'title_ar') }}
                                 </th>
                                 <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'order') }}
@@ -81,16 +75,10 @@
                                     </td>
 
                                     <td class="text-center">
-                                        {{ $record->name_en }}
+                                        {{ $record->title_en }}
                                     </td>
                                     <td class="text-center">
-                                        {{ $record->name_ar }}
-                                    </td>
-                                    <td class="text-center">
-                                        {{ \App\Enums\GeneralEnums::ProjectStatuses[app()->getLocale()][$record->status] }}
-                                    </td>
-                                    <td class="text-center">
-                                        {{ $record->price }}
+                                        {{ $record->title_ar }}
                                     </td>
                                     <td class="text-center">
                                         {{ $record->order }}

@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\AppSettingController;
 use App\Http\Controllers\Dashboard\ContactMessageController;
 use App\Http\Controllers\Dashboard\HomePageSectionController;
 use App\Http\Controllers\Dashboard\InfoPageController;
+use App\Http\Controllers\Dashboard\NewsController;
 use App\Http\Controllers\Dashboard\PartnersAndSubsidiaryController;
 use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\Dashboard\RoleController;
@@ -63,6 +64,10 @@ Route::group(['middleware' => ['localization']], function () {
         // InfoPages
         Route::resource('info_pages', InfoPageController::class);
         Route::put('/info_pages/{id}/toggleActivity', [InfoPageController::class, 'toggleActivity'])->name('info_pages.toggleActivity');
+
+        // News
+        Route::resource('news', NewsController::class);
+        Route::put('/news/{id}/toggleActivity', [NewsController::class, 'toggleActivity'])->name('news.toggleActivity');
 
         // ContactMessages
         Route::get('/contact_messages', [ContactMessageController::class, 'index'])->name('contact_messages.index');

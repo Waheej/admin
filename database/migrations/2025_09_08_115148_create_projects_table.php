@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->string('lat')->nullable();
             $table->string('long')->nullable();
+            $table->unsignedInteger('order')->default(0);
             $table->boolean('is_active')->default(true);
             $table->softDeletes();
             $table->timestamps();

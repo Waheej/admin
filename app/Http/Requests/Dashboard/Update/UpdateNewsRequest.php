@@ -5,7 +5,7 @@ namespace App\Http\Requests\Dashboard\Update;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateProjectRequest extends FormRequest
+class UpdateNewsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,34 +23,33 @@ class UpdateProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name_en' => [
+            'title_en' => [
                 'string',
             ],
-            'name_ar' => [
+            'title_ar' => [
                 'string',
             ],
             'description_en' => [
                 'string',
+                'nullable',
             ],
             'description_ar' => [
                 'string',
-            ],
-            'status' => [
-                'string',
-            ],
-            'lat' => [
-                'string',
-            ],
-            'long' => [
-                'string',
-            ],
-            'price' => [
-                'string',
+                'nullable',
             ],
             'order' => [
+                'integer',
+            ],
+            'media_path' => [
+                'nullable',
+                'file',
+                'mimes:jpeg,png,jpg,gif,svg,webp',
+                'max:10000', // Max size in KB
+            ],
+            'project_id' => [
                 'nullable',
                 'integer',
-                'min:0',
+                'exists:projects,id',
             ],
         ];
     }

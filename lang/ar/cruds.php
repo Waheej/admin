@@ -7,6 +7,7 @@ return array(
     'dashboard' => 'لوحة التحكم',
     'user_management' => 'ادارة المستخدمين',
     'support' => 'الدعم',
+    'home_page_settings' => 'اعدادات الصفحه الرئيسيه',
   ),
   'admins' =>
   array(
@@ -55,6 +56,24 @@ return array(
     'file_not_supported' => 'الملف غير مدعوم',
     'project_id' => 'المشروع',
   ),
+  'news' =>
+  array(
+    'title_plural' => 'الأخبار',
+    'title_singular' => 'خبر',
+    'title_en' => 'العنوان بالإنجليزية',
+    'title_ar' => 'العنوان بالعربية',
+    'description_en' => 'الوصف بالإنجليزية',
+    'description_ar' => 'الوصف بالعربية',
+    'sub_type' => 'النوع الفرعي',
+    'order' => 'الترتيب',
+    'is_active' => 'نشط',
+    'created_at' => 'تاريخ الإنشاء',
+    'updated_at' => 'تاريخ التحديث',
+    'deleted_at' => 'تاريخ الحذف',
+    'media_path' => 'الميديا',
+    'file_not_supported' => 'الملف غير مدعوم',
+    'project_id' => 'المشروع',
+  ),
   'projects' =>
   array(
     'title_plural' => 'المشاريع',
@@ -69,6 +88,7 @@ return array(
     'price' => 'السعر',
     'location' => 'الموقع',
     'is_active' => 'نشط',
+    'order' => 'الترتيب',
     'created_at' => 'تاريخ الإنشاء',
     'updated_at' => 'تاريخ التحديث',
     'deleted_at' => 'تاريخ الحذف',
@@ -84,6 +104,9 @@ return array(
     'message' => 'الرسالة',
     'status' => 'الحالة',
     'project_id' => 'المشروع',
+    'created_at' => 'تاريخ الإنشاء',
+    'updated_at' => 'تاريخ التحديث',
+    'deleted_at' => 'تاريخ الحذف',
   ),
   'app_settings' =>
   array(
@@ -127,7 +150,9 @@ return array(
     'order' => 'الترتيب',
     'is_active' => 'نشط',
     'media' => 'الميديا',
+    'videos' => 'الفيديوهات',
     'file_not_supported' => 'الملف غير مدعوم',
+    'project_id' => 'المشروع',
     'created_at' => 'تاريخ الإنشاء',
     'updated_at' => 'تاريخ التحديث',
     'deleted_at' => 'تاريخ الحذف',

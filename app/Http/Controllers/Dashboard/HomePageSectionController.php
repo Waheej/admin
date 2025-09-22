@@ -7,6 +7,7 @@ use App\Models\HomePageSection as Model;
 use App\Http\Requests\Dashboard\Create\CreateHomePageSectionRequest as CreateRequest;
 use App\Http\Requests\Dashboard\Update\UpdateHomePageSectionRequest as UpdateRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use App\Services\FileService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -70,7 +71,8 @@ class HomePageSectionController extends Controller
         abort_if(!canPass($this->path . '_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         try {
             $path = Model::FILE_UPLOAD_PATH;
-            return view('dashboard.' . $this->path . '.create', compact('path'));
+            $projects = Project::whereIsActive(true)->get();
+            return view('dashboard.' . $this->path . '.create', compact('path', 'projects'));
         } catch (\Throwable $th) {
             Log::error($th);
             abort(500);
@@ -103,6 +105,23 @@ class HomePageSectionController extends Controller
                     );
                 }
             }
+
+             // videos
+            if ($request->has('videos') && $request->videos  != null) {
+                foreach ($request->videos as $video) {
+                    $fileName = uploadMedia($video, $this->path);
+                    (new FileService)->addFile(
+                        $record,
+                        $fileName,
+                        $this->path,
+                        'videos',
+                        $video->getClientOriginalExtension(),
+                        'attachments',
+                        fileSize: $video->getSize()
+                    );
+                }
+            }
+
             return redirect(route('admin.' . $this->path . '.index'));
         } catch (\Throwable $th) {
             Log::error($th);
@@ -121,7 +140,8 @@ class HomePageSectionController extends Controller
         try {
             $path = Model::FILE_UPLOAD_PATH;
             $record = Model::findOrFail($id);
-            return view('dashboard.' . $this->path . '.edit', compact('record', 'path'));
+            $projects = Project::whereIsActive(true)->get();
+            return view('dashboard.' . $this->path . '.edit', compact('record', 'path', 'projects'));
         } catch (\Throwable $th) {
             Log::error($th);
             abort(500);
@@ -153,6 +173,23 @@ class HomePageSectionController extends Controller
                         $media->getClientOriginalExtension(),
                         'attachments',
                         fileSize: $media->getSize()
+                    );
+                }
+            }
+
+               // Handle Videos (Multiple Files)
+            if ($request->has('videos') && is_array($request->videos)) {
+                foreach ($request->videos as $video) {
+                    $fileName = uploadMedia($video, $this->path);
+
+                    (new FileService)->addFile(
+                        $record,
+                        $fileName,
+                        $this->path,
+                        'videos',
+                        $video->getClientOriginalExtension(),
+                        'attachments',
+                        fileSize: $video->getSize()
                     );
                 }
             }

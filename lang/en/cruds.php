@@ -7,6 +7,7 @@ return array(
     'dashboard' => 'Dashboard',
     'user_management' => 'User Management',
     'support' => 'Support',
+    'home_page_settings' => 'Home Page Settings',
   ),
   'admins' =>
   array(
@@ -55,6 +56,24 @@ return array(
     'file_not_supported' => 'File Not Supported',
     'project_id' => 'Project',
   ),
+  'news' =>
+  array(
+    'title_plural' => 'News',
+    'title_singular' => 'News',
+    'title_en' => 'TitleEn',
+    'title_ar' => 'TitleAr',
+    'description_en' => 'DescriptionEn',
+    'description_ar' => 'DescriptionAr',
+    'sub_type' => 'SubType',
+    'order' => 'Order',
+    'is_active' => 'IsActive',
+    'created_at' => 'CreatedAt',
+    'updated_at' => 'UpdatedAt',
+    'deleted_at' => 'DeletedAt',
+    'media_path' => 'Media',
+    'file_not_supported' => 'File Not Supported',
+    'project_id' => 'Project',
+  ),
   'projects' =>
   array(
     'title_plural' => 'Projects',
@@ -69,6 +88,7 @@ return array(
     'price' => 'Price',
     'location' => 'Location',
     'is_active' => 'IsActive',
+    'order' => 'Order',
     'created_at' => 'CreatedAt',
     'updated_at' => 'UpdatedAt',
     'deleted_at' => 'DeletedAt',
@@ -84,6 +104,9 @@ return array(
     'message' => 'Message',
     'status' => 'Status',
     'project_id' => 'Project',
+    'created_at' => 'CreatedAt',
+    'updated_at' => 'UpdatedAt',
+    'deleted_at' => 'DeletedAt',
   ),
   'app_settings' =>
   array(
@@ -126,8 +149,10 @@ return array(
     'type' => 'Type',
     'order' => 'Order',
     'media' => 'Media',
+    'videos' => 'Videos',
     'file_not_supported' => 'File Not Supported',
     'is_active' => 'IsActive',
+    'project_id' => 'Project',
     'created_at' => 'CreatedAt',
     'updated_at' => 'UpdatedAt',
     'deleted_at' => 'DeletedAt',

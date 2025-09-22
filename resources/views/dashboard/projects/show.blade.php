@@ -79,21 +79,15 @@
                                 value="{{ \App\Enums\GeneralEnums::ProjectStatuses[app()->getLocale()][$record->status] ?? '' }}"
                                 disabled>
                         </div>
-                        {{-- <div class="form-group">
-                            <label for="exampleInputLat">{{ trans('cruds.' . $path . '.' . 'lat') }}</label>
-                            <input type="text" class="form-control" id="exampleInputLat"
-                                value="{{ $record->lat ?? '' }}" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputLong">{{ trans('cruds.' . $path . '.' . 'long') }}</label>
-                            <input type="text" class="form-control" id="exampleInputLong"
-                                value="{{ $record->long ?? '' }}" disabled>
-                        </div> --}}
-
                         <div class="form-group">
                             <label for="exampleInputPrice">{{ trans('cruds.' . $path . '.' . 'price') }}</label>
                             <input type="text" class="form-control" id="exampleInputPrice"
                                 value="{{ $record->price ?? '' }}" disabled>
+                        </div>
+                         <div class="form-group">
+                            <label for="exampleInputOrder">{{ trans('cruds.' . $path . '.' . 'order') }}</label>
+                            <input type="text" class="form-control" id="exampleInputOrder"
+                                value="{{ $record->order ?? '' }}" disabled>
                         </div>
                         <label>{{ trans('cruds.' . $path . '.is_active') }}</label>
                         <div class="form-group">

@@ -20,6 +20,12 @@ return new class extends Migration
             $table->string('type')->nullable(); // hero, featured_projects, news, map, stats, testimonials, cta, newsletter
             $table->integer('order')->default(1);
             $table->boolean('is_active')->default(true);
+            $table->unsignedBigInteger('project_id')->nullable();
+             $table->foreign('project_id')
+            ->references('id')
+            ->on('projects')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

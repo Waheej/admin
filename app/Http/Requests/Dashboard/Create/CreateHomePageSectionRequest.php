@@ -42,7 +42,7 @@ class CreateHomePageSectionRequest extends FormRequest
             'type' => [
                 'required',
                 'string',
-                Rule::in(array_keys(\App\Enums\GeneralEnums::HomePageSectionTypes['en'])), 
+                Rule::in(array_keys(\App\Enums\GeneralEnums::HomePageSectionTypes['en'])),
             ],
             'order' => [
                 'required',
@@ -56,6 +56,20 @@ class CreateHomePageSectionRequest extends FormRequest
                 'file',
                 'mimes:jpeg,png,jpg,gif,svg,webp,mp4,avi,mov',
                 'max:10000', // Max size 10MB
+            ],
+              'videos' => [
+                'nullable',
+                'array',
+            ],
+            'videos.*' => [
+                'file',
+                'mimes:mp4,avi,mov',
+                'max:10240', // Max size 10MB
+            ],
+            'project_id' => [
+                'nullable',
+                'integer',
+                'exists:projects,id',
             ],
         ];
     }

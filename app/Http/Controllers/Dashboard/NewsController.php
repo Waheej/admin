@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Enums\GeneralEnums;
 use App\Models\InfoPage as Model;
-use App\Http\Requests\Dashboard\Create\CreateInfoPageRequest as CreateRequest;
-use App\Http\Requests\Dashboard\Update\UpdateInfoPageRequest as UpdateRequest;
+use App\Http\Requests\Dashboard\Create\CreateNewsRequest as CreateRequest;
+use App\Http\Requests\Dashboard\Update\UpdateNewsRequest as UpdateRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Services\FileService;
@@ -13,10 +13,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 
-class InfoPageController extends Controller
+class NewsController extends Controller
 {
     protected $itemPerPage = GeneralEnums::ITEM_PER_PAGE;
-    protected $path = Model::FILE_UPLOAD_PATH;
+    protected $path = 'news';
 
     /**
      * Get All Records
@@ -27,7 +27,7 @@ class InfoPageController extends Controller
         abort_if(!canPass($this->path . '_index'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         try {
 
-            $query = Model::where('type', '!=' ,'news')->orderBy('id', 'DESC');
+            $query = Model::whereType('news')->orderBy('id', 'DESC');
 
             // Filter data based on query string parameters
             if ($request->has('filter')) {
@@ -38,7 +38,7 @@ class InfoPageController extends Controller
             }
 
             $records = $query->paginate(GeneralEnums::ITEM_PER_PAGE);
-            $path = Model::FILE_UPLOAD_PATH;
+            $path = 'news';
             return view('dashboard.' . $this->path . '.index', compact('records', 'path'));
         } catch (\Throwable $th) {
             Log::error($th);
@@ -54,8 +54,13 @@ class InfoPageController extends Controller
     {
         abort_if(!canPass($this->path . '_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         try {
-            $record = Model::find($id);
-            $path = Model::FILE_UPLOAD_PATH;
+            $record = Model::whereType('news')->whereId($id)->first();
+
+            if (!$record) {
+                abort(404);
+            }
+
+            $path = 'news';
             return view('dashboard.' . $this->path . '.show', compact('record', 'path'));
         } catch (\Throwable $th) {
             Log::error($th);
@@ -70,7 +75,7 @@ class InfoPageController extends Controller
     {
         abort_if(!canPass($this->path . '_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         try {
-            $path = Model::FILE_UPLOAD_PATH;
+            $path = 'news';
             $projects = Project::whereIsActive(true)->get();
             return view('dashboard.' . $this->path . '.create', compact('path', 'projects'));
         } catch (\Throwable $th) {
@@ -89,13 +94,16 @@ class InfoPageController extends Controller
     {
         abort_if(!canPass($this->path . '_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         try {
-            $record = Model::create($request->validated());
+            $data = $request->validated();
+            $data['type'] = 'news';
+            $mainPath = Model::FILE_UPLOAD_PATH;
+            $record = Model::create($data);
             if ($request->has('media_path') && $request->media_path  != null) {
-                $fileName = uploadMedia($request->media_path, $this->path);
+                $fileName = uploadMedia($request->media_path, $mainPath);
                 (new FileService)->addFile(
                     $record,
                     $fileName,
-                    $this->path,
+                    $mainPath,
                     'media_path',
                     $request->media_path->getClientOriginalExtension(),
                     'attachments',
@@ -118,8 +126,13 @@ class InfoPageController extends Controller
     {
         abort_if(!canPass($this->path . '_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         try {
-            $path = Model::FILE_UPLOAD_PATH;
-            $record = Model::findOrFail($id);
+            $record = Model::whereType('news')->whereId($id)->first();
+
+            if (!$record) {
+                abort(404);
+            }
+
+            $path = 'news';
             $projects = Project::whereIsActive(true)->get();
             return view('dashboard.' . $this->path . '.edit', compact('record', 'path', 'projects'));
         } catch (\Throwable $th) {
@@ -139,21 +152,23 @@ class InfoPageController extends Controller
         try {
             $record = Model::findOrFail($id);
             $record->update($request->validated());
+            $mainPath = Model::FILE_UPLOAD_PATH;
+
             if ($request->has('media_path') && $request->media_path  != null) {
                 if ($record->media_path != null) {
                     (new FileService)->deleteFile(
                         $record->media_path,
-                        $this->path,
+                        $mainPath,
                         'media_path',
                         $record->id
                     );
                 }
-                $fileName = uploadMedia($request->media_path, $this->path);
+                $fileName = uploadMedia($request->media_path, $mainPath);
 
                 (new FileService)->addFile(
                     $record,
                     $fileName,
-                    $this->path,
+                    $mainPath,
                     'media_path',
                     $request->media_path->getClientOriginalExtension(),
                     'attachments',

@@ -35,6 +35,7 @@ class Project extends Model
         'long',
         'price',
         'is_active',
+        'order',
         'created_at',
         'updated_at',
         'deleted_at',

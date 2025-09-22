@@ -45,7 +45,38 @@
         @else
         @endif
 
-
+        @if (canPass('page_sections_index'))
+            <li class="nav-item has-treeview menu-open">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-file-alt"></i>
+                    <p>
+                        {{ trans('cruds.menu.home_page_settings') }}
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    @if (canPass('page_sections_index'))
+                        <li class="nav-item">
+                            <a href="{{ route('admin.page_sections.index') }}"
+                                class="{{ str_contains($currentRoute, 'page_sections') ? 'nav-link active' : 'nav-link' }}">
+                                <i class="nav-icon fas fa-solid fa-home"></i>
+                                <p>{{ trans('cruds.page_sections.title_plural') }}</p>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
+        @else
+        @endif
+        @if (canPass('projects_index'))
+            <li class="nav-item">
+                <a href="{{ route('admin.projects.index') }}"
+                    class="{{ str_contains($currentRoute, 'projects') ? 'nav-link active' : 'nav-link' }}">
+                    <i class="nav-icon fas fa-solid fa-city"></i>
+                    <p>{{ trans('cruds.projects.title_plural') }}</p>
+                </a>
+            </li>
+        @endif
 
         @if (canPass('info_pages_index'))
             <li class="nav-item">
@@ -57,34 +88,13 @@
             </li>
         @endif
 
-        @if (canPass('contact_messages_index'))
+        @if (canPass('news_index'))
             <li class="nav-item">
-                <a href="{{ route('admin.contact_messages.index') }}"
-                    class="{{ str_contains($currentRoute, 'contact_messages') ? 'nav-link active' : 'nav-link' }}">
-                    <i class="nav-icon fas fa-headset"></i>
-                    <p>{{ trans('cruds.contact_messages.title_plural') }}</p>
-                </a>
-            </li>
-        @endif
-
-
-
-        @if (canPass('projects_index'))
-            <li class="nav-item">
-                <a href="{{ route('admin.projects.index') }}"
-                    class="{{ str_contains($currentRoute, 'projects') ? 'nav-link active' : 'nav-link' }}">
-                    <i class="nav-icon fas fa-solid fa-city"></i>
-                    <p>{{ trans('cruds.projects.title_plural') }}</p>
-                </a>
-            </li>
-        @endif
-
-        @if (canPass('app_settings_index'))
-            <li class="nav-item">
-                <a href="{{ route('admin.app_settings.index') }}"
-                    class="{{ str_contains($currentRoute, 'app_settings') ? 'nav-link active' : 'nav-link' }}">
-                    <i class="nav-icon fas fa-cogs"></i>
-                    <p>{{ trans('cruds.app_settings.title_plural') }}</p>
+                <a href="{{ route('admin.news.index') }}"
+                    class="{{ str_contains($currentRoute, 'news') ? 'nav-link active' : 'nav-link' }}">
+                    
+                    <i class="nav-icon fas fa-newspaper"></i>
+                    <p>{{ trans('cruds.news.title_plural') }}</p>
                 </a>
             </li>
         @endif
@@ -99,15 +109,26 @@
             </li>
         @endif
 
-        @if (canPass('page_sections_index'))
+        @if (canPass('contact_messages_index'))
             <li class="nav-item">
-                <a href="{{ route('admin.page_sections.index') }}"
-                    class="{{ str_contains($currentRoute, 'page_sections') ? 'nav-link active' : 'nav-link' }}">
-                    <i class="nav-icon fas fa-solid fa-home"></i>
-                    <p>{{ trans('cruds.page_sections.title_plural') }}</p>
+                <a href="{{ route('admin.contact_messages.index') }}"
+                    class="{{ str_contains($currentRoute, 'contact_messages') ? 'nav-link active' : 'nav-link' }}">
+                    <i class="nav-icon fas fa-headset"></i>
+                    <p>{{ trans('cruds.contact_messages.title_plural') }}</p>
                 </a>
             </li>
         @endif
+
+        @if (canPass('app_settings_index'))
+            <li class="nav-item">
+                <a href="{{ route('admin.app_settings.index') }}"
+                    class="{{ str_contains($currentRoute, 'app_settings') ? 'nav-link active' : 'nav-link' }}">
+                    <i class="nav-icon fas fa-cogs"></i>
+                    <p>{{ trans('cruds.app_settings.title_plural') }}</p>
+                </a>
+            </li>
+        @endif
+
         {{-- end --}}
     </ul>
 </nav>

@@ -55,6 +55,11 @@ class CreateProjectRequest extends FormRequest
                 'required',
                 'string',
             ],
+            'order' => [
+                'nullable',
+                'integer',
+                'min:0',
+            ],
         ];
     }
 }
