@@ -137,6 +137,16 @@
                             @endif
                         </div>
 
+                        <!-- Mobile Media Path Upload -->
+                        <div class="form-group">
+                            <label for="mobileMediaPath">{{ trans('cruds.' . $path . '.' . 'mobile_media_path') }}</label>
+                            <input type="file" class="form-control-file" id="mobileMediaPath" name="mobile_media_path">
+                            @if ($errors->has('mobile_media_path'))
+                                <span class="text-danger">{{ $errors->first('mobile_media_path') }}</span>
+                            @endif
+                        </div>
+
+
                         <div>
                             <button class="btn button-purple btn-lg" type="submit">
                                 {{ trans('global.create') }}

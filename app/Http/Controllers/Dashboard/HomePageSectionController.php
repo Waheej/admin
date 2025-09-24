@@ -105,6 +105,21 @@ class HomePageSectionController extends Controller
                     );
                 }
             }
+            // mobile_media
+            if ($request->has('mobile_media') && $request->mobile_media  != null) {
+                foreach ($request->mobile_media as $mobileMedia) {
+                    $fileName = uploadMedia($mobileMedia, $this->path);
+                    (new FileService)->addFile(
+                        $record,
+                        $fileName,
+                        $this->path,
+                        'mobile_media',
+                        $mobileMedia->getClientOriginalExtension(),
+                        'attachments',
+                        fileSize: $mobileMedia->getSize()
+                    );
+                }
+            }
 
              // videos
             if ($request->has('videos') && $request->videos  != null) {
@@ -173,6 +188,22 @@ class HomePageSectionController extends Controller
                         $media->getClientOriginalExtension(),
                         'attachments',
                         fileSize: $media->getSize()
+                    );
+                }
+            }
+
+            if ($request->has('mobile_media') && is_array($request->mobile_media)) {
+                foreach ($request->mobile_media as $mobileMedia) {
+                    $fileName = uploadMedia($mobileMedia, $this->path);
+
+                    (new FileService)->addFile(
+                        $record,
+                        $fileName,
+                        $this->path,
+                        'mobile_media',
+                        $mobileMedia->getClientOriginalExtension(),
+                        'attachments',
+                        fileSize: $mobileMedia->getSize()
                     );
                 }
             }

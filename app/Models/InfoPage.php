@@ -41,7 +41,7 @@ class InfoPage extends Model
         'deleted_at',
     ];
 
-    protected $appends = ['media_path'];
+    protected $appends = ['media_path', 'mobile_media_path'];
 
     /**
      * Get the media_path attribute.
@@ -53,6 +53,24 @@ class InfoPage extends Model
     {
         $record = File::where('folder', self::FILE_UPLOAD_PATH)
             ->where('label', 'media_path')
+            ->where('fileable_type', self::class)
+            ->where('fileable_id', $this->id)
+            ->whereIsActive(true)
+            ->first();
+
+        return $record ?  $record->file_name : null;
+    }
+
+    /**
+     * Get the mobile_media_path attribute.
+     *
+     * @param string $value The original mobile_media_path.
+     * @return string|null The mobile_media_path attribute.
+     */
+    public function getMobileMediaPathAttribute($value): string |null
+    {
+        $record = File::where('folder', self::FILE_UPLOAD_PATH)
+            ->where('label', 'mobile_media_path')
             ->where('fileable_type', self::class)
             ->where('fileable_id', $this->id)
             ->whereIsActive(true)

@@ -114,6 +114,14 @@
                                     @endforeach
                                 @endif
 
+                                @if ($record->mobile_media)
+                                    <p><strong>{{ trans('cruds.' . $path . '.' . 'mobile_media') }} :</strong></p>
+                                    @foreach ($record->mobile_media as $image)
+                                        <img src="{{ $image }}" alt="Cover Image"
+                                            style="max-width: 100%; height: auto; margin-bottom: 10px;">
+                                    @endforeach
+                                @endif
+
                                 @if ($record->videos)
                                     <p><strong>{{ trans('cruds.' . $path . '.' . 'videos') }} :</strong></p>
                                     @foreach ($record->videos as $video)

@@ -40,7 +40,7 @@ class HomePageSection extends Model
         'deleted_at',
     ];
 
-    protected $appends = ['media', 'videos'];
+    protected $appends = ['media', 'mobile_media', 'videos'];
 
     /**
      * Get the media attribute.
@@ -61,12 +61,30 @@ class HomePageSection extends Model
     }
 
     /**
+     * Get the mobile_media attribute.
+     *
+     * @param string $value The original mobile_media.
+     * @return string|null The mobile_media attribute.
+     */
+    public function getMobileMediaAttribute($value): array | null
+    {
+        return File::where('folder', self::FILE_UPLOAD_PATH)
+            ->where('label', 'mobile_media')
+            ->where('fileable_type', self::class)
+            ->where('fileable_id', $this->id)
+            ->where('is_active', true)
+            ->get()
+            ->pluck('file_name')
+            ->toArray();
+    }
+    
+    /**
      * Get the videos attribute.
      *
      * @param string $value The original videos.
      * @return string|null The videos attribute.
      */
-    
+
     public function getVideosAttribute($value): array | null
     {
         return File::where('folder', self::FILE_UPLOAD_PATH)
@@ -78,7 +96,7 @@ class HomePageSection extends Model
             ->pluck('file_name')
             ->toArray();
     }
-    
+
     /**
      * Get the attachments associated with the model.
      *

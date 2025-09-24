@@ -51,6 +51,15 @@ class UpdateHomePageSectionRequest extends FormRequest
                 'mimes:jpeg,png,jpg,gif,svg,webp',
                 'max:10000', // Max size 10MB
             ],
+            'mobile_media' => [
+                'nullable',
+                'array',
+            ],
+            'mobile_media.*' => [
+                'file',
+                'mimes:jpeg,png,jpg,gif,svg,webp',
+                'max:10000', // Max size 10MB
+            ],
             'videos' => [
                 'nullable',
                 'array',

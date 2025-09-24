@@ -46,6 +46,12 @@ class UpdateNewsRequest extends FormRequest
                 'mimes:jpeg,png,jpg,gif,svg,webp',
                 'max:10000', // Max size in KB
             ],
+            'mobile_media_path' => [
+                'nullable',
+                'file',
+                'mimes:jpeg,png,jpg,gif,svg,webp',
+                'max:10000', // Max size in KB
+            ],
             'project_id' => [
                 'nullable',
                 'integer',

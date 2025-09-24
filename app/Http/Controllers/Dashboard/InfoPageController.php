@@ -27,7 +27,7 @@ class InfoPageController extends Controller
         abort_if(!canPass($this->path . '_index'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         try {
 
-            $query = Model::where('type', '!=' ,'news')->orderBy('id', 'DESC');
+            $query = Model::where('type', '!=', 'news')->orderBy('id', 'DESC');
 
             // Filter data based on query string parameters
             if ($request->has('filter')) {
@@ -102,6 +102,19 @@ class InfoPageController extends Controller
                     fileSize: $request->media_path->getSize()
                 );
             }
+
+            if ($request->has('mobile_media_path') && $request->mobile_media_path  != null) {
+                $fileName = uploadMedia($request->mobile_media_path, $this->path);
+                (new FileService)->addFile(
+                    $record,
+                    $fileName,
+                    $this->path,
+                    'mobile_media_path',
+                    $request->mobile_media_path->getClientOriginalExtension(),
+                    'attachments',
+                    fileSize: $request->mobile_media_path->getSize()
+                );
+            }
             return redirect(route('admin.' . $this->path . '.index'));
         } catch (\Throwable $th) {
             Log::error($th);
@@ -158,6 +171,28 @@ class InfoPageController extends Controller
                     $request->media_path->getClientOriginalExtension(),
                     'attachments',
                     fileSize: $request->media_path->getSize()
+                );
+            }
+
+            if ($request->has('mobile_media_path') && $request->mobile_media_path  != null) {
+                if ($record->mobile_media_path != null) {
+                    (new FileService)->deleteFile(
+                        $record->mobile_media_path,
+                        $this->path,
+                        'mobile_media_path',
+                        $record->id
+                    );
+                }
+                $fileName = uploadMedia($request->mobile_media_path, $this->path);
+
+                (new FileService)->addFile(
+                    $record,
+                    $fileName,
+                    $this->path,
+                    'mobile_media_path',
+                    $request->mobile_media_path->getClientOriginalExtension(),
+                    'attachments',
+                    fileSize: $request->mobile_media_path->getSize()
                 );
             }
             return redirect(route('admin.' . $this->path . '.index'));

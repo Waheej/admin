@@ -107,6 +107,26 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="mobileMediaPath">{{ trans('cruds.' . $path . '.' . 'mobile_media_path') }}</label>
+                            <div>
+                                @php
+                                    $fileExtension = pathinfo($record->mobile_media_path, PATHINFO_EXTENSION);
+                                @endphp
+
+                                @if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif']))
+                                    <img src="{{ $record->mobile_media_path }}" alt="Mobile Media Image"
+                                        style="max-width: 300px; height: auto;">
+                                @elseif (in_array($fileExtension, ['mp4', 'mov', 'avi']))
+                                    <video width="320" height="240" controls>
+                                        <source src="{{ $record->mobile_media_path }}" type="video/{{ $fileExtension }}">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                @else
+                                    <p>{{ trans('cruds.' . $path . '.file_not_supported') }}</p>
+                                @endif
+                            </div>
+                        </div>
                         <label>{{ trans('cruds.' . $path . '.is_active') }}</label>
                         <div class="form-group">
                             <label class="switch">

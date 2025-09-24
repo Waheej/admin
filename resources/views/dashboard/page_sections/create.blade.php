@@ -129,6 +129,14 @@
                                 <span class="text-danger">{{ $errors->first('media') }}</span>
                             @endif
                         </div>
+                         <!-- Mobile Media Upload -->
+                        <div class="form-group">
+                            <label for="mobileMedia">{{ trans('cruds.' . $path . '.' . 'mobile_media') }}</label>
+                            <input type="file" class="form-control-file" id="mobileMedia" name="mobile_media[]" multiple>
+                            @if ($errors->has('mobile_media'))
+                                <span class="text-danger">{{ $errors->first('mobile_media') }}</span>
+                            @endif
+                        </div>
                         <div class="form-group">
                             <label for="videos">{{ trans('cruds.' . $path . '.' . 'videos') }}</label>
                             <input type="file" class="form-control-file" id="videos" name="videos[]" multiple>

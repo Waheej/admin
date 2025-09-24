@@ -110,6 +110,19 @@ class NewsController extends Controller
                     fileSize: $request->media_path->getSize()
                 );
             }
+
+            if ($request->has('mobile_media_path') && $request->mobile_media_path  != null) {
+                $fileName = uploadMedia($request->mobile_media_path, $mainPath);
+                (new FileService)->addFile(
+                    $record,
+                    $fileName,
+                    $mainPath,
+                    'mobile_media_path',
+                    $request->mobile_media_path->getClientOriginalExtension(),
+                    'attachments',
+                    fileSize: $request->mobile_media_path->getSize()
+                );
+            }
             return redirect(route('admin.' . $this->path . '.index'));
         } catch (\Throwable $th) {
             Log::error($th);
@@ -173,6 +186,28 @@ class NewsController extends Controller
                     $request->media_path->getClientOriginalExtension(),
                     'attachments',
                     fileSize: $request->media_path->getSize()
+                );
+            }
+
+            if ($request->has('mobile_media_path') && $request->mobile_media_path  != null) {
+                if ($record->mobile_media_path != null) {
+                    (new FileService)->deleteFile(
+                        $record->mobile_media_path,
+                        $mainPath,
+                        'mobile_media_path',
+                        $record->id
+                    );
+                }
+                $fileName = uploadMedia($request->mobile_media_path, $mainPath);
+
+                (new FileService)->addFile(
+                    $record,
+                    $fileName,
+                    $mainPath,
+                    'mobile_media_path',
+                    $request->mobile_media_path->getClientOriginalExtension(),
+                    'attachments',
+                    fileSize: $request->mobile_media_path->getSize()
                 );
             }
             return redirect(route('admin.' . $this->path . '.index'));

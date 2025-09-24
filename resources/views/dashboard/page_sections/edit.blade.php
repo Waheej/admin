@@ -138,6 +138,24 @@
                             @endif
                         </div>
 
+                         <div class="form-group">
+                            <label for="mobileMedia">{{ trans('cruds.' . $path . '.' . 'mobile_media') }}</label>
+                            <input type="file" class="form-control-file" id="mobileMedia" name="mobile_media[]" multiple>
+                            @if ($record->mobile_media)
+                                <p>Current Images:</p>
+                                @foreach ($record->mobile_media as $image)
+                                    <img src="{{ $image }}" style="max-width: 100px; margin-right: 10px;">
+                                    <a href="{{ route('admin.page_sections.delete_image', ['id' => $record->id, 'file_name' => $image, 'label' => 'mobile_media']) }}"
+                                        class="btn btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                @endforeach
+                            @endif
+                            @if ($errors->has('mobile_media'))
+                                <span class="text-danger">{{ $errors->first('mobile_media') }}</span>
+                            @endif
+                        </div>
+
                         <div class="form-group">
                             <label for="videos">{{ trans('cruds.' . $path . '.' . 'videos') }}</label>
                             <input type="file" class="form-control-file" id="videos" name="videos[]" multiple>
