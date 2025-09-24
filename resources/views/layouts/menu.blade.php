@@ -140,6 +140,16 @@
         @endif
 
 
-        {{-- end --}}
+        
+@if (canPass('seo_index'))
+
+<li class="nav-item">
+    <a href="{{ route('admin.seo.index') }}" class="{{ str_contains($currentRoute, 'seo') ? 'nav-link active' : 'nav-link'}}">
+        <i class="nav-icon fas fa-tachometer-alt"></i>
+        <p>{{ trans('cruds.seo.title_plural') }}</p>
+    </a>
+</li>
+@endif
+{{-- end --}}
     </ul>
 </nav>

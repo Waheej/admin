@@ -156,7 +156,7 @@
                             @endif
                         </div>
 
-                         <div class="form-group">
+                        <div class="form-group">
                             <label for="mobileMedia">{{ trans('cruds.' . $path . '.' . 'mobile_media') }}</label>
                             <input type="file" class="form-control-file" id="mobileMedia" name="mobile_media[]" multiple>
                             @if ($record->mobile_media)

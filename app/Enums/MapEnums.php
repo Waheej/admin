@@ -23,6 +23,7 @@ enum MapEnums
         'PermissionActions' => GeneralEnums::PermissionActions,
         'ProjectStatuses' => GeneralEnums::ProjectStatuses,
         'SubsidiaryTypes' => GeneralEnums::SubsidiaryTypes,
+        'SEOPages' => GeneralEnums::SEOPages,
         // 'HomePageSectionTypes' => GeneralEnums::HomePageSectionTypes,
     ];
 }

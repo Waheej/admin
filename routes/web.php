@@ -11,6 +11,7 @@ use App\Http\Controllers\Dashboard\PageTypeController;
 use App\Http\Controllers\Dashboard\PartnersAndSubsidiaryController;
 use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\Dashboard\RoleController;
+use App\Http\Controllers\Dashboard\SeoController;
 use App\Http\Controllers\HomeController;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
@@ -97,6 +98,9 @@ Route::group(['middleware' => ['localization']], function () {
         // PageTypes
         Route::resource('page_types', PageTypeController::class);
         Route::put('/page_types/{id}/toggleActivity', [PageTypeController::class, 'toggleActivity'])->name('page_types.toggleActivity');
+
+        // Seos
+        Route::resource('seo', SeoController::class);
         // end
     });
 });

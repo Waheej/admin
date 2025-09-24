@@ -122,7 +122,7 @@ enum GeneralEnums
             'partner' => 'Partner'
         ],
         'ar' => [
-           'subsidiary' => 'شركة تابعة',
+            'subsidiary' => 'شركة تابعة',
             'partner' => 'شريك',
         ],
     ];
@@ -174,4 +174,25 @@ enum GeneralEnums
         ],
     ];
 
+    // SEO Pages
+    const SEOPages = [
+        'en' => [
+            'home' => 'Home',
+            'privacy_policy' => 'Privacy Policy',
+            'terms_conditions' => 'Terms Conditions',
+            'faq' => 'FAQ',
+            'news' => 'News',
+            'mission' => 'Our Mission',
+            'vision' => 'Our Vision',
+        ],
+        'ar' => [
+            'home' => 'الرئيسية',
+            'privacy_policy' => 'سياسة الخصوصيه',
+            'terms_conditions' => 'الشروط و الأحكام',
+            'faq' => 'الاسئله المتكرره',
+            'news' => 'الأخبار',
+            'mission' => 'مهمتنا',
+            'vision' => 'رؤيتنا',
+        ],
+    ];
 }
