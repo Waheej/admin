@@ -1,16 +1,16 @@
 <?php
 
-return array(
+return array (
   'home' => 'الرئيسيه',
-  'menu' =>
-  array(
+  'menu' => 
+  array (
     'dashboard' => 'لوحة التحكم',
     'user_management' => 'ادارة المستخدمين',
     'support' => 'الدعم',
     'home_page_settings' => 'اعدادات الصفحه الرئيسيه',
   ),
-  'admins' =>
-  array(
+  'admins' => 
+  array (
     'title_plural' => 'المديرين',
     'title_singular' => 'المدير',
     'full_name' => 'اﻻسم بالكامل ',
@@ -25,8 +25,8 @@ return array(
     'module' => 'الوحدة',
     'permissions' => 'الأذونات',
   ),
-  'roles' =>
-  array(
+  'roles' => 
+  array (
     'title_plural' => 'الأدوار',
     'title_singular' => 'دور',
     'title_en' => 'العنوان بالإنجليزية',
@@ -37,8 +37,8 @@ return array(
     'module' => 'الوحدة',
     'permissions' => 'الأذونات',
   ),
-  'info_pages' =>
-  array(
+  'info_pages' => 
+  array (
     'title_plural' => 'صفحات المعلومات',
     'title_singular' => 'صفحة المعلومات',
     'title_en' => 'العنوان بالإنجليزية',
@@ -57,8 +57,8 @@ return array(
     'file_not_supported' => 'الملف غير مدعوم',
     'project_id' => 'المشروع',
   ),
-  'news' =>
-  array(
+  'news' => 
+  array (
     'title_plural' => 'الأخبار',
     'title_singular' => 'خبر',
     'title_en' => 'العنوان بالإنجليزية',
@@ -76,8 +76,8 @@ return array(
     'file_not_supported' => 'الملف غير مدعوم',
     'project_id' => 'المشروع',
   ),
-  'projects' =>
-  array(
+  'projects' => 
+  array (
     'title_plural' => 'المشاريع',
     'title_singular' => 'المشروع',
     'name_en' => 'الاسم بالإنجليزية',
@@ -95,8 +95,8 @@ return array(
     'updated_at' => 'تاريخ التحديث',
     'deleted_at' => 'تاريخ الحذف',
   ),
-  'contact_messages' =>
-  array(
+  'contact_messages' => 
+  array (
     'title_plural' => 'رسائل التواصل',
     'title_singular' => 'رسالة تواصل',
     'name' => 'الاسم',
@@ -110,8 +110,8 @@ return array(
     'updated_at' => 'تاريخ التحديث',
     'deleted_at' => 'تاريخ الحذف',
   ),
-  'app_settings' =>
-  array(
+  'app_settings' => 
+  array (
     'title_plural' => 'إعدادات التطبيق',
     'title_singular' => 'إعداد التطبيق',
     'key' => 'المفتاح',
@@ -123,8 +123,8 @@ return array(
     'updated_at' => 'تاريخ التحديث',
     'deleted_at' => 'تاريخ الحذف',
   ),
-  'partners_and_subsidiaries' =>
-  array(
+  'partners_and_subsidiaries' => 
+  array (
     'title_plural' => 'الشركاء والشركات التابعة',
     'title_singular' => 'الشريك أو الشركة التابعة',
     'url' => 'الرابط',
@@ -140,8 +140,8 @@ return array(
     'updated_at' => 'تاريخ التحديث',
     'deleted_at' => 'تاريخ الحذف',
   ),
-  'page_sections' =>
-  array(
+  'page_sections' => 
+  array (
     'title_plural' => 'أقسام الصفحة الرئيسية',
     'title_singular' => 'قسم الصفحة الرئيسية',
     'title_en' => 'العنوان بالإنجليزية',
@@ -149,6 +149,7 @@ return array(
     'description_en' => 'الوصف بالإنجليزية',
     'description_ar' => 'الوصف بالعربية',
     'type' => 'النوع',
+    'page_type_id' => 'النوع',
     'order' => 'الترتيب',
     'is_active' => 'نشط',
     'media' => 'الميديا',
@@ -156,6 +157,18 @@ return array(
     'videos' => 'الفيديوهات',
     'file_not_supported' => 'الملف غير مدعوم',
     'project_id' => 'المشروع',
+    'created_at' => 'تاريخ الإنشاء',
+    'updated_at' => 'تاريخ التحديث',
+    'deleted_at' => 'تاريخ الحذف',
+  ),
+  'page_types' => 
+  array (
+    'title_plural' => 'نوع الأقسام',
+    'title_singular' => 'نوع القسم',
+    'title_en' => 'العنوان بالإنجليزية',
+    'title_ar' => 'العنوان بالعربية',
+    'order' => 'الترتيب',
+    'is_active' => 'نشط',
     'created_at' => 'تاريخ الإنشاء',
     'updated_at' => 'تاريخ التحديث',
     'deleted_at' => 'تاريخ الحذف',

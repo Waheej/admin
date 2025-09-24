@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\ContactMessageController;
 use App\Http\Controllers\Dashboard\HomePageSectionController;
 use App\Http\Controllers\Dashboard\InfoPageController;
 use App\Http\Controllers\Dashboard\NewsController;
+use App\Http\Controllers\Dashboard\PageTypeController;
 use App\Http\Controllers\Dashboard\PartnersAndSubsidiaryController;
 use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\Dashboard\RoleController;
@@ -92,6 +93,10 @@ Route::group(['middleware' => ['localization']], function () {
         Route::resource('page_sections', HomePageSectionController::class);
         Route::put('/page_sections/{id}/toggleActivity', [HomePageSectionController::class, 'toggleActivity'])->name('page_sections.toggleActivity');
         Route::get('/page_sections/{id}/delete_image', [HomePageSectionController::class, 'deleteImage'])->name('page_sections.delete_image');
+
+        // PageTypes
+        Route::resource('page_types', PageTypeController::class);
+        Route::put('/page_types/{id}/toggleActivity', [PageTypeController::class, 'toggleActivity'])->name('page_types.toggleActivity');
         // end
     });
 });

@@ -45,7 +45,7 @@
         @else
         @endif
 
-        @if (canPass('page_sections_index'))
+        @if (canPass('page_sections_index') || canPass('page_types_index'))
             <li class="nav-item has-treeview menu-open">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-file-alt"></i>
@@ -61,6 +61,16 @@
                                 class="{{ str_contains($currentRoute, 'page_sections') ? 'nav-link active' : 'nav-link' }}">
                                 <i class="nav-icon fas fa-solid fa-home"></i>
                                 <p>{{ trans('cruds.page_sections.title_plural') }}</p>
+                            </a>
+                        </li>
+                    @endif
+
+                    @if (canPass('page_types_index'))
+                        <li class="nav-item">
+                            <a href="{{ route('admin.page_types.index') }}"
+                                class="{{ str_contains($currentRoute, 'page_types') ? 'nav-link active' : 'nav-link' }}">
+                                <i class="nav-icon fas fa-paperclip"></i>
+                                <p>{{ trans('cruds.page_types.title_plural') }}</p>
                             </a>
                         </li>
                     @endif
@@ -92,7 +102,7 @@
             <li class="nav-item">
                 <a href="{{ route('admin.news.index') }}"
                     class="{{ str_contains($currentRoute, 'news') ? 'nav-link active' : 'nav-link' }}">
-                    
+
                     <i class="nav-icon fas fa-newspaper"></i>
                     <p>{{ trans('cruds.news.title_plural') }}</p>
                 </a>
@@ -128,6 +138,7 @@
                 </a>
             </li>
         @endif
+
 
         {{-- end --}}
     </ul>

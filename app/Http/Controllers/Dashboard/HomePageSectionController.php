@@ -7,6 +7,7 @@ use App\Models\HomePageSection as Model;
 use App\Http\Requests\Dashboard\Create\CreateHomePageSectionRequest as CreateRequest;
 use App\Http\Requests\Dashboard\Update\UpdateHomePageSectionRequest as UpdateRequest;
 use App\Http\Controllers\Controller;
+use App\Models\PageType;
 use App\Models\Project;
 use App\Services\FileService;
 use Illuminate\Http\Request;
@@ -72,7 +73,8 @@ class HomePageSectionController extends Controller
         try {
             $path = Model::FILE_UPLOAD_PATH;
             $projects = Project::whereIsActive(true)->get();
-            return view('dashboard.' . $this->path . '.create', compact('path', 'projects'));
+            $pageTypes = PageType::whereIsActive(true)->get();
+            return view('dashboard.' . $this->path . '.create', compact('path', 'projects', 'pageTypes'));
         } catch (\Throwable $th) {
             Log::error($th);
             abort(500);
@@ -156,7 +158,8 @@ class HomePageSectionController extends Controller
             $path = Model::FILE_UPLOAD_PATH;
             $record = Model::findOrFail($id);
             $projects = Project::whereIsActive(true)->get();
-            return view('dashboard.' . $this->path . '.edit', compact('record', 'path', 'projects'));
+            $pageTypes = PageType::whereIsActive(true)->get();
+            return view('dashboard.' . $this->path . '.edit', compact('record', 'path', 'projects', 'pageTypes'));
         } catch (\Throwable $th) {
             Log::error($th);
             abort(500);

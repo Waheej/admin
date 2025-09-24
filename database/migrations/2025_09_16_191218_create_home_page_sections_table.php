@@ -17,13 +17,19 @@ return new class extends Migration
             $table->string('title_ar')->nullable();
             $table->text('description_en')->nullable();
             $table->text('description_ar')->nullable();
-            $table->string('type')->nullable(); // hero, featured_projects, news, map, stats, testimonials, cta, newsletter
+            // $table->string('type')->nullable(); // hero, featured_projects, news, map, stats, testimonials, cta, newsletter
             $table->integer('order')->default(1);
             $table->boolean('is_active')->default(true);
             $table->unsignedBigInteger('project_id')->nullable();
              $table->foreign('project_id')
             ->references('id')
             ->on('projects')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+            $table->unsignedBigInteger('page_type_id')->nullable();
+             $table->foreign('page_type_id')
+            ->references('id')
+            ->on('page_types')
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->timestamps();

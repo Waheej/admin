@@ -105,7 +105,26 @@
                                 <span class="text-danger">{{ $errors->first('project_id') }}</span>
                             @endif
                         </div>
+
                         <div class="form-group">
+                            @php $name = "title_" . app()->getLocale(); @endphp
+                            <label for="exampleInputPageTypeId">{{ trans('cruds.' . $path . '.page_type_id') }}</label>
+                            <select class="form-control" id="exampleInputPageTypeId" name="page_type_id">
+                                <option value="" disabled selected>
+                                    {{ __('global.please_select', ['col' => trans('cruds.' . $path . '.page_type_id')]) }}
+                                </option>
+                                @foreach ($pageTypes as $pageType)
+                                    <option value="{{ $pageType->id }}"
+                                        {{ old('page_type_id') == $pageType->id ? 'selected' : '' }}>
+                                        {{ $pageType->$name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('page_type_id'))
+                                <span class="text-danger">{{ $errors->first('page_type_id') }}</span>
+                            @endif
+                        </div>
+                        {{-- <div class="form-group">
                             <label for="exampleInputType">{{ trans('cruds.' . $path . '.' . 'type') }}</label>
                             <select class="form-control" id="exampleInputType" name="type">
                                 <option value="" disabled selected>
@@ -121,7 +140,7 @@
                             @if ($errors->has('type'))
                                 <span class="text-danger">{{ $errors->first('type') }}</span>
                             @endif
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <label for="media">{{ trans('cruds.' . $path . '.' . 'media') }}</label>
                             <input type="file" class="form-control-file" id="media" name="media[]" multiple>
@@ -129,7 +148,7 @@
                                 <span class="text-danger">{{ $errors->first('media') }}</span>
                             @endif
                         </div>
-                         <!-- Mobile Media Upload -->
+                        <!-- Mobile Media Upload -->
                         <div class="form-group">
                             <label for="mobileMedia">{{ trans('cruds.' . $path . '.' . 'mobile_media') }}</label>
                             <input type="file" class="form-control-file" id="mobileMedia" name="mobile_media[]" multiple>

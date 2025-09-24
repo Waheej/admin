@@ -103,6 +103,24 @@
                             @endif
                         </div>
                         <div class="form-group">
+                            @php $name = "title_" . app()->getLocale(); @endphp
+                            <label for="exampleInputPageTypeId">{{ trans('cruds.' . $path . '.page_type_id') }}</label>
+                            <select class="form-control" id="exampleInputPageTypeId" name="page_type_id">
+                                <option value="{{ null }}">
+                                    {{ __('global.please_select', ['col' => trans('cruds.' . $path . '.page_type_id')]) }}
+                                </option>
+                                @foreach ($pageTypes as $pageType)
+                                    <option value="{{ $pageType->id }}"
+                                        {{ old('page_type_id', $record->page_type_id) == $pageType->id ? 'selected' : '' }}>
+                                        {{ $pageType->$name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('role_id'))
+                                <span class="text-danger">{{ $errors->first('role_id') }}</span>
+                            @endif
+                        </div>
+                        {{-- <div class="form-group">
                             <label for="exampleInputType">{{ trans('cruds.' . $path . '.' . 'type') }}</label>
                             <select class="form-control" id="exampleInputType" name="type">
                                 <option value="" disabled selected>
@@ -118,7 +136,7 @@
                             @if ($errors->has('type'))
                                 <span class="text-danger">{{ $errors->first('type') }}</span>
                             @endif
-                        </div>
+                        </div> --}}
 
                         <div class="form-group">
                             <label for="media">{{ trans('cruds.' . $path . '.' . 'media') }}</label>

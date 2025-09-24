@@ -31,7 +31,8 @@ class HomePageSection extends Model
         'title_ar',
         'description_en',
         'description_ar',
-        'type', // hero, featured_projects, news, map, stats, testimonials, cta, newsletter
+        // 'type', // hero, featured_projects, news, map, stats, testimonials, cta, newsletter
+        'page_type_id',
         'order',
         'is_active',
         'project_id',
@@ -115,5 +116,15 @@ class HomePageSection extends Model
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
+    }
+
+    /**
+     * Get the page type associated with the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function pageType(): BelongsTo
+    {
+        return $this->belongsTo(PageType::class);
     }
 }

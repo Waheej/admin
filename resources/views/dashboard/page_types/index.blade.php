@@ -58,12 +58,6 @@
                                     {{ trans('cruds.' . $path . '.' . 'title_ar') }}
                                 </th>
                                 <th class="text-center">
-                                    {{ trans('cruds.' . $path . '.' . 'page_type_id') }}
-                                </th>
-                                <th class="text-center">
-                                    {{ trans('cruds.' . $path . '.' . 'order') }}
-                                </th>
-                                <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'is_active') }}
                                 </th>
                                 <th>
@@ -76,17 +70,12 @@
                                     <td>
                                         {{ $record->id }}
                                     </td>
+
                                     <td class="text-center">
                                         {{ $record->title_en }}
                                     </td>
                                     <td class="text-center">
                                         {{ $record->title_ar }}
-                                    </td>
-                                    <td class="text-center">
-                                        {{ $record->pageType ? $record->pageType->{"title_".app()->getLocale()} : '' }}
-                                    </td>
-                                    <td class="text-center">
-                                        {{ $record->order }}
                                     </td>
                                     @if (canPass($path . '_toggleActivity'))
                                         <td class="text-center" style="padding-top: 1%;">

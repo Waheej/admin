@@ -1,16 +1,16 @@
 <?php
 
-return array(
+return array (
   'home' => 'Home',
-  'menu' =>
-  array(
+  'menu' => 
+  array (
     'dashboard' => 'Dashboard',
     'user_management' => 'User Management',
     'support' => 'Support',
     'home_page_settings' => 'Home Page Settings',
   ),
-  'admins' =>
-  array(
+  'admins' => 
+  array (
     'title_plural' => 'Admins',
     'title_singular' => 'Admin',
     'full_name' => 'Full Name',
@@ -25,8 +25,8 @@ return array(
     'module' => 'Module',
     'permissions' => 'Permissions',
   ),
-  'roles' =>
-  array(
+  'roles' => 
+  array (
     'title_plural' => 'Roles',
     'title_singular' => 'Role',
     'title_en' => 'TitleEn',
@@ -37,8 +37,8 @@ return array(
     'module' => 'Module',
     'permissions' => 'Permissions',
   ),
-  'info_pages' =>
-  array(
+  'info_pages' => 
+  array (
     'title_plural' => 'InfoPages',
     'title_singular' => 'InfoPage',
     'title_en' => 'TitleEn',
@@ -57,8 +57,8 @@ return array(
     'file_not_supported' => 'File Not Supported',
     'project_id' => 'Project',
   ),
-  'news' =>
-  array(
+  'news' => 
+  array (
     'title_plural' => 'News',
     'title_singular' => 'News',
     'title_en' => 'TitleEn',
@@ -76,8 +76,8 @@ return array(
     'file_not_supported' => 'File Not Supported',
     'project_id' => 'Project',
   ),
-  'projects' =>
-  array(
+  'projects' => 
+  array (
     'title_plural' => 'Projects',
     'title_singular' => 'Project',
     'name_en' => 'NameEn',
@@ -95,8 +95,8 @@ return array(
     'updated_at' => 'UpdatedAt',
     'deleted_at' => 'DeletedAt',
   ),
-  'contact_messages' =>
-  array(
+  'contact_messages' => 
+  array (
     'title_plural' => 'ContactMessages',
     'title_singular' => 'ContactMessage',
     'name' => 'Name',
@@ -110,8 +110,8 @@ return array(
     'updated_at' => 'UpdatedAt',
     'deleted_at' => 'DeletedAt',
   ),
-  'app_settings' =>
-  array(
+  'app_settings' => 
+  array (
     'title_plural' => 'AppSettings',
     'title_singular' => 'AppSetting',
     'key' => 'Key',
@@ -123,8 +123,8 @@ return array(
     'updated_at' => 'UpdatedAt',
     'deleted_at' => 'DeletedAt',
   ),
-  'partners_and_subsidiaries' =>
-  array(
+  'partners_and_subsidiaries' => 
+  array (
     'title_plural' => 'Partners And Subsidiaries',
     'title_singular' => 'Partner And Subsidiary',
     'url' => 'Url',
@@ -132,7 +132,7 @@ return array(
     'name_ar' => 'NameAr',
     'description_en' => 'DescriptionEn',
     'description_ar' => 'DescriptionAr',
-    'type' => 'Type', // 'partner' or 'subsidiary'
+    'type' => 'Type',
     'is_active' => 'Active',
     'img' => 'Image',
     'file_not_supported' => 'File Not Supported',
@@ -140,8 +140,8 @@ return array(
     'updated_at' => 'UpdatedAt',
     'deleted_at' => 'DeletedAt',
   ),
-  'page_sections' =>
-  array(
+  'page_sections' => 
+  array (
     'title_plural' => 'Home Page Sections',
     'title_singular' => 'Home Page Section',
     'title_en' => 'TitleEn',
@@ -149,6 +149,7 @@ return array(
     'description_en' => 'DescriptionEn',
     'description_ar' => 'DescriptionAr',
     'type' => 'Type',
+    'page_type_id' => 'Type',
     'order' => 'Order',
     'media' => 'Media',
     'mobile_media' => 'Mobile Media',
@@ -156,6 +157,18 @@ return array(
     'file_not_supported' => 'File Not Supported',
     'is_active' => 'IsActive',
     'project_id' => 'Project',
+    'created_at' => 'CreatedAt',
+    'updated_at' => 'UpdatedAt',
+    'deleted_at' => 'DeletedAt',
+  ),
+  'page_types' => 
+  array (
+    'title_plural' => 'PageTypes',
+    'title_singular' => 'PageType',
+    'title_en' => 'TitleEn',
+    'title_ar' => 'TitleAr',
+    'order' => 'Order',
+    'is_active' => 'IsActive',
     'created_at' => 'CreatedAt',
     'updated_at' => 'UpdatedAt',
     'deleted_at' => 'DeletedAt',
