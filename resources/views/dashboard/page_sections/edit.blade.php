@@ -84,25 +84,28 @@
                                 <span class="text-danger">{{ $errors->first('order') }}</span>
                             @endif
                         </div>
-                        <div class="form-group">
-                            @php $name = "name_" . app()->getLocale(); @endphp
-                            <label for="exampleInputProjectId">{{ trans('cruds.' . $path . '.project_id') }}</label>
-                            <select class="form-control" id="exampleInputProjectId" name="project_id">
-                                <option value="{{ null }}">
-                                    {{ __('global.please_select', ['col' => trans('cruds.' . $path . '.project_id')]) }}
-                                </option>
-                                @foreach ($projects as $project)
-                                    <option value="{{ $project->id }}"
-                                        {{ old('project_id', $record->project_id) == $project->id ? 'selected' : '' }}>
-                                        {{ $project->$name }}
+
+                        @if (in_array($record->type, ['featured_projects', 'partners', 'news']))
+                        @else
+                            <div class="form-group">
+                                @php $name = "name_" . app()->getLocale(); @endphp
+                                <label for="exampleInputProjectId">{{ trans('cruds.' . $path . '.project_id') }}</label>
+                                <select class="form-control" id="exampleInputProjectId" name="project_id">
+                                    <option value="{{ null }}">
+                                        {{ __('global.please_select', ['col' => trans('cruds.' . $path . '.project_id')]) }}
                                     </option>
-                                @endforeach
-                            </select>
-                            @if ($errors->has('role_id'))
-                                <span class="text-danger">{{ $errors->first('role_id') }}</span>
-                            @endif
-                        </div>
-                        {{-- <div class="form-group">
+                                    @foreach ($projects as $project)
+                                        <option value="{{ $project->id }}"
+                                            {{ old('project_id', $record->project_id) == $project->id ? 'selected' : '' }}>
+                                            {{ $project->$name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('role_id'))
+                                    <span class="text-danger">{{ $errors->first('role_id') }}</span>
+                                @endif
+                            </div>
+                            {{-- <div class="form-group">
                             @php $name = "title_" . app()->getLocale(); @endphp
                             <label for="exampleInputPageTypeId">{{ trans('cruds.' . $path . '.page_type_id') }}</label>
                             <select class="form-control" id="exampleInputPageTypeId" name="page_type_id">
@@ -120,7 +123,7 @@
                                 <span class="text-danger">{{ $errors->first('role_id') }}</span>
                             @endif
                         </div> --}}
-                        {{-- <div class="form-group">
+                            {{-- <div class="form-group">
                             <label for="exampleInputType">{{ trans('cruds.' . $path . '.' . 'type') }}</label>
                             <select class="form-control" id="exampleInputType" name="type">
                                 <option value="" disabled selected>
@@ -138,69 +141,71 @@
                             @endif
                         </div> --}}
 
-                        <div class="form-group">
-                            <label for="media">{{ trans('cruds.' . $path . '.' . 'media') }}</label>
-                            <input type="file" class="form-control-file" id="media" name="media[]" multiple>
-                            @if ($record->media)
-                                <p>Current Images:</p>
-                                @foreach ($record->media as $image)
-                                    <img src="{{ $image }}" style="max-width: 100px; margin-right: 10px;">
-                                    <a href="{{ route('admin.page_sections.delete_image', ['id' => $record->id, 'file_name' => $image, 'label' => 'media']) }}"
-                                        class="btn btn-danger">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                @endforeach
-                            @endif
-                            @if ($errors->has('media'))
-                                <span class="text-danger">{{ $errors->first('media') }}</span>
-                            @endif
-                        </div>
+                            <div class="form-group">
+                                <label for="media">{{ trans('cruds.' . $path . '.' . 'media') }}</label>
+                                <input type="file" class="form-control-file" id="media" name="media[]" multiple>
+                                @if ($record->media)
+                                    <p>Current Images:</p>
+                                    @foreach ($record->media as $image)
+                                        <img src="{{ $image }}" style="max-width: 100px; margin-right: 10px;">
+                                        <a href="{{ route('admin.page_sections.delete_image', ['id' => $record->id, 'file_name' => $image, 'label' => 'media']) }}"
+                                            class="btn btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    @endforeach
+                                @endif
+                                @if ($errors->has('media'))
+                                    <span class="text-danger">{{ $errors->first('media') }}</span>
+                                @endif
+                            </div>
 
-                        <div class="form-group">
-                            <label for="mobileMedia">{{ trans('cruds.' . $path . '.' . 'mobile_media') }}</label>
-                            <input type="file" class="form-control-file" id="mobileMedia" name="mobile_media[]" multiple>
-                            @if ($record->mobile_media)
-                                <p>Current Images:</p>
-                                @foreach ($record->mobile_media as $image)
-                                    <img src="{{ $image }}" style="max-width: 100px; margin-right: 10px;">
-                                    <a href="{{ route('admin.page_sections.delete_image', ['id' => $record->id, 'file_name' => $image, 'label' => 'mobile_media']) }}"
-                                        class="btn btn-danger">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                @endforeach
-                            @endif
-                            @if ($errors->has('mobile_media'))
-                                <span class="text-danger">{{ $errors->first('mobile_media') }}</span>
-                            @endif
-                        </div>
+                            <div class="form-group">
+                                <label for="mobileMedia">{{ trans('cruds.' . $path . '.' . 'mobile_media') }}</label>
+                                <input type="file" class="form-control-file" id="mobileMedia" name="mobile_media[]"
+                                    multiple>
+                                @if ($record->mobile_media)
+                                    <p>Current Images:</p>
+                                    @foreach ($record->mobile_media as $image)
+                                        <img src="{{ $image }}" style="max-width: 100px; margin-right: 10px;">
+                                        <a href="{{ route('admin.page_sections.delete_image', ['id' => $record->id, 'file_name' => $image, 'label' => 'mobile_media']) }}"
+                                            class="btn btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    @endforeach
+                                @endif
+                                @if ($errors->has('mobile_media'))
+                                    <span class="text-danger">{{ $errors->first('mobile_media') }}</span>
+                                @endif
+                            </div>
 
-                        <div class="form-group">
-                            <label for="videos">{{ trans('cruds.' . $path . '.' . 'videos') }}</label>
-                            <input type="file" class="form-control-file" id="videos" name="videos[]" multiple>
-                            @if ($record->videos)
-                                <p>Current Videos:</p>
-                                @foreach ($record->videos as $video)
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <video controls style="max-width: 100%; display: block; margin-bottom: 10px;">
-                                                <source src="{{ $video }}" type="video/mp4">
-                                                Your browser does not support the video tag.
-                                            </video>
+                            <div class="form-group">
+                                <label for="videos">{{ trans('cruds.' . $path . '.' . 'videos') }}</label>
+                                <input type="file" class="form-control-file" id="videos" name="videos[]" multiple>
+                                @if ($record->videos)
+                                    <p>Current Videos:</p>
+                                    @foreach ($record->videos as $video)
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <video controls
+                                                    style="max-width: 100%; display: block; margin-bottom: 10px;">
+                                                    <source src="{{ $video }}" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <a href="{{ route('admin.page_sections.delete_image', ['id' => $record->id, 'file_name' => $video, 'label' => 'videos']) }}"
+                                                    class="btn btn-danger" style="margin-top: 10px;">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <a href="{{ route('admin.page_sections.delete_image', ['id' => $record->id, 'file_name' => $video, 'label' => 'videos']) }}"
-                                                class="btn btn-danger" style="margin-top: 10px;">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endif
-                            @if ($errors->has('videos'))
-                                <span class="text-danger">{{ $errors->first('videos') }}</span>
-                            @endif
-                        </div>
-
+                                    @endforeach
+                                @endif
+                                @if ($errors->has('videos'))
+                                    <span class="text-danger">{{ $errors->first('videos') }}</span>
+                                @endif
+                            </div>
+                        @endif
                         <div>
                             <button class="btn button-purple btn-lg" type="submit">{{ trans('global.update') }}</button>
                         </div>

@@ -129,16 +129,11 @@
                                                 </a>
                                             @endif
                                         @endif
-
-
                                         @if (canPass($path . '_edit'))
-                                            @if(in_array($record->type, ['featured_projects', 'partners', 'news', 'contact_us']))
-                                            @else
                                                 <a class="btn btn-info btn-sm"
                                                     href="{{ route('admin.' . $path . '.edit', $record->id) }}">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </a>
-                                            @endif
                                         @endif
                                         {{-- @if (canPass($path . '_destroy'))
                                             <a class="btn btn-danger btn-sm text-white"
