@@ -43,3 +43,11 @@ Route::get("/enumDDLList", [GeneralController::class, 'enumDDLList'])->name('enu
 
 // Contact Message
 Route::post("/contact_messages/request", [PortalController::class, 'createContactMessage'])->name('createContactMessage');
+// Get Info
+Route::get("/getInfo", [PortalController::class, 'getInfo'])->name('getInfo');
+// Projects
+Route::get("/projectsList", [PortalController::class, 'projectsList'])->name('projectsList');
+Route::get("/projectDetails/{id}", [PortalController::class, 'projectDetails'])->name('projectDetails');
+
+// Home Page
+Route::get("/homePage", [PortalController::class, 'homePage'])->name('homePage');

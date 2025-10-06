@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Portal;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseValidationRequest;
 
-class CreateContactMessageRequest extends FormRequest
+class CreateContactMessageRequest extends BaseValidationRequest
 {
     /**
      * Determine if the user is authorized to make this request.
