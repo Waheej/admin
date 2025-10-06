@@ -35,6 +35,11 @@ class CreatePartnerAndSubsidiariesRequest extends FormRequest
                 'required',
                 'string',
             ],
+            'order' => [
+                'required',
+                'integer',
+                'min:0',
+            ],
             'description_en' => [
                 'required',
                 'string',

@@ -35,14 +35,14 @@ class UpdateHomePageSectionRequest extends FormRequest
             'description_ar' => [
                 'string',
             ],
-            // 'type' => [
-            //     'string',
-            //     Rule::in(array_keys(\App\Enums\GeneralEnums::HomePageSectionTypes['en'])),
-            // ],
-            'page_type_id' => [
-                'integer',
-                'exists:page_types,id',
+            'type' => [
+                'string',
+                Rule::in(array_keys(\App\Enums\GeneralEnums::HomePageSectionTypes['en'])),
             ],
+            // 'page_type_id' => [
+            //     'integer',
+            //     'exists:page_types,id',
+            // ],
             'order' => [
                 'integer',
             ],

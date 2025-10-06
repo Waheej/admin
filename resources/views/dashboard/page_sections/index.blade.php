@@ -32,7 +32,7 @@
                             <h3 style="font-size: 1.1rem;font-weight: 400;">{{ trans('cruds.' . $path . '.title_plural') }}
                             </h3>
                         </div>
-                        @if (canPass($path . '_create'))
+                        {{-- @if (canPass($path . '_create'))
                             <div class="col-6">
                                 <div style="display: flex; justify-content: flex-end;">
                                     <a class="btn button-purple btn-sm" href="{{ route('admin.' . $path . '.create') }}">
@@ -40,7 +40,7 @@
                                     </a>
                                 </div>
                             </div>
-                        @endif
+                        @endif --}}
                     </div>
                 </div>
                 <div class="card-body  table-responsive p-0">
@@ -83,7 +83,7 @@
                                         {{ $record->title_ar }}
                                     </td>
                                     <td class="text-center">
-                                        {{ $record->pageType ? $record->pageType->{"title_".app()->getLocale()} : '' }}
+                                        {{ $record->type ? \App\Enums\GeneralEnums::HomePageSectionTypes[app()->getLocale()][$record->type] : '' }}
                                     </td>
                                     <td class="text-center">
                                         {{ $record->order }}
@@ -106,18 +106,41 @@
 
                                     <td class="project-actions text-right">
                                         @if (canPass($path . '_show'))
-                                            <a class="btn btn-primary btn-sm"
-                                                href="{{ route('admin.' . $path . '.show', $record->id) }}">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
+                                            @if($record->type == 'featured_projects')
+                                             <a class="btn btn-primary btn-sm"
+                                                    href="{{ route('admin.projects.index') }}">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                            @elseif($record->type == 'partners')
+                                                <a class="btn btn-primary btn-sm"
+                                                    href="{{ route('admin.partners_and_subsidiaries.index') }}">
+                                                   <i class="fas fa-eye"></i>
+                                                </a>
+
+                                            @elseif($record->type == 'news')
+                                                <a class="btn btn-primary btn-sm"
+                                                    href="{{ route('admin.news.index') }}">
+                                                   <i class="fas fa-eye"></i>
+                                                </a>
+                                            @else
+                                                <a class="btn btn-primary btn-sm"
+                                                    href="{{ route('admin.' . $path . '.show', $record->id) }}">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                            @endif
                                         @endif
+
+
                                         @if (canPass($path . '_edit'))
-                                            <a class="btn btn-info btn-sm"
-                                                href="{{ route('admin.' . $path . '.edit', $record->id) }}">
-                                                <i class="fas fa-pencil-alt"></i>
-                                            </a>
+                                            @if(in_array($record->type, ['featured_projects', 'partners', 'news', 'contact_us']))
+                                            @else
+                                                <a class="btn btn-info btn-sm"
+                                                    href="{{ route('admin.' . $path . '.edit', $record->id) }}">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a>
+                                            @endif
                                         @endif
-                                        @if (canPass($path . '_destroy'))
+                                        {{-- @if (canPass($path . '_destroy'))
                                             <a class="btn btn-danger btn-sm text-white"
                                                 onclick="submitDeleteForm({{ $record->id }})">
                                                 <form id="{{ 'deleteForm-' . $record->id }}"
@@ -128,7 +151,7 @@
                                                 </form>
                                                 <i class="fas fa-trash"></i>
                                             </a>
-                                        @endif
+                                        @endif --}}
                                     </td>
                                 </tr>
                             @endforeach

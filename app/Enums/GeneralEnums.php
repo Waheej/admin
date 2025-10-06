@@ -154,23 +154,19 @@ enum GeneralEnums
     const HomePageSectionTypes = [
         'en' => [
             'hero' => 'Hero',
+            'about_us' => 'About Us',
             'featured_projects' => 'Featured Projects',
+            'partners' => 'Partners',
             'news' => 'News',
-            'map' => 'Map',
-            'stats' => 'Stats',
-            'testimonials' => 'Testimonials',
-            'cta' => 'Call To Action',
-            'newsletter' => 'Newsletter',
+            'contact_us' => 'Contact Us',
         ],
         'ar' => [
-            'hero' => 'الرئيسية',
+            'hero' => 'الصفحه الرئيسيه',
+            'about_us' => 'من نحن',
             'featured_projects' => 'مشاريع مميزة',
+            'partners' => 'شركاء',
             'news' => 'الأخبار',
-            'map' => 'الخريطة',
-            'stats' => 'الإحصائيات',
-            'testimonials' => 'الشهادات',
-            'cta' => 'دعوة لاتخاذ إجراء',
-            'newsletter' => 'النشرة الإخبارية',
+            'contact_us' => 'تواصل معنا',
         ],
     ];
 

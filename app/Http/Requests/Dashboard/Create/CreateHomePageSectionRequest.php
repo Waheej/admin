@@ -39,16 +39,16 @@ class CreateHomePageSectionRequest extends FormRequest
                 'required',
                 'string',
             ],
-            // 'type' => [
-            //     'required',
-            //     'string',
-            //     Rule::in(array_keys(\App\Enums\GeneralEnums::HomePageSectionTypes['en'])),
-            // ],
-            'page_type_id' => [
+            'type' => [
                 'required',
-                'integer',
-                'exists:page_types,id',
+                'string',
+                Rule::in(array_keys(\App\Enums\GeneralEnums::HomePageSectionTypes['en'])),
             ],
+            // 'page_type_id' => [
+            //     'required',
+            //     'integer',
+            //     'exists:page_types,id',
+            // ],
             'order' => [
                 'required',
                 'integer',

@@ -73,18 +73,18 @@
                                 <span class="text-danger">{{ $errors->first('description_ar') }}</span>
                             @endif
                         </div>
-                        {{-- <div class="form-group">
+                        <div class="form-group">
                             <label for="exampleInputType">{{ trans('cruds.' . $path . '.' . 'type') }}</label>
                             <input type="text" class="form-control" id="exampleInputType"
                                 value="{{ \App\Enums\GeneralEnums::HomePageSectionTypes[app()->getLocale()][$record->type] ?? '' }}"
                                 disabled>
-                        </div> --}}
-                         <div class="form-group">
+                        </div>
+                         {{-- <div class="form-group">
                             @php $name = "title_".app()->getLocale(); @endphp
                             <label for="exampleInputPageTypeId">{{ trans('cruds.' . $path . '.page_type_id') }}</label>
                             <input type="text" class="form-control" id="exampleInputpageType"
                                 value="{{ $record->pageType?->$name }}" disabled>
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <label for="exampleInputOrder">{{ trans('cruds.' . $path . '.' . 'order') }}</label>
                             <input type="text" class="form-control" id="exampleInputOrder"

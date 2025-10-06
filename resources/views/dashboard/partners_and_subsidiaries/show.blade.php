@@ -54,6 +54,11 @@
                             <input type="text" class="form-control" id="exampleInputNameAr"
                                 value="{{ $record->name_ar ?? '' }}" disabled>
                         </div>
+                         <div class="form-group">
+                            <label for="exampleInputOrder">{{ trans('cruds.' . $path . '.' . 'order') }}</label>
+                            <input type="text" class="form-control" id="exampleInputOrder"
+                                value="{{ $record->order ?? '' }}" disabled>
+                        </div>
                         <div class="form-group">
                             <label for="description_en">
                                 {{ trans('cruds.' . $path . '.' . 'description_en') }}

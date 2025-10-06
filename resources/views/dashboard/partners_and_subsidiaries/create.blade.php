@@ -62,6 +62,14 @@
                             @endif
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputOrder">{{ trans('cruds.' . $path . '.' . 'order') }}</label>
+                            <input type="number" class="form-control" id="exampleInputOrder" name="order"
+                                value="{{ old('order') }}" placeholder="{{ trans('cruds.' . $path . '.' . 'order') }}">
+                            @if ($errors->has('order'))
+                                <span class="text-danger">{{ $errors->first('order') }}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
                             <label for="description_en">
                                 {{ trans('cruds.' . $path . '.' . 'description_en') }}
                             </label>
@@ -105,7 +113,7 @@
                             @endif
                         </div>
 
-                          <!-- Img Upload -->
+                        <!-- Img Upload -->
                         <div class="form-group">
                             <label for="img">{{ trans('cruds.' . $path . '.' . 'img') }}</label>
                             <input type="file" class="form-control-file" id="img" name="img">

@@ -102,7 +102,7 @@
                                 <span class="text-danger">{{ $errors->first('role_id') }}</span>
                             @endif
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             @php $name = "title_" . app()->getLocale(); @endphp
                             <label for="exampleInputPageTypeId">{{ trans('cruds.' . $path . '.page_type_id') }}</label>
                             <select class="form-control" id="exampleInputPageTypeId" name="page_type_id">
@@ -119,7 +119,7 @@
                             @if ($errors->has('role_id'))
                                 <span class="text-danger">{{ $errors->first('role_id') }}</span>
                             @endif
-                        </div>
+                        </div> --}}
                         {{-- <div class="form-group">
                             <label for="exampleInputType">{{ trans('cruds.' . $path . '.' . 'type') }}</label>
                             <select class="form-control" id="exampleInputType" name="type">

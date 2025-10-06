@@ -60,6 +60,9 @@
                                 <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'name_ar') }}
                                 </th>
+                                 <th class="text-center">
+                                    {{ trans('cruds.' . $path . '.' . 'order') }}
+                                </th>
                                 <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'type') }}
                                 </th>
@@ -85,6 +88,9 @@
                                     </td>
                                     <td class="text-center">
                                         {{ $record->name_ar }}
+                                    </td>
+                                     <td class="text-center">
+                                        {{ $record->order }}
                                     </td>
                                     <td class="text-center">
                                         {{ \App\Enums\GeneralEnums::SubsidiaryTypes[app()->getLocale()][$record->type] }}

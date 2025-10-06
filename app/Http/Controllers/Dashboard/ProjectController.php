@@ -7,6 +7,7 @@ use App\Models\Project as Model;
 use App\Http\Requests\Dashboard\Create\CreateProjectRequest as CreateRequest;
 use App\Http\Requests\Dashboard\Update\UpdateProjectRequest as UpdateRequest;
 use App\Http\Controllers\Controller;
+use App\Services\FileService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
@@ -25,7 +26,7 @@ class ProjectController extends Controller
         abort_if(!canPass($this->path . '_index'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         try {
 
-            $query = Model::orderBy('id', 'DESC');
+            $query = Model::orderBy('order', 'ASC');
 
             // Filter data based on query string parameters
             if ($request->has('filter')) {
@@ -86,7 +87,19 @@ class ProjectController extends Controller
     {
         abort_if(!canPass($this->path . '_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         try {
-            Model::create($request->validated());
+            $record = Model::create($request->validated());
+            if ($request->has('map') && $request->map  != null) {
+                $fileName = uploadMedia($request->map, $this->path);
+                (new FileService)->addFile(
+                    $record,
+                    $fileName,
+                    $this->path,
+                    'map',
+                    $request->map->getClientOriginalExtension(),
+                    'attachments',
+                    fileSize: $request->map->getSize()
+                );
+            }
             return redirect(route('admin.' . $this->path . '.index'));
         } catch (\Throwable $th) {
             Log::error($th);
@@ -123,6 +136,27 @@ class ProjectController extends Controller
         try {
             $record = Model::findOrFail($id);
             $record->update($request->validated());
+            if ($request->has('map') && $request->map  != null) {
+                if ($record->map != null) {
+                    (new FileService)->deleteFile(
+                        $record->map,
+                        $this->path,
+                        'map',
+                        $record->id
+                    );
+                }
+                $fileName = uploadMedia($request->map, $this->path);
+
+                (new FileService)->addFile(
+                    $record,
+                    $fileName,
+                    $this->path,
+                    'map',
+                    $request->map->getClientOriginalExtension(),
+                    'attachments',
+                    fileSize: $request->map->getSize()
+                );
+            }
             return redirect(route('admin.' . $this->path . '.index'));
         } catch (\Throwable $th) {
             Log::error($th);
@@ -163,5 +197,5 @@ class ProjectController extends Controller
             Log::error($th);
             abort(500);
         }
-    }    
+    }
 }

@@ -125,6 +125,15 @@
                                 <span class="text-danger">{{ $errors->first('long') }}</span>
                             @endif
                         </div>
+
+                         <!-- map Upload -->
+                        <div class="form-group">
+                            <label for="map">{{ trans('cruds.' . $path . '.' . 'map') }}</label>
+                            <input type="file" class="form-control-file" id="map" name="map">
+                            @if ($errors->has('map'))
+                                <span class="text-danger">{{ $errors->first('map') }}</span>
+                            @endif
+                        </div>
                         <div>
                             <button class="btn button-purple btn-lg" type="submit">
                                 {{ trans('global.create') }}

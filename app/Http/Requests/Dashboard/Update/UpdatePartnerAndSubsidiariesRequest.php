@@ -32,6 +32,10 @@ class UpdatePartnerAndSubsidiariesRequest extends FormRequest
             'name_ar' => [
                 'string',
             ],
+            'order' => [
+                'integer',
+                'min:0',
+            ],
             'description_en' => [
                 'string',
             ],

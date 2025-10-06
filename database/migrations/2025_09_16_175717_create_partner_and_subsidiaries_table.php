@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('description_en')->nullable();
             $table->text('description_ar')->nullable();
             $table->string('type')->nullable()->comment("'partner' or 'subsidiary'");
+            $table->integer('order')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
             $table->softDeletes();

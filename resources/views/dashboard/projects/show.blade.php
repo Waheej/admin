@@ -84,7 +84,7 @@
                             <input type="text" class="form-control" id="exampleInputPrice"
                                 value="{{ $record->price ?? '' }}" disabled>
                         </div>
-                         <div class="form-group">
+                        <div class="form-group">
                             <label for="exampleInputOrder">{{ trans('cruds.' . $path . '.' . 'order') }}</label>
                             <input type="text" class="form-control" id="exampleInputOrder"
                                 value="{{ $record->order ?? '' }}" disabled>
@@ -106,6 +106,28 @@
                         <div class="form-group">
                             <label for="map">{{ trans('cruds.' . $path . '.' . 'location') }}</label>
                             <div id="map" style="height: 400px; border: 1px solid #ccc;"></div>
+                        </div>
+
+                        <!-- Map Display -->
+                        <div class="form-group">
+                            <label for="map">{{ trans('cruds.' . $path . '.' . 'map') }}</label>
+                            <div>
+                                @php
+                                    $fileExtension = pathinfo($record->map, PATHINFO_EXTENSION);
+                                @endphp
+
+                                @if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif']))
+                                    <img src="{{ $record->map }}" alt="Media Image"
+                                        style="max-width: 300px; height: auto;">
+                                @elseif (in_array($fileExtension, ['mp4', 'mov', 'avi']))
+                                    <video width="320" height="240" controls>
+                                        <source src="{{ $record->map }}" type="video/{{ $fileExtension }}">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                @else
+                                    <p>{{ trans('cruds.' . $path . '.file_not_supported') }}</p>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </form>

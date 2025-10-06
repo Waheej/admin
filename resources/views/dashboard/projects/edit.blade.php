@@ -25,7 +25,8 @@
                     <h3 style="font-size: 1.1rem;font-weight: 400;">{{ trans('cruds.' . $path . '.title_singular') }}</h3>
                 </div>
 
-                <form role="form" method="POST" action="{{ route('admin.projects.update', $record->id) }}">
+                <form role="form" method="POST" enctype="multipart/form-data"
+                    action="{{ route('admin.projects.update', $record->id) }}">
                     @csrf
                     @method('PUT')
                     <div class="card-body">
@@ -120,7 +121,13 @@
                                 <span class="text-danger">{{ $errors->first('long') }}</span>
                             @endif
                         </div>
-
+                        <div class="form-group">
+                            <label for="map">{{ trans('cruds.' . $path . '.' . 'map') }}</label>
+                            <input type="file" class="form-control-file" id="map" name="map">
+                            @if ($errors->has('map'))
+                                <span class="text-danger">{{ $errors->first('map') }}</span>
+                            @endif
+                        </div>
                         <div>
                             <button class="btn button-purple btn-lg" type="submit">{{ trans('global.update') }}</button>
                         </div>

@@ -28,7 +28,7 @@ class HomePageSectionController extends Controller
         abort_if(!canPass($this->path . '_index'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         try {
 
-            $query = Model::orderBy('id', 'DESC');
+            $query = Model::orderBy('order', 'ASC');
 
             // Filter data based on query string parameters
             if ($request->has('filter')) {
@@ -64,87 +64,86 @@ class HomePageSectionController extends Controller
         }
     }
 
-    /**
-     * Show Create a New Record Page
-     */
-    public function create()
-    {
-        abort_if(!canPass($this->path . '_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        try {
-            $path = Model::FILE_UPLOAD_PATH;
-            $projects = Project::whereIsActive(true)->get();
-            $pageTypes = PageType::whereIsActive(true)->get();
-            return view('dashboard.' . $this->path . '.create', compact('path', 'projects', 'pageTypes'));
-        } catch (\Throwable $th) {
-            Log::error($th);
-            abort(500);
-        }
-    }
+    // /**
+    //  * Show Create a New Record Page
+    //  */
+    // public function create()
+    // {
+    //     abort_if(!canPass($this->path . '_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+    //     try {
+    //         $path = Model::FILE_UPLOAD_PATH;
+    //         $projects = Project::whereIsActive(true)->get();
+    //         $pageTypes = PageType::whereIsActive(true)->get();
+    //         return view('dashboard.' . $this->path . '.create', compact('path', 'projects', 'pageTypes'));
+    //     } catch (\Throwable $th) {
+    //         Log::error($th);
+    //         abort(500);
+    //     }
+    // }
 
 
-    /**
-     * Create a New Record
-     * @param CreateRequest $request
-     */
+    // /**
+    //  * Create a New Record
+    //  * @param CreateRequest $request
+    //  */
+    // public function store(CreateRequest $request)
+    // {
+    //     abort_if(!canPass($this->path . '_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+    //     try {
+    //         $record = Model::create($request->validated());
+    //         // media
+    //         if ($request->has('media') && $request->media  != null) {
+    //             foreach ($request->media as $media) {
+    //                 $fileName = uploadMedia($media, $this->path);
+    //                 (new FileService)->addFile(
+    //                     $record,
+    //                     $fileName,
+    //                     $this->path,
+    //                     'media',
+    //                     $media->getClientOriginalExtension(),
+    //                     'attachments',
+    //                     fileSize: $media->getSize()
+    //                 );
+    //             }
+    //         }
+    //         // mobile_media
+    //         if ($request->has('mobile_media') && $request->mobile_media  != null) {
+    //             foreach ($request->mobile_media as $mobileMedia) {
+    //                 $fileName = uploadMedia($mobileMedia, $this->path);
+    //                 (new FileService)->addFile(
+    //                     $record,
+    //                     $fileName,
+    //                     $this->path,
+    //                     'mobile_media',
+    //                     $mobileMedia->getClientOriginalExtension(),
+    //                     'attachments',
+    //                     fileSize: $mobileMedia->getSize()
+    //                 );
+    //             }
+    //         }
 
-    public function store(CreateRequest $request)
-    {
-        abort_if(!canPass($this->path . '_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        try {
-            $record = Model::create($request->validated());
-            // media
-            if ($request->has('media') && $request->media  != null) {
-                foreach ($request->media as $media) {
-                    $fileName = uploadMedia($media, $this->path);
-                    (new FileService)->addFile(
-                        $record,
-                        $fileName,
-                        $this->path,
-                        'media',
-                        $media->getClientOriginalExtension(),
-                        'attachments',
-                        fileSize: $media->getSize()
-                    );
-                }
-            }
-            // mobile_media
-            if ($request->has('mobile_media') && $request->mobile_media  != null) {
-                foreach ($request->mobile_media as $mobileMedia) {
-                    $fileName = uploadMedia($mobileMedia, $this->path);
-                    (new FileService)->addFile(
-                        $record,
-                        $fileName,
-                        $this->path,
-                        'mobile_media',
-                        $mobileMedia->getClientOriginalExtension(),
-                        'attachments',
-                        fileSize: $mobileMedia->getSize()
-                    );
-                }
-            }
+    //          // videos
+    //         if ($request->has('videos') && $request->videos  != null) {
+    //             foreach ($request->videos as $video) {
+    //                 $fileName = uploadMedia($video, $this->path);
+    //                 (new FileService)->addFile(
+    //                     $record,
+    //                     $fileName,
+    //                     $this->path,
+    //                     'videos',
+    //                     $video->getClientOriginalExtension(),
+    //                     'attachments',
+    //                     fileSize: $video->getSize()
+    //                 );
+    //             }
+    //         }
 
-             // videos
-            if ($request->has('videos') && $request->videos  != null) {
-                foreach ($request->videos as $video) {
-                    $fileName = uploadMedia($video, $this->path);
-                    (new FileService)->addFile(
-                        $record,
-                        $fileName,
-                        $this->path,
-                        'videos',
-                        $video->getClientOriginalExtension(),
-                        'attachments',
-                        fileSize: $video->getSize()
-                    );
-                }
-            }
-
-            return redirect(route('admin.' . $this->path . '.index'));
-        } catch (\Throwable $th) {
-            Log::error($th);
-            abort(500);
-        }
-    }
+    //         return redirect(route('admin.' . $this->path . '.index'));
+    //     } catch (\Throwable $th) {
+    //         Log::error($th);
+    //         abort(500);
+    //     }
+    // }
 
 
     /**
@@ -158,8 +157,7 @@ class HomePageSectionController extends Controller
             $path = Model::FILE_UPLOAD_PATH;
             $record = Model::findOrFail($id);
             $projects = Project::whereIsActive(true)->get();
-            $pageTypes = PageType::whereIsActive(true)->get();
-            return view('dashboard.' . $this->path . '.edit', compact('record', 'path', 'projects', 'pageTypes'));
+            return view('dashboard.' . $this->path . '.edit', compact('record', 'path', 'projects'));
         } catch (\Throwable $th) {
             Log::error($th);
             abort(500);
@@ -234,22 +232,22 @@ class HomePageSectionController extends Controller
         }
     }
 
-    /**
-     * Delete an Existing Record
-     * @param int $id
-     */
-    public function destroy($id)
-    {
-        abort_if(!canPass($this->path . '_destroy'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        try {
-            $record = Model::findOrFail($id);
-            $record->delete();
-            return redirect(route('admin.' . $this->path . '.index'));
-        } catch (\Throwable $th) {
-            Log::error($th);
-            abort(500);
-        }
-    }
+    // /**
+    //  * Delete an Existing Record
+    //  * @param int $id
+    //  */
+    // public function destroy($id)
+    // {
+    //     abort_if(!canPass($this->path . '_destroy'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+    //     try {
+    //         $record = Model::findOrFail($id);
+    //         $record->delete();
+    //         return redirect(route('admin.' . $this->path . '.index'));
+    //     } catch (\Throwable $th) {
+    //         Log::error($th);
+    //         abort(500);
+    //     }
+    // }
 
     /**
      * Toggle Activity an Existing Record

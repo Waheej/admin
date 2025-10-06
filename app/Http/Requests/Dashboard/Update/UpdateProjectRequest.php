@@ -52,6 +52,12 @@ class UpdateProjectRequest extends FormRequest
                 'integer',
                 'min:0',
             ],
+            'map' => [
+                'nullable',
+                'file',
+                'mimes:jpeg,png,jpg,gif,svg,webp',
+                'max:10000', // Max size in KB
+            ],
         ];
     }
 }

@@ -24,6 +24,6 @@ enum MapEnums
         'ProjectStatuses' => GeneralEnums::ProjectStatuses,
         'SubsidiaryTypes' => GeneralEnums::SubsidiaryTypes,
         'SEOPages' => GeneralEnums::SEOPages,
-        // 'HomePageSectionTypes' => GeneralEnums::HomePageSectionTypes,
+        'HomePageSectionTypes' => GeneralEnums::HomePageSectionTypes,
     ];
 }

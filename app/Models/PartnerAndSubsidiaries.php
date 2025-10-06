@@ -32,6 +32,7 @@ class PartnerAndSubsidiaries extends Model
         'description_en',
         'description_ar',
         'type', // 'partner' or 'subsidiary'
+        'order',
         'is_active',
         'created_at',
         'updated_at',

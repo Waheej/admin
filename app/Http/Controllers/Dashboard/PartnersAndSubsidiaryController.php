@@ -26,7 +26,7 @@ class PartnersAndSubsidiaryController extends Controller
         abort_if(!canPass($this->path . '_index'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         try {
 
-            $query = Model::orderBy('id', 'DESC');
+            $query = Model::orderBy('order', 'ASC');
 
             // Filter data based on query string parameters
             if ($request->has('filter')) {
