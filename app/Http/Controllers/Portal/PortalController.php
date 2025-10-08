@@ -79,7 +79,14 @@ class PortalController
     {
         try {
             $locale = app()->getLocale() ?? 'ar';
-            $records = Project::select('id', "name_{$locale} as name", "description_{$locale} as description")
+            $records = Project::select(
+                'id',
+                "name_{$locale} as name",
+                "description_{$locale} as description",
+                'city',
+                'apartment_type',
+                'price',
+            )
                 ->where('is_active', true)
                 ->orderBy('order', 'ASC')
                 ->get();
@@ -103,10 +110,43 @@ class PortalController
     {
         try {
             $locale = app()->getLocale() ?? 'ar';
-            $record = Project::select('id', "name_{$locale} as name", "description_{$locale} as description", 'lat', 'long', 'price', 'status as status_key')
+            $record = Project::select(
+                'id',
+                "name_{$locale} as name",
+                "description_{$locale} as description",
+                'lat',
+                'long',
+                'price',
+                'city',
+                'apartment_type',
+                'parent_id',
+                'status as status_key'
+            )
                 ->where('is_active', true)
                 ->where('id', $id)
+                ->with(['news' => function ($query) use ($locale) {
+                    $query->select(
+                        'id',
+                        'project_id',
+                        "title_{$locale} as title",
+                        "description_{$locale} as description",
+                    );
+                }])
+                ->with(['parent' => function ($query) use ($locale) {
+                    $query->select(
+                        'id',
+                        "name_{$locale} as name",
+                    );
+                }])
+               ->with(['children' => function ($query) use ($locale) {
+                    $query->select(
+                        'id',
+                        'parent_id',
+                        "name_{$locale} as name"
+                    );
+                }])
                 ->first();
+
             if (!$record) {
                 return apiResponse(
                     true,
@@ -142,7 +182,7 @@ class PortalController
             $data['sections'] = HomePageSection::orderBy('order', 'ASC')
                 ->where('is_active', true)
                 ->get();
-                // dd($data);
+            // dd($data);
             return apiResponse(
                 true,
                 '',

@@ -122,6 +122,17 @@ class Project extends Model
      */
     public function children()
     {
-        return $this->hasMany(Project::class, 'parent_id');
+        return $this->hasMany(Project::class, 'parent_id', 'id')->where('is_active', true);
+    }
+
+    /**
+     * Get the info pages associated with the project.
+     */
+    public function news()
+    {
+        return $this->hasMany(InfoPage::class, 'project_id')
+            ->where('type', 'news')
+            ->where('is_active', true)
+            ->orderBy('order', 'ASC');
     }
 }
