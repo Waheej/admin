@@ -50,7 +50,6 @@ class CreateContactMessageRequest extends BaseValidationRequest
                 'min:10',
             ],
             'project_id' => [
-                'required',
                 'nullable',
                 'integer',
                 'exists:projects,id',

@@ -31,7 +31,7 @@ class PortalController
                 'mobile' => $request->mobile,
                 'email' => $request->email,
                 'message' => $request->message,
-                'project_id' => $request->project_id,
+                'project_id' => $request->project_id ?? null,
                 'status' => 'in_progress'
             ]);
 
