@@ -64,6 +64,15 @@
                                     {{ trans('cruds.' . $path . '.' . 'price') }}
                                 </th>
                                 <th class="text-center">
+                                    {{ trans('cruds.' . $path . '.' . 'parent_id') }}
+                                </th>
+                                <th class="text-center">
+                                    {{ trans('cruds.' . $path . '.' . 'city') }}
+                                </th>
+                                <th class="text-center">
+                                    {{ trans('cruds.' . $path . '.' . 'apartment_type') }}
+                                </th>
+                                <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'order') }}
                                 </th>
                                 <th class="text-center">
@@ -91,6 +100,15 @@
                                     </td>
                                     <td class="text-center">
                                         {{ $record->price }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $record->parent ? $record->parent->{"name_".app()->getLocale()} : '' }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $record->city }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $record->apartment_type }}
                                     </td>
                                     <td class="text-center">
                                         {{ $record->order }}

@@ -51,6 +51,19 @@ class CreateProjectRequest extends FormRequest
                 'required',
                 'string',
             ],
+            'city' => [
+                'required',
+                'string',
+            ],
+            'apartment_type' => [
+                'required',
+                'string',
+            ],
+            'parent_id' => [
+                'nullable',
+                'integer',
+                Rule::exists('projects', 'id'),
+            ],
             'price' => [
                 'required',
                 'string',
@@ -62,6 +75,18 @@ class CreateProjectRequest extends FormRequest
             ],
             'map' => [
                 'required',
+                'file',
+                'mimes:jpeg,png,jpg,gif,svg,webp',
+                'max:10000', // Max size in KB
+            ],
+            'image' => [
+                'required',
+                'file',
+                'mimes:jpeg,png,jpg,gif,svg,webp',
+                'max:10000', // Max size in KB
+            ],
+            'image_mobile' => [
+                'nullable',
                 'file',
                 'mimes:jpeg,png,jpg,gif,svg,webp',
                 'max:10000', // Max size in KB

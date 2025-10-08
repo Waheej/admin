@@ -70,7 +70,8 @@ class ProjectController extends Controller
         abort_if(!canPass($this->path . '_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         try {
             $path = Model::FILE_UPLOAD_PATH;
-            return view('dashboard.' . $this->path . '.create', compact('path'));
+            $projects = Model::whereIsActive(true)->get();
+            return view('dashboard.' . $this->path . '.create', compact('path', 'projects'));
         } catch (\Throwable $th) {
             Log::error($th);
             abort(500);
@@ -100,6 +101,32 @@ class ProjectController extends Controller
                     fileSize: $request->map->getSize()
                 );
             }
+
+            if ($request->has('image') && $request->image  != null) {
+                $fileName = uploadMedia($request->image, $this->path);
+                (new FileService)->addFile(
+                    $record,
+                    $fileName,
+                    $this->path,
+                    'image',
+                    $request->image->getClientOriginalExtension(),
+                    'attachments',
+                    fileSize: $request->image->getSize()
+                );
+            }
+
+            if ($request->has('image_mobile') && $request->image_mobile  != null) {
+                $fileName = uploadMedia($request->image_mobile, $this->path);
+                (new FileService)->addFile(
+                    $record,
+                    $fileName,
+                    $this->path,
+                    'image_mobile',
+                    $request->image_mobile->getClientOriginalExtension(),
+                    'attachments',
+                    fileSize: $request->image_mobile->getSize()
+                );
+            }
             return redirect(route('admin.' . $this->path . '.index'));
         } catch (\Throwable $th) {
             Log::error($th);
@@ -118,7 +145,10 @@ class ProjectController extends Controller
         try {
             $path = Model::FILE_UPLOAD_PATH;
             $record = Model::findOrFail($id);
-            return view('dashboard.' . $this->path . '.edit', compact('record', 'path'));
+            $projects = Model::whereIsActive(true)
+                ->where('id', '!=', $id)
+                ->get();
+            return view('dashboard.' . $this->path . '.edit', compact('record', 'path', 'projects'));
         } catch (\Throwable $th) {
             Log::error($th);
             abort(500);
@@ -155,6 +185,50 @@ class ProjectController extends Controller
                     $request->map->getClientOriginalExtension(),
                     'attachments',
                     fileSize: $request->map->getSize()
+                );
+            }
+
+            if ($request->has('image') && $request->image  != null) {
+                if ($record->image != null) {
+                    (new FileService)->deleteFile(
+                        $record->image,
+                        $this->path,
+                        'image',
+                        $record->id
+                    );
+                }
+                $fileName = uploadMedia($request->image, $this->path);
+
+                (new FileService)->addFile(
+                    $record,
+                    $fileName,
+                    $this->path,
+                    'image',
+                    $request->image->getClientOriginalExtension(),
+                    'attachments',
+                    fileSize: $request->image->getSize()
+                );
+            }
+
+            if ($request->has('image_mobile') && $request->image_mobile  != null) {
+                if ($record->image_mobile != null) {
+                    (new FileService)->deleteFile(
+                        $record->image_mobile,
+                        $this->path,
+                        'image_mobile',
+                        $record->id
+                    );
+                }
+                $fileName = uploadMedia($request->image_mobile, $this->path);
+
+                (new FileService)->addFile(
+                    $record,
+                    $fileName,
+                    $this->path,
+                    'image_mobile',
+                    $request->image_mobile->getClientOriginalExtension(),
+                    'attachments',
+                    fileSize: $request->image_mobile->getSize()
                 );
             }
             return redirect(route('admin.' . $this->path . '.index'));

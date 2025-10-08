@@ -21,8 +21,16 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->string('lat')->nullable();
             $table->string('long')->nullable();
+            $table->string('city')->nullable();
+            $table->string('apartment_type')->nullable();
             $table->unsignedInteger('order')->default(0);
             $table->boolean('is_active')->default(true);
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreign('parent_id')
+                ->references('id')
+                ->on('projects')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

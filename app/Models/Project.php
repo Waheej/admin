@@ -34,6 +34,9 @@ class Project extends Model
         'lat',
         'long',
         'price',
+        'city',
+        'apartment_type',
+        'parent_id',
         'is_active',
         'order',
         'created_at',
@@ -41,7 +44,7 @@ class Project extends Model
         'deleted_at',
     ];
 
-    protected $appends = ['map'];
+    protected $appends = ['map', 'image', 'image_mobile'];
 
     /**
      * Get the map attribute.
@@ -62,6 +65,41 @@ class Project extends Model
     }
 
     /**
+     * Get the image attribute.
+     *
+     * @param string $value The original image.
+     * @return string|null The image attribute.
+     */
+    public function getImageAttribute($value): string |null
+    {
+        $record = File::where('folder', self::FILE_UPLOAD_PATH)
+            ->where('label', 'image')
+            ->where('fileable_type', self::class)
+            ->where('fileable_id', $this->id)
+            ->whereIsActive(true)
+            ->first();
+
+        return $record ? $record->file_name : null;
+    }
+
+    /**
+     * Get the image_mobile attribute.
+     *
+     * @param string $value The original image_mobile.
+     * @return string|null The image_mobile attribute.
+     */
+    public function getImageMobileAttribute($value): string |null
+    {
+        $record = File::where('folder', self::FILE_UPLOAD_PATH)
+            ->where('label', 'image_mobile')
+            ->where('fileable_type', self::class)
+            ->where('fileable_id', $this->id)
+            ->whereIsActive(true)
+            ->first();
+        return $record ? $record->file_name : null;
+    }
+
+    /**
      * Get the attachments associated with the model.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
@@ -69,5 +107,21 @@ class Project extends Model
     public function attachments(): MorphOne
     {
         return $this->morphOne(File::class, "fileable");
+    }
+
+    /**
+     * Get the parent project of the current project.
+     */
+    public function parent()
+    {
+        return $this->belongsTo(Project::class, 'parent_id');
+    }
+
+    /**
+     * Get the child projects of the current project.
+     */
+    public function children()
+    {
+        return $this->hasMany(Project::class, 'parent_id');
     }
 }

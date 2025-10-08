@@ -44,6 +44,17 @@ class UpdateProjectRequest extends FormRequest
             'long' => [
                 'string',
             ],
+            'city' => [
+                'string',
+            ],
+            'apartment_type' => [
+                'string',
+            ],
+            'parent_id' => [
+                'nullable',
+                'integer',
+                Rule::exists('projects', 'id'),
+            ],
             'price' => [
                 'string',
             ],
@@ -53,6 +64,18 @@ class UpdateProjectRequest extends FormRequest
                 'min:0',
             ],
             'map' => [
+                'nullable',
+                'file',
+                'mimes:jpeg,png,jpg,gif,svg,webp',
+                'max:10000', // Max size in KB
+            ],
+            'image' => [
+                'nullable',
+                'file',
+                'mimes:jpeg,png,jpg,gif,svg,webp',
+                'max:10000', // Max size in KB
+            ],
+            'image_mobile' => [
                 'nullable',
                 'file',
                 'mimes:jpeg,png,jpg,gif,svg,webp',

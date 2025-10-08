@@ -99,8 +99,8 @@
                                     </option>
                                 @endforeach
                             </select>
-                            @if ($errors->has('role_id'))
-                                <span class="text-danger">{{ $errors->first('role_id') }}</span>
+                            @if ($errors->has('project_id'))
+                                <span class="text-danger">{{ $errors->first('project_id') }}</span>
                             @endif
                         </div>
                         <div class="form-group">

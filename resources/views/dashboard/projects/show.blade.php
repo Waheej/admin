@@ -85,6 +85,23 @@
                                 value="{{ $record->price ?? '' }}" disabled>
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputCity">{{ trans('cruds.' . $path . '.' . 'city') }}</label>
+                            <input type="text" class="form-control" id="exampleInputCity"
+                                value="{{ $record->city ?? '' }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label
+                                for="exampleInputApartmentType">{{ trans('cruds.' . $path . '.' . 'apartment_type') }}</label>
+                            <input type="text" class="form-control" id="exampleInputApartmentType"
+                                value="{{ $record->apartment_type ?? '' }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label
+                                for="exampleInputParentId">{{ trans('cruds.' . $path . '.' . 'parent_id') }}</label>
+                            <input type="text" class="form-control" id="exampleInputParentId"
+                                value="{{ $record->parent ? $record->parent->{"name_".app()->getLocale()} : '' }}" disabled>
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputOrder">{{ trans('cruds.' . $path . '.' . 'order') }}</label>
                             <input type="text" class="form-control" id="exampleInputOrder"
                                 value="{{ $record->order ?? '' }}" disabled>
@@ -124,6 +141,36 @@
                                         <source src="{{ $record->map }}" type="video/{{ $fileExtension }}">
                                         Your browser does not support the video tag.
                                     </video>
+                                @else
+                                    <p>{{ trans('cruds.' . $path . '.file_not_supported') }}</p>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="image">{{ trans('cruds.' . $path . '.' . 'image') }}</label>
+                            <div>
+                                @php
+                                    $fileExtension = pathinfo($record->image, PATHINFO_EXTENSION);
+                                @endphp
+
+                                @if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif']))
+                                    <img src="{{ $record->image }}" alt="Media Image"
+                                        style="max-width: 300px; height: auto;">
+                                @else
+                                    <p>{{ trans('cruds.' . $path . '.file_not_supported') }}</p>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="image_mobile">{{ trans('cruds.' . $path . '.' . 'image_mobile') }}</label>
+                            <div>
+                                @php
+                                    $fileExtension = pathinfo($record->image_mobile, PATHINFO_EXTENSION);
+                                @endphp
+
+                                @if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif']))
+                                    <img src="{{ $record->image_mobile }}" alt="Media Image"
+                                        style="max-width: 300px; height: auto;">
                                 @else
                                     <p>{{ trans('cruds.' . $path . '.file_not_supported') }}</p>
                                 @endif
