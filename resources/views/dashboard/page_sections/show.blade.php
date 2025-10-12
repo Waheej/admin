@@ -79,7 +79,7 @@
                                 value="{{ \App\Enums\GeneralEnums::HomePageSectionTypes[app()->getLocale()][$record->type] ?? '' }}"
                                 disabled>
                         </div>
-                         {{-- <div class="form-group">
+                        {{-- <div class="form-group">
                             @php $name = "title_".app()->getLocale(); @endphp
                             <label for="exampleInputPageTypeId">{{ trans('cruds.' . $path . '.page_type_id') }}</label>
                             <input type="text" class="form-control" id="exampleInputpageType"
@@ -109,6 +109,44 @@
                             <input type="text" class="form-control" id="exampleInputproject"
                                 value="{{ $record->project?->$name }}" disabled>
                         </div>
+
+                        {{-- additional_data --}}
+                        @if ($record->additional_data)
+                            @php
+                                // Decode JSON if it's stored as string
+                                $additionalData = is_string($record->additional_data)
+                                    ? json_decode($record->additional_data, true)
+                                    : $record->additional_data;
+                            @endphp
+
+                            <div class="form-group">
+                                <label for="additional_data">{{ trans('cruds.' . $path . '.additional_data') }}</label>
+
+                                @if (!empty($additionalData) && is_array($additionalData))
+                                    <table class="table table-bordered" id="additional_data">
+                                        <thead>
+                                            <tr>
+                                                <th>Key</th>
+                                                <th>Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($additionalData as $key => $value)
+                                                <tr>
+                                                    <td>{{ $key }}</td>
+                                                    <td>{{ is_array($value) ? json_encode($value) : $value }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                @else
+                                    <div class="form-control" id="additional_data"
+                                        style="min-height: 150px; overflow-y: auto;">
+                                        <pre>{{ json_encode($record->additional_data, JSON_PRETTY_PRINT) }}</pre>
+                                    </div>
+                                @endif
+                            </div>
+                        @endif
                         {{-- Media --}}
                         <div class="form-group">
                             <div>

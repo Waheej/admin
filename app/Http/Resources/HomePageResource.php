@@ -77,6 +77,10 @@ class HomePageResource extends JsonResource
                         ->get();
                 }
 
+                if ($section->type == 'about_us') {
+                  $section['data'] = json_decode($section->additional_data) ?? [];
+                }
+
                 return [
                     'id' => $section->id,
                     'title' => $section->{"title_" . $locale} ?? $section->title_ar,

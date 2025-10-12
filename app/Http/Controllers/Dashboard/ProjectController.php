@@ -127,6 +127,52 @@ class ProjectController extends Controller
                     fileSize: $request->image_mobile->getSize()
                 );
             }
+
+            if ($request->has('video') && $request->video  != null) {
+                $fileName = uploadMedia($request->video, $this->path);
+                (new FileService)->addFile(
+                    $record,
+                    $fileName,
+                    $this->path,
+                    'video',
+                    $request->video->getClientOriginalExtension(),
+                    'attachments',
+                    fileSize: $request->video->getSize()
+                );
+            }
+
+
+            if ($request->has('rendered_images') && is_array($request->rendered_images)) {
+                foreach ($request->rendered_images as $renderImages) {
+                    $fileName = uploadMedia($renderImages, $this->path);
+
+                    (new FileService)->addFile(
+                        $record,
+                        $fileName,
+                        $this->path,
+                        'rendered_images',
+                        $renderImages->getClientOriginalExtension(),
+                        'attachments',
+                        fileSize: $renderImages->getSize()
+                    );
+                }
+            }
+
+            if ($request->has('rendered_images_mobile') && is_array($request->rendered_images_mobile)) {
+                foreach ($request->rendered_images_mobile as $renderImages) {
+                    $fileName = uploadMedia($renderImages, $this->path);
+
+                    (new FileService)->addFile(
+                        $record,
+                        $fileName,
+                        $this->path,
+                        'rendered_images_mobile',
+                        $renderImages->getClientOriginalExtension(),
+                        'attachments',
+                        fileSize: $renderImages->getSize()
+                    );
+                }
+            }
             return redirect(route('admin.' . $this->path . '.index'));
         } catch (\Throwable $th) {
             Log::error($th);
@@ -231,6 +277,62 @@ class ProjectController extends Controller
                     fileSize: $request->image_mobile->getSize()
                 );
             }
+
+            if ($request->has('video') && $request->video  != null) {
+                if ($record->video != null) {
+                    (new FileService)->deleteFile(
+                        $record->video,
+                        $this->path,
+                        'video',
+                        $record->id
+                    );
+                }
+                $fileName = uploadMedia($request->video, $this->path);
+
+                (new FileService)->addFile(
+                    $record,
+                    $fileName,
+                    $this->path,
+                    'video',
+                    $request->video->getClientOriginalExtension(),
+                    'attachments',
+                    fileSize: $request->video->getSize()
+                );
+            }
+
+            if ($request->has('rendered_images') && is_array($request->rendered_images)) {
+                foreach ($request->rendered_images as $renderImages) {
+                    $fileName = uploadMedia($renderImages, $this->path);
+
+                    (new FileService)->addFile(
+                        $record,
+                        $fileName,
+                        $this->path,
+                        'rendered_images',
+                        $renderImages->getClientOriginalExtension(),
+                        'attachments',
+                        fileSize: $renderImages->getSize()
+                    );
+                }
+            }
+
+            if ($request->has('rendered_images_mobile') && is_array($request->rendered_images_mobile)) {
+                foreach ($request->rendered_images_mobile as $renderImages) {
+                    $fileName = uploadMedia($renderImages, $this->path);
+
+                    (new FileService)->addFile(
+                        $record,
+                        $fileName,
+                        $this->path,
+                        'rendered_images_mobile',
+                        $renderImages->getClientOriginalExtension(),
+                        'attachments',
+                        fileSize: $renderImages->getSize()
+                    );
+                }
+            }
+
+
             return redirect(route('admin.' . $this->path . '.index'));
         } catch (\Throwable $th) {
             Log::error($th);
@@ -266,6 +368,27 @@ class ProjectController extends Controller
             $record = Model::findOrFail($id);
             $record->is_active = !$record->is_active;
             $record->save();
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            Log::error($th);
+            abort(500);
+        }
+    }
+
+    /**
+     * Delete Image from Record
+     * @param int $id
+     * @param string $file_name
+     * @param string $label
+     */
+    public function deleteImage($id)
+    {
+        abort_if(!canPass($this->path . '_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        try {
+            $fileName = explode('/', request()->file_name);
+            $fileName = end($fileName);
+            (new FileService)->deleteFile(request()->file_name, Model::FILE_UPLOAD_PATH, request()->label, $id);
+            deleteFile($fileName, Model::FILE_UPLOAD_PATH);
             return redirect()->back();
         } catch (\Throwable $th) {
             Log::error($th);

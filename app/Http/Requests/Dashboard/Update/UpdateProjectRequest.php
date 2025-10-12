@@ -81,6 +81,30 @@ class UpdateProjectRequest extends FormRequest
                 'mimes:jpeg,png,jpg,gif,svg,webp',
                 'max:10000', // Max size in KB
             ],
+            'video' => [
+                'nullable',
+                'file',
+                'mimes:mp4,avi,mov',
+                'max:10240', // Max size in KB
+            ],
+            'rendered_images' => [
+                'nullable',
+                'array',
+            ],
+            'rendered_images.*' => [
+                'file',
+                'mimes:jpeg,png,jpg,gif,svg,webp',
+                'max:10000', // Max size in KB
+            ],
+            'rendered_images_mobile' => [
+                'nullable',
+                'array',
+            ],
+            'rendered_images_mobile.*' => [
+                'file',
+                'mimes:jpeg,png,jpg,gif,svg,webp',
+                'max:10000', // Max size in KB
+            ],
         ];
     }
 }

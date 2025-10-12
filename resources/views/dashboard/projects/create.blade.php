@@ -178,11 +178,37 @@
                                 <span class="text-danger">{{ $errors->first('image') }}</span>
                             @endif
                         </div>
-                         <div class="form-group">
+                        <div class="form-group">
                             <label for="image_mobile">{{ trans('cruds.' . $path . '.' . 'image_mobile') }}</label>
                             <input type="file" class="form-control-file" id="image_mobile" name="image_mobile">
                             @if ($errors->has('image_mobile'))
                                 <span class="text-danger">{{ $errors->first('image_mobile') }}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label for="video">{{ trans('cruds.' . $path . '.' . 'video') }}</label>
+                            <input type="file" class="form-control-file" id="video" name="video">
+                            @if ($errors->has('video'))
+                                <span class="text-danger">{{ $errors->first('video') }}</span>
+                            @endif
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rendered_images">{{ trans('cruds.' . $path . '.' . 'rendered_images') }}</label>
+                            <input type="file" class="form-control-file" id="rendered_images" name="rendered_images[]"
+                                multiple>
+                            @if ($errors->has('rendered_images'))
+                                <span class="text-danger">{{ $errors->first('rendered_images') }}</span>
+                            @endif
+                        </div>
+
+                        <div class="form-group">
+                            <label
+                                for="rendered_images_mobile">{{ trans('cruds.' . $path . '.' . 'rendered_images_mobile') }}</label>
+                            <input type="file" class="form-control-file" id="rendered_images_mobile"
+                                name="rendered_images_mobile[]" multiple>
+                            @if ($errors->has('rendered_images_mobile'))
+                                <span class="text-danger">{{ $errors->first('rendered_images_mobile') }}</span>
                             @endif
                         </div>
                         <div>

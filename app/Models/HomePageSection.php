@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
@@ -35,13 +36,20 @@ class HomePageSection extends Model
         'page_type_id',
         'order',
         'is_active',
+        'additional_data',
         'project_id',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
-    protected $appends = ['media', 'mobile_media', 'videos'];
+    protected $appends = [
+        'media',
+        'mobile_media',
+        'videos'
+    ];
+
+
 
     /**
      * Get the media attribute.
@@ -78,7 +86,7 @@ class HomePageSection extends Model
             ->pluck('file_name')
             ->toArray();
     }
-    
+
     /**
      * Get the videos attribute.
      *
@@ -117,5 +125,4 @@ class HomePageSection extends Model
     {
         return $this->belongsTo(Project::class);
     }
-
 }

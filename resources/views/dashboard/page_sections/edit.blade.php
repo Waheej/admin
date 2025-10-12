@@ -206,6 +206,29 @@
                                 @endif
                             </div>
                         @endif
+
+                        @if($record->type == 'about_us')
+                        {{-- Key-Value Section --}}
+                        <div class="form-group">
+                            <label>{{ trans('cruds.' . $path . '.' . 'additional_data') }}</label>
+
+                            {{-- Input fields for adding new pairs --}}
+                            <div class="d-flex mb-3">
+                                <input type="text" id="keyInput" class="form-control mr-2" placeholder="Enter key">
+                                <input type="text" id="valueInput" class="form-control mr-2"
+                                    placeholder="Enter value">
+                                <button type="button" id="addBtn"
+                                    class="btn button-purple px-4">{{trans('global.add') }}</button>
+                            </div>
+
+                            {{-- Display existing pairs --}}
+                            <div id="pairsContainer" class="border rounded p-2 bg-light"></div>
+
+                            {{-- Hidden field to hold JSON data --}}
+                            <input type="hidden" name="additional_data" id="dataInput"
+                                value="{{ old('additional_data', $record->additional_data ?? '') }}">
+                        </div>
+                        @endif
                         <div>
                             <button class="btn button-purple btn-lg" type="submit">{{ trans('global.update') }}</button>
                         </div>
@@ -225,5 +248,85 @@
             .catch(error => {
                 console.error('Error initializing CKEditor:', error);
             });
+    </script>
+    <script>
+        const keyInput = document.getElementById('keyInput');
+        const valueInput = document.getElementById('valueInput');
+        const addBtn = document.getElementById('addBtn');
+        const pairsContainer = document.getElementById('pairsContainer');
+        const dataInput = document.getElementById('dataInput');
+
+        // Load existing key-value data from backend (JSON)
+        let pairs = {};
+        try {
+            pairs = JSON.parse(dataInput.value) || {};
+        } catch (e) {
+            pairs = {};
+        }
+
+        renderPairs();
+
+        addBtn.addEventListener('click', () => {
+            const key = keyInput.value.trim();
+            const value = valueInput.value.trim();
+
+            if (!key || !value) {
+                alert('Please enter both key and value.');
+                return;
+            }
+
+            pairs[key] = value; // add or update
+            renderPairs();
+
+            // update hidden input
+            dataInput.value = JSON.stringify(pairs);
+
+            keyInput.value = '';
+            valueInput.value = '';
+        });
+
+        function renderPairs() {
+            pairsContainer.innerHTML = '';
+
+            Object.entries(pairs).forEach(([key, value]) => {
+                const row = document.createElement('div');
+                row.className = 'd-flex align-items-center mb-2';
+
+                row.innerHTML = `
+                <input type="text" value="${key}" class="form-control mr-2 key-field" style="width: 40%;">
+                <input type="text" value="${value}" class="form-control mr-2 value-field" style="width: 40%;">
+                <button type="button" class="btn btn-danger btn-sm" onclick="removePair('${key}')">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+
+                pairsContainer.appendChild(row);
+            });
+
+            updateHiddenInput();
+        }
+
+        function removePair(key) {
+            delete pairs[key];
+            renderPairs();
+        }
+
+        function updateHiddenInput() {
+            const keyFields = document.querySelectorAll('.key-field');
+            const valueFields = document.querySelectorAll('.value-field');
+            const updatedPairs = {};
+
+            keyFields.forEach((input, i) => {
+                const k = input.value.trim();
+                const v = valueFields[i].value.trim();
+                if (k) updatedPairs[k] = v;
+            });
+
+            pairs = updatedPairs;
+            dataInput.value = JSON.stringify(pairs);
+        }
+
+        // Keep JSON updated on form submit
+        document.querySelector('form').addEventListener('submit', updateHiddenInput);
     </script>
 @endsection

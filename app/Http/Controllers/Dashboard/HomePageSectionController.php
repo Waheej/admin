@@ -173,8 +173,9 @@ class HomePageSectionController extends Controller
     {
         abort_if(!canPass($this->path . '_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         try {
+            $data = $request->validated();
             $record = Model::findOrFail($id);
-            $record->update($request->validated());
+            $record->update($data);
 
             // Handle Media (Multiple Files)
             if ($request->has('media') && is_array($request->media)) {

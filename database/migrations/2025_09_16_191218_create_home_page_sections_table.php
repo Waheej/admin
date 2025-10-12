@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('type')->nullable(); // hero, featured_projects, news, map, stats, testimonials, cta, newsletter
             $table->integer('order')->default(1);
             $table->boolean('is_active')->default(true);
-            
+            $table->json('additional_data')->nullable(); // For storing any additional data specific to the section type
             $table->unsignedBigInteger('project_id')->nullable();
             $table->foreign('project_id')
                 ->references('id')

@@ -78,6 +78,10 @@ class UpdateHomePageSectionRequest extends FormRequest
                 'integer',
                 'exists:projects,id',
             ],
+            'additional_data' => [
+                'nullable',
+                // 'array',
+            ],
         ];
     }
 }

@@ -96,10 +96,10 @@
                                 value="{{ $record->apartment_type ?? '' }}" disabled>
                         </div>
                         <div class="form-group">
-                            <label
-                                for="exampleInputParentId">{{ trans('cruds.' . $path . '.' . 'parent_id') }}</label>
+                            <label for="exampleInputParentId">{{ trans('cruds.' . $path . '.' . 'parent_id') }}</label>
                             <input type="text" class="form-control" id="exampleInputParentId"
-                                value="{{ $record->parent ? $record->parent->{"name_".app()->getLocale()} : '' }}" disabled>
+                                value="{{ $record->parent ? $record->parent->{'name_' . app()->getLocale()} : '' }}"
+                                disabled>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputOrder">{{ trans('cruds.' . $path . '.' . 'order') }}</label>
@@ -173,6 +173,36 @@
                                         style="max-width: 300px; height: auto;">
                                 @else
                                     <p>{{ trans('cruds.' . $path . '.file_not_supported') }}</p>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                @if ($record->video)
+                                    <p><strong>{{ trans('cruds.' . $path . '.' . 'video') }} :</strong></p>
+                                    <video controls style="max-width: 100%; display: block; margin-bottom: 10px;">
+                                        <source src="{{ $record->video }}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                @endif
+                            </div>
+                            <div>
+                                @if ($record->rendered_images)
+                                    <p><strong>{{ trans('cruds.' . $path . '.' . 'rendered_images') }} :</strong></p>
+                                    @foreach ($record->rendered_images as $image)
+                                        <img src="{{ $image }}" alt="Cover Image"
+                                            style="max-width: 100%; height: auto; margin-bottom: 10px;">
+                                    @endforeach
+                                @endif
+                            </div>
+                            <div>
+                                @if ($record->rendered_images_mobile)
+                                    <p><strong>{{ trans('cruds.' . $path . '.' . 'rendered_images_mobile') }} :</strong>
+                                    </p>
+                                    @foreach ($record->rendered_images_mobile as $image)
+                                        <img src="{{ $image }}" alt="Cover Image"
+                                            style="max-width: 100%; height: auto; margin-bottom: 10px;">
+                                    @endforeach
                                 @endif
                             </div>
                         </div>

@@ -182,7 +182,6 @@ class PortalController
             $data['sections'] = HomePageSection::orderBy('order', 'ASC')
                 ->where('is_active', true)
                 ->get();
-            // dd($data);
             return apiResponse(
                 true,
                 '',

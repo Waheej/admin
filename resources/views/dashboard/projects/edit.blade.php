@@ -99,7 +99,7 @@
                                 <span class="text-danger">{{ $errors->first('price') }}</span>
                             @endif
                         </div>
-                         <div class="form-group">
+                        <div class="form-group">
                             <label for="exampleInputCity">{{ trans('cruds.' . $path . '.' . 'city') }}</label>
                             <input type="text" class="form-control" id="exampleInputCity" name="{{ 'city' }}"
                                 value="{{ old('city', $record->city) }}"
@@ -108,10 +108,11 @@
                                 <span class="text-danger">{{ $errors->first('city') }}</span>
                             @endif
                         </div>
-                         <div class="form-group">
-                            <label for="exampleInputApartmentType">{{ trans('cruds.' . $path . '.' . 'apartment_type') }}</label>
-                            <input type="text" class="form-control" id="exampleInputApartmentType" name="{{ 'apartment_type' }}"
-                                value="{{ old('apartment_type', $record->apartment_type) }}"
+                        <div class="form-group">
+                            <label
+                                for="exampleInputApartmentType">{{ trans('cruds.' . $path . '.' . 'apartment_type') }}</label>
+                            <input type="text" class="form-control" id="exampleInputApartmentType"
+                                name="{{ 'apartment_type' }}" value="{{ old('apartment_type', $record->apartment_type) }}"
                                 placeholder="{{ trans('cruds.' . $path . '.' . 'apartment_type') }}">
                             @if ($errors->has('apartment_type'))
                                 <span class="text-danger">{{ $errors->first('apartment_type') }}</span>
@@ -149,7 +150,8 @@
                             <label for="map">{{ trans('cruds.' . $path . '.' . 'location') }}</label>
                             <div id="map" style="height: 400px; border: 1px solid #ccc;"></div>
                             <input type="hidden" id="lat" name="lat" value="{{ old('lat', $record->lat) }}">
-                            <input type="hidden" id="long" name="long" value="{{ old('long', $record->long) }}">
+                            <input type="hidden" id="long" name="long"
+                                value="{{ old('long', $record->long) }}">
                             @if ($errors->has('lat'))
                                 <span class="text-danger">{{ $errors->first('lat') }}</span>
                             @endif
@@ -164,18 +166,73 @@
                                 <span class="text-danger">{{ $errors->first('map') }}</span>
                             @endif
                         </div>
-                         <div class="form-group">
+                        <div class="form-group">
                             <label for="image">{{ trans('cruds.' . $path . '.' . 'image') }}</label>
                             <input type="file" class="form-control-file" id="image" name="image">
                             @if ($errors->has('image'))
                                 <span class="text-danger">{{ $errors->first('image') }}</span>
                             @endif
                         </div>
-                         <div class="form-group">
+                        <div class="form-group">
                             <label for="image_mobile">{{ trans('cruds.' . $path . '.' . 'image_mobile') }}</label>
                             <input type="file" class="form-control-file" id="image_mobile" name="image_mobile">
                             @if ($errors->has('image_mobile'))
                                 <span class="text-danger">{{ $errors->first('image_mobile') }}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label for="video">{{ trans('cruds.' . $path . '.' . 'video') }}</label>
+                            <input type="file" class="form-control-file" id="video" name="video">
+                            @if ($errors->has('video'))
+                                <span class="text-danger">{{ $errors->first('video') }}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label for="rendered_images">{{ trans('cruds.' . $path . '.' . 'rendered_images') }}</label>
+                            <input type="file" class="form-control-file" id="rendered_images" name="rendered_images[]" multiple>
+                            @if ($record->rendered_images)
+                                <p>{{ trans('cruds.' . $path . '.' . 'rendered_images') }}:</p>
+                                @foreach ($record->rendered_images as $renderedImage)
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <img src="{{ $renderedImage }}"
+                                                alt="Rendered Image" style="max-width: 200px; max-height: 200px;">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a href="{{ route('admin.projects.delete_image', ['id' => $record->id, 'file_name' => $renderedImage, 'label' => 'rendered_images']) }}"
+                                                class="btn btn-danger" style="margin-top: 10px;">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+                            @if ($errors->has('rendered_images'))
+                                <span class="text-danger">{{ $errors->first('rendered_images') }}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label for="rendered_images_mobile">{{ trans('cruds.' . $path . '.' . 'rendered_images_mobile') }}</label>
+                            <input type="file" class="form-control-file" id="rendered_images_mobile" name="rendered_images_mobile[]" multiple>
+                            @if ($record->rendered_images_mobile)
+                                <p>{{ trans('cruds.' . $path . '.' . 'rendered_images_mobile') }}:</p>
+                                @foreach ($record->rendered_images_mobile as $renderedImage)
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <img src="{{ $renderedImage }}"
+                                                alt="Rendered Image" style="max-width: 200px; max-height: 200px;">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a href="{{ route('admin.projects.delete_image', ['id' => $record->id, 'file_name' => $renderedImage, 'label' => 'rendered_images_mobile']) }}"
+                                                class="btn btn-danger" style="margin-top: 10px;">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+                            @if ($errors->has('rendered_images_mobile'))
+                                <span class="text-danger">{{ $errors->first('rendered_images_mobile') }}</span>
                             @endif
                         </div>
                         <div>

@@ -81,6 +81,8 @@ Route::group(['middleware' => ['localization']], function () {
         // Projects
         Route::resource('projects', ProjectController::class);
         Route::put('/projects/{id}/toggleActivity', [ProjectController::class, 'toggleActivity'])->name('projects.toggleActivity');
+        Route::get('/projects/{id}/delete_image', [ProjectController::class, 'deleteImage'])->name('projects.delete_image');
+
 
         // AppSettings
         Route::resource('app_settings', AppSettingController::class);

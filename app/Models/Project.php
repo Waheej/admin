@@ -44,7 +44,14 @@ class Project extends Model
         'deleted_at',
     ];
 
-    protected $appends = ['map', 'image', 'image_mobile'];
+    protected $appends = [
+        'map',
+        'image',
+        'image_mobile',
+        'video',
+        'rendered_images',
+        'rendered_images_mobile',
+    ];
 
     /**
      * Get the map attribute.
@@ -98,6 +105,61 @@ class Project extends Model
             ->first();
         return $record ? $record->file_name : null;
     }
+
+    /**
+     * Get the video attribute.
+     *
+     * @param string $value The original video.
+     * @return string|null The video attribute.
+     */
+    public function getVideoAttribute($value): string |null
+    {
+        $record = File::where('folder', self::FILE_UPLOAD_PATH)
+            ->where('label', 'video')
+            ->where('fileable_type', self::class)
+            ->where('fileable_id', $this->id)
+            ->whereIsActive(true)
+            ->first();
+        return $record ? $record->file_name : null;
+    }
+
+    /**
+     * Get the rendered_images attribute.
+     *
+     * @param string $value The original rendered_images.
+     * @return string|null The rendered_images attribute.
+     */
+    public function getRenderedImagesAttribute($value): array | null
+    {
+        return File::where('folder', self::FILE_UPLOAD_PATH)
+            ->where('label', 'rendered_images')
+            ->where('fileable_type', self::class)
+            ->where('fileable_id', $this->id)
+            ->where('is_active', true)
+            ->get()
+            ->pluck('file_name')
+            ->toArray();
+    }
+
+    /**
+     * Get the rendered_images_mobile attribute.
+     *
+     * @param string $value The original rendered_images_mobile.
+     * @return string|null The rendered_images_mobile attribute.
+     */
+    public function getRenderedImagesMobileAttribute($value): array | null
+    {
+        return File::where('folder', self::FILE_UPLOAD_PATH)
+            ->where('label', 'rendered_images_mobile')
+            ->where('fileable_type', self::class)
+            ->where('fileable_id', $this->id)
+            ->where('is_active', true)
+            ->get()
+            ->pluck('file_name')
+            ->toArray();
+    }
+
+
 
     /**
      * Get the attachments associated with the model.
