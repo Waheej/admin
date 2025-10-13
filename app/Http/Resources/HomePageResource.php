@@ -8,7 +8,6 @@ use App\Models\PartnerAndSubsidiaries;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Carbon\Carbon;
 
 class HomePageResource extends JsonResource
 {
@@ -65,7 +64,7 @@ class HomePageResource extends JsonResource
                 }
 
                 if ($section->type == 'partners') {
-                  $section['data'] = PartnerAndSubsidiaries::where('type', 'partner')
+                    $section['data'] = PartnerAndSubsidiaries::where('type', 'partner')
                         ->where('is_active', true)
                         ->select(
                             'id',
@@ -78,7 +77,15 @@ class HomePageResource extends JsonResource
                 }
 
                 if ($section->type == 'about_us') {
-                  $section['data'] = json_decode($section->additional_data) ?? [];
+                    $data = [];
+                    foreach (json_decode($section->additional_data ?? '{}', true) as $key => $value) {
+                        $data[] = [
+                            'key' => $key,
+                            'value' => $value,
+                        ];
+                    }
+
+                    $section['data'] = $data;
                 }
 
                 return [
