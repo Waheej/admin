@@ -83,13 +83,29 @@ class PortalController
                 'id',
                 "name_{$locale} as name",
                 "description_{$locale} as description",
-                'city',
-                'apartment_type',
+                'lat',
+                'long',
                 'price',
+                'parent_id',
+                "city_{$locale} as city",
+                'apartment_type as apartment_type_key',
+                'status as status_key'
             )
                 ->where('is_active', true)
                 ->orderBy('order', 'ASC')
                 ->get();
+
+            if (isset($records) && $records->count() > 0) {
+                foreach ($records as $record) {
+                    if (isset($record->status_key)) {
+                        $record['status_value'] = GeneralEnums::ProjectStatuses[$locale][$record->status_key] ?? $record->status_key;
+                    }
+                    if (isset($record->apartment_type_key)) {
+                        $record['apartment_type_value'] = GeneralEnums::PropertyTypes[$locale][$record->apartment_type_key] ?? $record->apartment_type_key;
+                    }
+                }
+            }
+
             return apiResponse(
                 true,
                 '',
@@ -117,9 +133,9 @@ class PortalController
                 'lat',
                 'long',
                 'price',
-                'city',
-                'apartment_type',
                 'parent_id',
+                "city_{$locale} as city",
+                'apartment_type as apartment_type_key',
                 'status as status_key'
             )
                 ->where('is_active', true)
@@ -136,13 +152,27 @@ class PortalController
                     $query->select(
                         'id',
                         "name_{$locale} as name",
+                        "description_{$locale} as description",
+                        'lat',
+                        'long',
+                        'price',
+                        "city_{$locale} as city",
+                        'apartment_type as apartment_type_key',
+                        'status as status_key',
                     );
                 }])
-               ->with(['children' => function ($query) use ($locale) {
+                ->with(['children' => function ($query) use ($locale) {
                     $query->select(
                         'id',
                         'parent_id',
-                        "name_{$locale} as name"
+                        "name_{$locale} as name",
+                        "description_{$locale} as description",
+                        'lat',
+                        'long',
+                        'price',
+                        "city_{$locale} as city",
+                        'apartment_type as apartment_type_key',
+                        'status as status_key',
                     );
                 }])
                 ->first();
@@ -158,6 +188,31 @@ class PortalController
             if (isset($record->status_key)) {
                 $record['status_value'] = GeneralEnums::ProjectStatuses[$locale][$record->status_key] ?? $record->status_key;
             }
+
+            if (isset($record?->parent?->status_key)) {
+                $record->parent['status_value'] = GeneralEnums::ProjectStatuses[$locale][$record->parent->status_key] ?? $record->parent->status_key;
+            }
+
+            if (isset($record?->parent?->apartment_type_key)) {
+                $record->parent['apartment_type_value'] = GeneralEnums::PropertyTypes[$locale][$record->parent->apartment_type_key] ?? $record->parent->apartment_type_key;
+            }
+
+            if (isset($record?->children) && $record->children->count() > 0) {
+                foreach ($record->children as $child) {
+                    if (isset($child->status_key)) {
+                        $child['status_value'] = GeneralEnums::ProjectStatuses[$locale][$child->status_key] ?? $child->status_key;
+                    }
+                    if (isset($child->apartment_type_key)) {
+                        $child['apartment_type_value'] = GeneralEnums::PropertyTypes[$locale][$child->apartment_type_key] ?? $child->apartment_type_key;
+                    }
+                }
+            }
+
+            if (isset($record->apartment_type_key)) {
+                $record['apartment_type_value'] = GeneralEnums::PropertyTypes[$locale][$record->apartment_type_key] ?? $record->apartment_type_key;
+            }
+
+
 
             return apiResponse(
                 true,

@@ -43,15 +43,40 @@ class HomePageResource extends JsonResource
             ],
             'sections' => $this['sections']->map(function ($section) use ($locale) {
                 if ($section->type == 'featured_projects') {
-                    $section['data'] = Project::select('id', "name_{$locale} as name", "description_{$locale} as description")
+                    $obj = Project::select(
+                        'id',
+                        "name_{$locale} as name",
+                        "description_{$locale} as description",
+                        'lat',
+                        'long',
+                        'price',
+                        'parent_id',
+                        "city_{$locale} as city",
+                        'apartment_type as apartment_type_key',
+                        'status as status_key'
+                    )
                         ->where('is_active', true)
+                        ->where('show_in_home_screen', true)
                         ->orderBy('order', 'ASC')
                         ->get();
+
+                    foreach ($obj as $record) {
+                        if (isset($record?->apartment_type_key)) {
+                            $record['apartment_type_value'] = GeneralEnums::PropertyTypes[$locale][$record->apartment_type_key] ?? $record->apartment_type_key;
+                        }
+
+                        if (isset($record?->status_key)) {
+                            $record['status_value'] = GeneralEnums::ProjectStatuses[$locale][$record->status_key] ?? $record->status_key;
+                        }
+                    }
+
+                    $section['data'] = $obj;
                 }
 
                 if ($section->type == 'news') {
                     $section['data'] = InfoPage::where('type', 'news')
                         ->where('is_active', true)
+                        ->where('show_in_home_screen', true)
                         ->select(
                             'id',
                             "title_{$locale} as title",
@@ -78,10 +103,11 @@ class HomePageResource extends JsonResource
 
                 if ($section->type == 'about_us') {
                     $data = [];
-                    foreach (json_decode($section->additional_data ?? '{}', true) as $key => $value) {
+                    foreach (json_decode($section->additional_data ?? '{}', true) as $obj) {
                         $data[] = [
-                            'key' => $key,
-                            'value' => $value,
+                            'label_en' => $obj['label_en'] ?? null,
+                            'label_ar' => $obj['label_ar'] ?? null,
+                            'value' => $obj['value'] ?? null,
                         ];
                     }
 
@@ -92,6 +118,7 @@ class HomePageResource extends JsonResource
                     'id' => $section->id,
                     'title' => $section->{"title_" . $locale} ?? $section->title_ar,
                     'description' => $section->{"description_" . $locale} ?? $section->description_ar,
+                    'project_id' => $section->project_id,
                     'type_key' => $section->type,
                     'type_value' => GeneralEnums::HomePageSectionTypes[$locale][$section->type] ?? null,
                     'order' => $section->order,
