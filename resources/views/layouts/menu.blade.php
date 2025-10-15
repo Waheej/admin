@@ -55,7 +55,7 @@
             </li>
         @endif
 
-        {{-- @if (canPass('projects_index'))
+        @if (canPass('projects_index'))
             <li class="nav-item">
                 <a href="{{ route('admin.projects.index') }}"
                     class="{{ str_contains($currentRoute, 'projects') ? 'nav-link active' : 'nav-link' }}">
@@ -63,7 +63,7 @@
                     <p>{{ trans('cruds.projects.title_plural') }}</p>
                 </a>
             </li>
-        @endif --}}
+        @endif
 
         {{-- @if (canPass('info_pages_index'))
             <li class="nav-item">
@@ -75,7 +75,7 @@
             </li>
         @endif --}}
 
-        {{-- @if (canPass('news_index'))
+        @if (canPass('news_index'))
             <li class="nav-item">
                 <a href="{{ route('admin.news.index') }}"
                     class="{{ str_contains($currentRoute, 'news') ? 'nav-link active' : 'nav-link' }}">
@@ -84,7 +84,7 @@
                     <p>{{ trans('cruds.news.title_plural') }}</p>
                 </a>
             </li>
-        @endif --}}
+        @endif
 
         {{-- @if (canPass('partners_and_subsidiaries_index'))
             <li class="nav-item">

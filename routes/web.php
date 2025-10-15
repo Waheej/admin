@@ -69,7 +69,7 @@ Route::group(['middleware' => ['localization']], function () {
 
         // News
         Route::resource('news', NewsController::class);
-        Route::put('/news/{id}/toggleActivity', [NewsController::class, 'toggleActivity'])->name('news.toggleActivity');
+        Route::put('/news/{id}/toggleActivity/{key}', [NewsController::class, 'toggleActivity'])->name('news.toggleActivity');
 
         // ContactMessages
         Route::get('/contact_messages', [ContactMessageController::class, 'index'])->name('contact_messages.index');
@@ -80,12 +80,16 @@ Route::group(['middleware' => ['localization']], function () {
 
         // Projects
         Route::resource('projects', ProjectController::class);
-        Route::put('/projects/{id}/toggleActivity', [ProjectController::class, 'toggleActivity'])->name('projects.toggleActivity');
+        Route::put('/projects/{id}/toggleActivity/{key}', [ProjectController::class, 'toggleActivity'])->name('projects.toggleActivity');
         Route::get('/projects/{id}/delete_image', [ProjectController::class, 'deleteImage'])->name('projects.delete_image');
 
 
         // AppSettings
-        Route::resource('app_settings', AppSettingController::class);
+        // Route::resource('app_settings', AppSettingController::class);
+        Route::get('/app_settings', [AppSettingController::class, 'index'])->name('app_settings.index');
+        Route::get('/app_settings/{id}', [AppSettingController::class, 'show'])->name('app_settings.show');
+        Route::get('/app_settings/{id}/edit', [AppSettingController::class, 'edit'])->name('app_settings.edit');
+        Route::put('/app_settings/{id}', [AppSettingController::class, 'update'])->name('app_settings.update');
         Route::put('/app_settings/{id}/toggleActivity', [AppSettingController::class, 'toggleActivity'])->name('app_settings.toggleActivity');
 
         // PartnersAndSubsidiaries

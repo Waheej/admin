@@ -207,27 +207,30 @@
                             </div>
                         @endif
 
-                        @if($record->type == 'about_us')
-                        {{-- Key-Value Section --}}
-                        <div class="form-group">
-                            <label>{{ trans('cruds.' . $path . '.' . 'additional_data') }}</label>
+                        @if ($record->type == 'about_us')
+                            {{-- Key-Value Section --}}
+                            <div class="form-group">
+                                <label>{{ trans('cruds.' . $path . '.' . 'additional_data') }}</label>
 
-                            {{-- Input fields for adding new pairs --}}
-                            <div class="d-flex mb-3">
-                                <input type="text" id="keyInput" class="form-control mr-2" placeholder="Enter key">
-                                <input type="text" id="valueInput" class="form-control mr-2"
-                                    placeholder="Enter value">
-                                <button type="button" id="addBtn"
-                                    class="btn button-purple px-4">{{trans('global.add') }}</button>
+                                {{-- Input fields for adding new items --}}
+                                <div class="d-flex mb-3 flex-wrap">
+                                    <input type="text" id="labelEnInput" class="form-control mr-2 mb-2"
+                                        placeholder="Enter label (EN)">
+                                    <input type="text" id="labelArInput" class="form-control mr-2 mb-2"
+                                        placeholder="Enter label (AR)">
+                                    <input type="text" id="valueInput" class="form-control mr-2 mb-2"
+                                        placeholder="Enter value">
+                                    <button type="button" id="addBtn"
+                                        class="btn button-purple px-4 mb-2">{{ trans('global.add') }}</button>
+                                </div>
+
+                                {{-- Display existing pairs --}}
+                                <div id="pairsContainer" class="border rounded p-2 bg-light"></div>
+
+                                {{-- Hidden field to hold JSON data --}}
+                                <input type="hidden" name="additional_data" id="dataInput"
+                                    value="{{ old('additional_data', $record->additional_data ?? '') }}">
                             </div>
-
-                            {{-- Display existing pairs --}}
-                            <div id="pairsContainer" class="border rounded p-2 bg-light"></div>
-
-                            {{-- Hidden field to hold JSON data --}}
-                            <input type="hidden" name="additional_data" id="dataInput"
-                                value="{{ old('additional_data', $record->additional_data ?? '') }}">
-                        </div>
                         @endif
                         <div>
                             <button class="btn button-purple btn-lg" type="submit">{{ trans('global.update') }}</button>
@@ -250,83 +253,94 @@
             });
     </script>
     <script>
-        const keyInput = document.getElementById('keyInput');
+        const labelEnInput = document.getElementById('labelEnInput');
+        const labelArInput = document.getElementById('labelArInput');
         const valueInput = document.getElementById('valueInput');
         const addBtn = document.getElementById('addBtn');
         const pairsContainer = document.getElementById('pairsContainer');
         const dataInput = document.getElementById('dataInput');
 
-        // Load existing key-value data from backend (JSON)
-        let pairs = {};
+        // Load existing data
+        let pairs = [];
         try {
-            pairs = JSON.parse(dataInput.value) || {};
+            pairs = JSON.parse(dataInput.value) || [];
+            if (!Array.isArray(pairs)) pairs = [];
         } catch (e) {
-            pairs = {};
+            pairs = [];
         }
 
         renderPairs();
 
         addBtn.addEventListener('click', () => {
-            const key = keyInput.value.trim();
+            const label_en = labelEnInput.value.trim();
+            const label_ar = labelArInput.value.trim();
             const value = valueInput.value.trim();
 
-            if (!key || !value) {
-                alert('Please enter both key and value.');
+            if (!label_en || !label_ar || !value) {
+                alert('Please enter English label, Arabic label, and value.');
                 return;
             }
 
-            pairs[key] = value; // add or update
+            pairs.push({
+                label_en,
+                label_ar,
+                value
+            });
             renderPairs();
 
-            // update hidden input
-            dataInput.value = JSON.stringify(pairs);
-
-            keyInput.value = '';
+            labelEnInput.value = '';
+            labelArInput.value = '';
             valueInput.value = '';
         });
 
         function renderPairs() {
             pairsContainer.innerHTML = '';
 
-            Object.entries(pairs).forEach(([key, value]) => {
+            pairs.forEach((pair, index) => {
                 const row = document.createElement('div');
-                row.className = 'd-flex align-items-center mb-2';
-
+                row.className = 'd-flex align-items-center mb-2 flex-wrap';
                 row.innerHTML = `
-                <input type="text" value="${key}" class="form-control mr-2 key-field" style="width: 40%;">
-                <input type="text" value="${value}" class="form-control mr-2 value-field" style="width: 40%;">
-                <button type="button" class="btn btn-danger btn-sm" onclick="removePair('${key}')">
+                <input type="text" value="${pair.label_en}" class="form-control mr-2 mb-2 label-en-field" style="width: 30%;">
+                <input type="text" value="${pair.label_ar}" class="form-control mr-2 mb-2 label-ar-field" style="width: 30%;">
+                <input type="text" value="${pair.value}" class="form-control mr-2 mb-2 value-field" style="width: 30%;">
+                <button type="button" class="btn btn-danger btn-sm mb-2" onclick="removePair(${index})">
                     <i class="fas fa-trash"></i>
                 </button>
             `;
-
                 pairsContainer.appendChild(row);
             });
 
             updateHiddenInput();
         }
 
-        function removePair(key) {
-            delete pairs[key];
+        function removePair(index) {
+            pairs.splice(index, 1);
             renderPairs();
         }
 
         function updateHiddenInput() {
-            const keyFields = document.querySelectorAll('.key-field');
+            const labelEnFields = document.querySelectorAll('.label-en-field');
+            const labelArFields = document.querySelectorAll('.label-ar-field');
             const valueFields = document.querySelectorAll('.value-field');
-            const updatedPairs = {};
 
-            keyFields.forEach((input, i) => {
-                const k = input.value.trim();
-                const v = valueFields[i].value.trim();
-                if (k) updatedPairs[k] = v;
+            const updatedPairs = [];
+            labelEnFields.forEach((input, i) => {
+                const label_en = input.value.trim();
+                const label_ar = labelArFields[i].value.trim();
+                const value = valueFields[i].value.trim();
+                if (label_en && label_ar) {
+                    updatedPairs.push({
+                        label_en,
+                        label_ar,
+                        value
+                    });
+                }
             });
 
             pairs = updatedPairs;
             dataInput.value = JSON.stringify(pairs);
         }
 
-        // Keep JSON updated on form submit
         document.querySelector('form').addEventListener('submit', updateHiddenInput);
     </script>
 @endsection

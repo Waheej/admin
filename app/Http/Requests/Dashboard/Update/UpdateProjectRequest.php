@@ -44,11 +44,15 @@ class UpdateProjectRequest extends FormRequest
             'long' => [
                 'string',
             ],
-            'city' => [
+            'city_en' => [
+                'string',
+            ],
+            'city_ar' => [
                 'string',
             ],
             'apartment_type' => [
                 'string',
+                Rule::in(array_keys(\App\Enums\GeneralEnums::PropertyTypes['en'])),
             ],
             'parent_id' => [
                 'nullable',

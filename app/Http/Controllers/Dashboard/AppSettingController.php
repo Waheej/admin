@@ -7,6 +7,7 @@ use App\Models\AppSetting as Model;
 use App\Http\Requests\Dashboard\Create\CreateAppSettingRequest as CreateRequest;
 use App\Http\Requests\Dashboard\Update\UpdateAppSettingRequest as UpdateRequest;
 use App\Http\Controllers\Controller;
+use App\Services\FileService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
@@ -123,6 +124,27 @@ class AppSettingController extends Controller
         try {
             $record = Model::findOrFail($id);
             $record->update($request->validated());
+            if ($request->has('icon') && $request->icon  != null) {
+                if ($record->icon != null) {
+                    (new FileService)->deleteFile(
+                        $record->icon,
+                        $this->path,
+                        'icon',
+                        $record->id
+                    );
+                }
+                $fileName = uploadMedia($request->icon, $this->path);
+
+                (new FileService)->addFile(
+                    $record,
+                    $fileName,
+                    $this->path,
+                    'icon',
+                    $request->icon->getClientOriginalExtension(),
+                    'attachments',
+                    fileSize: $request->icon->getSize()
+                );
+            }
             return redirect(route('admin.' . $this->path . '.index'));
         } catch (\Throwable $th) {
             Log::error($th);

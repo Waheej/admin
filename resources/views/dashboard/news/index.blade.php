@@ -61,6 +61,9 @@
                                     {{ trans('cruds.' . $path . '.' . 'order') }}
                                 </th>
                                 <th class="text-center">
+                                    {{ trans('cruds.' . $path . '.' . 'show_in_home_screen') }}
+                                </th>
+                                <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'is_active') }}
                                 </th>
                                 <th>
@@ -85,8 +88,23 @@
                                     </td>
                                     @if (canPass($path . '_toggleActivity'))
                                         <td class="text-center" style="padding-top: 1%;">
+                                            <form id="{{ 'homeForm-' . $record->id }}"
+                                                action="{{ route('admin.' . $path . '.toggleActivity', ['id' => $record->id, 'key' => 'show_in_home_screen']) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                            </form>
+                                            <label class="switch">
+                                                <input onchange="submitHomeForm({{ $record->id }})" type="checkbox"
+                                                    {{ $record->show_in_home_screen == true ? 'checked' : '' }}>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </td>
+                                    @endif
+                                    @if (canPass($path . '_toggleActivity'))
+                                        <td class="text-center" style="padding-top: 1%;">
                                             <form id="{{ 'activeForm-' . $record->id }}"
-                                                action="{{ route('admin.' . $path . '.toggleActivity', $record->id) }}"
+                                                action="{{ route('admin.' . $path . '.toggleActivity', ['id' => $record->id, 'key' => 'is_active']) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('PUT')
@@ -145,6 +163,10 @@
     <script>
         function submitActiveForm(id) {
             document.getElementById("activeForm-" + id).submit();
+        }
+
+        function submitHomeForm(id) {
+            document.getElementById("homeForm-" + id).submit();
         }
 
         function submitDeleteForm(id) {

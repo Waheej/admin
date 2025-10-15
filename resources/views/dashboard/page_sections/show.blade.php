@@ -126,15 +126,17 @@
                                     <table class="table table-bordered" id="additional_data">
                                         <thead>
                                             <tr>
-                                                <th>Key</th>
+                                                <th>Label En</th>
+                                                <th>Label Ar</th>
                                                 <th>Value</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($additionalData as $key => $value)
                                                 <tr>
-                                                    <td>{{ $key }}</td>
-                                                    <td>{{ is_array($value) ? json_encode($value) : $value }}</td>
+                                                    <td>{{ $value['label_en'] ?? $key }}</td>
+                                                    <td>{{ $value['label_ar'] ?? $key }}</td>
+                                                    <td>{{ $value['value'] ?? (is_array($value) ? json_encode($value) : $value) }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

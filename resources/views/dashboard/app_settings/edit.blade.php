@@ -25,7 +25,8 @@
                     <h3 style="font-size: 1.1rem;font-weight: 400;">{{ trans('cruds.' . $path . '.title_singular') }}</h3>
                 </div>
 
-                <form role="form" method="POST" action="{{ route('admin.app_settings.update', $record->id) }}">
+                <form role="form" method="POST" enctype="multipart/form-data"
+                    action="{{ route('admin.app_settings.update', $record->id) }}">
                     @csrf
                     @method('PUT')
                     <div class="card-body">
@@ -53,6 +54,13 @@
                                 placeholder="{{ trans('cruds.' . $path . '.' . 'value') }}">{{ old('value', $record->value) }}</textarea>
                             @if ($errors->has('value'))
                                 <span class="text-danger">{{ $errors->first('value') }}</span>
+                            @endif
+                        </div>
+                         <div class="form-group">
+                            <label for="Icon">{{ trans('cruds.' . $path . '.' . 'icon') }}</label>
+                            <input type="file" class="form-control-file" id="Icon" name="icon">
+                            @if ($errors->has('icon'))
+                                <span class="text-danger">{{ $errors->first('icon') }}</span>
                             @endif
                         </div>
                         <div>

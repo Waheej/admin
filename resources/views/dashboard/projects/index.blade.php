@@ -67,13 +67,19 @@
                                     {{ trans('cruds.' . $path . '.' . 'parent_id') }}
                                 </th>
                                 <th class="text-center">
-                                    {{ trans('cruds.' . $path . '.' . 'city') }}
+                                    {{ trans('cruds.' . $path . '.' . 'city_en') }}
+                                </th>
+                                <th class="text-center">
+                                    {{ trans('cruds.' . $path . '.' . 'city_ar') }}
                                 </th>
                                 <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'apartment_type') }}
                                 </th>
                                 <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'order') }}
+                                </th>
+                                <th class="text-center">
+                                    {{ trans('cruds.' . $path . '.' . 'show_in_home_screen') }}
                                 </th>
                                 <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'is_active') }}
@@ -96,27 +102,47 @@
                                         {{ $record->name_ar }}
                                     </td>
                                     <td class="text-center">
-                                        {{ \App\Enums\GeneralEnums::ProjectStatuses[app()->getLocale()][$record->status] }}
+                                        {{ \App\Enums\GeneralEnums::ProjectStatuses[app()->getLocale()][$record->status] ?? '' }}
                                     </td>
                                     <td class="text-center">
                                         {{ $record->price }}
                                     </td>
                                     <td class="text-center">
-                                        {{ $record->parent ? $record->parent->{"name_".app()->getLocale()} : '' }}
+                                        <a href="{{ $record->parent_id ? route('admin.' . $path . '.show', $record->parent_id) : "#" }}">
+                                            {{ $record->parent ? $record->parent->{'name_' . app()->getLocale()} : '-' }}
+                                        </a>
                                     </td>
                                     <td class="text-center">
-                                        {{ $record->city }}
+                                        {{ $record->city_en }}
                                     </td>
                                     <td class="text-center">
-                                        {{ $record->apartment_type }}
+                                        {{ $record->city_ar }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ \App\Enums\GeneralEnums::PropertyTypes[app()->getLocale()][$record->apartment_type] ?? '' }}
                                     </td>
                                     <td class="text-center">
                                         {{ $record->order }}
                                     </td>
                                     @if (canPass($path . '_toggleActivity'))
                                         <td class="text-center" style="padding-top: 1%;">
+                                            <form id="{{ 'homeForm-' . $record->id }}"
+                                                action="{{ route('admin.' . $path . '.toggleActivity', ['id' => $record->id, 'key' => 'show_in_home_screen']) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                            </form>
+                                            <label class="switch">
+                                                <input onchange="submitHomeForm({{ $record->id }})" type="checkbox"
+                                                    {{ $record->show_in_home_screen == true ? 'checked' : '' }}>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </td>
+                                    @endif
+                                    @if (canPass($path . '_toggleActivity'))
+                                        <td class="text-center" style="padding-top: 1%;">
                                             <form id="{{ 'activeForm-' . $record->id }}"
-                                                action="{{ route('admin.' . $path . '.toggleActivity', $record->id) }}"
+                                                action="{{ route('admin.' . $path . '.toggleActivity', ['id' => $record->id, 'key' => 'is_active']) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('PUT')
@@ -175,6 +201,10 @@
     <script>
         function submitActiveForm(id) {
             document.getElementById("activeForm-" + id).submit();
+        }
+
+        function submitHomeForm(id) {
+            document.getElementById("homeForm-" + id).submit();
         }
 
         function submitDeleteForm(id) {

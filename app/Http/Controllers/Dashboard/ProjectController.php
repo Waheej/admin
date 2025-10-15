@@ -360,13 +360,14 @@ class ProjectController extends Controller
     /**
      * Toggle Activity an Existing Record
      * @param int $id
+     * @param string $key
      */
-    public function toggleActivity($id)
+    public function toggleActivity($id, $key)
     {
-        abort_if(!canPass($this->path . '_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(!canPass($this->path . '_toggleActivity'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         try {
             $record = Model::findOrFail($id);
-            $record->is_active = !$record->is_active;
+            $record->{"$key"} = !$record->{"$key"};
             $record->save();
             return redirect()->back();
         } catch (\Throwable $th) {

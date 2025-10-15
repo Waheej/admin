@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Dashboard\Update;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class UpdateAppSettingRequest extends FormRequest
 {
@@ -31,6 +30,12 @@ class UpdateAppSettingRequest extends FormRequest
             ],
             'value' => [
                 'string',
+            ],
+            'icon' => [
+                'nullable',
+                'file',
+                'mimes:jpg,jpeg,png,gif,svg',
+                'max:3000', // Max size in KB
             ],
         ];
     }

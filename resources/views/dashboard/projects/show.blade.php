@@ -85,15 +85,21 @@
                                 value="{{ $record->price ?? '' }}" disabled>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputCity">{{ trans('cruds.' . $path . '.' . 'city') }}</label>
-                            <input type="text" class="form-control" id="exampleInputCity"
-                                value="{{ $record->city ?? '' }}" disabled>
+                            <label for="exampleInputCityEn">{{ trans('cruds.' . $path . '.' . 'city_en') }}</label>
+                            <input type="text" class="form-control" id="exampleInputCityEn"
+                                value="{{ $record->city_en ?? '' }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputCityAr">{{ trans('cruds.' . $path . '.' . 'city_ar') }}</label>
+                            <input type="text" class="form-control" id="exampleInputCityAr"
+                                value="{{ $record->city_ar ?? '' }}" disabled>
                         </div>
                         <div class="form-group">
                             <label
                                 for="exampleInputApartmentType">{{ trans('cruds.' . $path . '.' . 'apartment_type') }}</label>
                             <input type="text" class="form-control" id="exampleInputApartmentType"
-                                value="{{ $record->apartment_type ?? '' }}" disabled>
+                                value="{{ \App\Enums\GeneralEnums::PropertyTypes[app()->getLocale()][$record->apartment_type] ?? '' }}"
+                                disabled>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputParentId">{{ trans('cruds.' . $path . '.' . 'parent_id') }}</label>
@@ -111,6 +117,14 @@
                             <label class="switch">
                                 <input type="checkbox" class="form-control" id="exampleInputIsActive"
                                     {{ $record->is_active == true ? 'checked' : '' }} disabled>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <label>{{ trans('cruds.' . $path . '.show_in_home_screen') }}</label>
+                        <div class="form-group">
+                            <label class="switch">
+                                <input type="checkbox" class="form-control" id="exampleInputIsActive"
+                                    {{ $record->show_in_home_screen == true ? 'checked' : '' }} disabled>
                                 <span class="slider round"></span>
                             </label>
                         </div>

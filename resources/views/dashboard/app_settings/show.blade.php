@@ -66,6 +66,26 @@
                             <input type="text" class="form-control" id="exampleInputCreatedAt"
                                 value="{{ \Carbon\Carbon::parse($record->created_at)->diffForHumans() ?? '' }}" disabled>
                         </div>
+                         <div class="form-group">
+                            <label for="Icon">{{ trans('cruds.' . $path . '.' . 'icon') }}</label>
+                            <div>
+                                @php
+                                    $fileExtension = pathinfo($record->icon, PATHINFO_EXTENSION);
+                                @endphp
+
+                                @if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif']))
+                                    <img src="{{ $record->icon }}" alt="Media Image"
+                                        style="max-width: 300px; height: auto;">
+                                @elseif (in_array($fileExtension, ['mp4', 'mov', 'avi']))
+                                    <video width="320" height="240" controls>
+                                        <source src="{{ $record->icon }}" type="video/{{ $fileExtension }}">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                @else
+                                    <p>{{ trans('cruds.' . $path . '.file_not_supported') }}</p>
+                                @endif
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

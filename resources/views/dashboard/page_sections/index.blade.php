@@ -108,7 +108,7 @@
                                         @if (canPass($path . '_show'))
                                             @if($record->type == 'featured_projects')
                                              <a class="btn btn-primary btn-sm"
-                                                    href="{{ route('admin.projects.index') }}">
+                                                    href="{{ route('admin.projects.index', ['filter' => ['show_in_home_screen' => 1]]) }}">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
                                             @elseif($record->type == 'partners')
@@ -119,7 +119,7 @@
 
                                             @elseif($record->type == 'news')
                                                 <a class="btn btn-primary btn-sm"
-                                                    href="{{ route('admin.news.index') }}">
+                                                    href="{{ route('admin.news.index', ['filter' => ['show_in_home_screen' => 1]]) }}">
                                                    <i class="fas fa-eye"></i>
                                                 </a>
                                             @else

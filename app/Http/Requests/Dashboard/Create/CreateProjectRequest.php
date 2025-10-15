@@ -51,13 +51,18 @@ class CreateProjectRequest extends FormRequest
                 'required',
                 'string',
             ],
-            'city' => [
+            'city_en' => [
+                'required',
+                'string',
+            ],
+            'city_ar' => [
                 'required',
                 'string',
             ],
             'apartment_type' => [
                 'required',
                 'string',
+                Rule::in(array_keys(\App\Enums\GeneralEnums::PropertyTypes['en'])),
             ],
             'parent_id' => [
                 'nullable',

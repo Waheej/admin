@@ -129,6 +129,14 @@
                                 <span class="slider round"></span>
                             </label>
                         </div>
+                        <label>{{ trans('cruds.' . $path . '.show_in_home_screen') }}</label>
+                        <div class="form-group">
+                            <label class="switch">
+                                <input type="checkbox" class="form-control" id="exampleInputIsActive"
+                                    {{ $record->show_in_home_screen == true ? 'checked' : '' }} disabled>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
                         <div class="form-group">
                             <label for="exampleInputCreatedAt">{{ trans('cruds.' . $path . '.' . 'created_at') }}</label>
                             <input type="text" class="form-control" id="exampleInputCreatedAt"

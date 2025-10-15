@@ -35,6 +35,7 @@ class InfoPage extends Model
         'type',
         'order',
         'is_active',
+        'show_in_home_screen',
         'project_id',
         'created_at',
         'updated_at',

@@ -100,20 +100,44 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputCity">{{ trans('cruds.' . $path . '.' . 'city') }}</label>
-                            <input type="text" class="form-control" id="exampleInputCity" name="{{ 'city' }}"
-                                value="{{ old('city', $record->city) }}"
-                                placeholder="{{ trans('cruds.' . $path . '.' . 'city') }}">
-                            @if ($errors->has('city'))
-                                <span class="text-danger">{{ $errors->first('city') }}</span>
+                            <label for="exampleInputCityEn">{{ trans('cruds.' . $path . '.' . 'city_en') }}</label>
+                            <input type="text" class="form-control" id="exampleInputCityEn" name="{{ 'city_en' }}"
+                                value="{{ old('city_en', $record->city_en) }}"
+                                placeholder="{{ trans('cruds.' . $path . '.' . 'city_en') }}">
+                            @if ($errors->has('city_en'))
+                                <span class="text-danger">{{ $errors->first('city_en') }}</span>
                             @endif
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputCityAr">{{ trans('cruds.' . $path . '.' . 'city_ar') }}</label>
+                            <input type="text" class="form-control" id="exampleInputCityAr" name="{{ 'city_ar' }}"
+                                value="{{ old('city_ar', $record->city_ar) }}"
+                                placeholder="{{ trans('cruds.' . $path . '.' . 'city_ar') }}">
+                            @if ($errors->has('city_ar'))
+                                <span class="text-danger">{{ $errors->first('city_ar') }}</span>
+                            @endif
+                        </div>
+                        {{-- <div class="form-group">
                             <label
                                 for="exampleInputApartmentType">{{ trans('cruds.' . $path . '.' . 'apartment_type') }}</label>
                             <input type="text" class="form-control" id="exampleInputApartmentType"
                                 name="{{ 'apartment_type' }}" value="{{ old('apartment_type', $record->apartment_type) }}"
                                 placeholder="{{ trans('cruds.' . $path . '.' . 'apartment_type') }}">
+                            @if ($errors->has('apartment_type'))
+                                <span class="text-danger">{{ $errors->first('apartment_type') }}</span>
+                            @endif
+                        </div> --}}
+                        <div class="form-group">
+                            <label for="exampleInputApartmentType">{{ trans('cruds.' . $path . '.' . 'apartment_type') }}</label>
+                            <select class="form-control" id="exampleInputApartmentType" name="apartment_type">
+                                <option value="" disabled>{{ trans('global.pleaseSelect') }}</option>
+                                @foreach (\App\Enums\GeneralEnums::PropertyTypes[app()->getLocale()] as $key => $value)
+                                    <option value="{{ $key }}"
+                                        {{ old('apartment_type', $record->apartment_type) == $key ? 'selected' : '' }}>
+                                        {{ $value }}
+                                    </option>
+                                @endforeach
+                            </select>
                             @if ($errors->has('apartment_type'))
                                 <span class="text-danger">{{ $errors->first('apartment_type') }}</span>
                             @endif

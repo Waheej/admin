@@ -154,6 +154,37 @@ enum GeneralEnums
         ],
     ];
 
+    const PropertyTypes = [
+        'en' => [
+            'apartment' => 'Apartment',
+            'villa' => 'Villa',
+            'twinhouse' => 'Twinhouse',
+            'townhouse' => 'Townhouse',
+            'duplex' => 'Duplex',
+            'penthouse' => 'Penthouse',
+            'chalet' => 'Chalet',
+            'studio' => 'Studio',
+            'cabin' => 'Cabin',
+            'clinic' => 'Clinic',
+            'office' => 'Office',
+            'retail' => 'Retail',
+        ],
+        'ar' => [
+            'apartment' => 'شقة',
+            'villa' => 'فيلا',
+            'twinhouse' => 'توين هاوس',
+            'townhouse' => 'تاون هاوس',
+            'duplex' => 'دوبلكس',
+            'penthouse' => 'بنتهاوس',
+            'chalet' => 'شاليه',
+            'studio' => 'ستوديو',
+            'cabin' => 'كابينة',
+            'clinic' => 'عيادة',
+            'office' => 'مكتب',
+            'retail' => 'متجر',
+        ],
+    ];
+
     // Home page sections
     const HomePageSectionTypes = [
         'en' => [
