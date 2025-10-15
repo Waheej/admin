@@ -134,6 +134,7 @@ return array (
     'value' => 'Value',
     'active' => 'Active',
     'icon' => 'Icon',
+    'file_not_supported' => 'File Not Supported',
     'created_at' => 'CreatedAt',
     'updated_at' => 'UpdatedAt',
     'deleted_at' => 'DeletedAt',
