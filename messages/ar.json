@@ -1,0 +1,116 @@
+{
+    "HomePage": {
+        "title": "مرحبا بالعالم!",
+        "banner_subTitle": "نحقق حلمك",
+        "banner_title": "استثمر واسكن في السعودية: فرص عقارية مميزة"
+    },
+    "common": {
+        "loading": "تحميل",
+        "enquiry_now": "استفسر",
+        "play_video": "تشغيل الفيديو",
+        "download_brochure": "تحميل الكتيب",
+        "waheej": "وهيج",
+        "location": "الموقع",
+        "social": "وسائل التواصل الاجتماعي",
+        "filter": "تصفية",
+        "follow_us": "تابعنا",
+        "company_description": "نحن شركة رائدة في مجال العقارات في المملكة العربية السعودية، نقدم حلول عقارية مبتكرة ومتميزة."
+    },
+    "menu": {
+        "home": "الرئيسية",
+        "about_us": "من نحن",
+        "projects": "المشاريع",
+        "media_center": "المركز الإعلامي",
+        "quick_navigation": "تصفح سريع",
+        "properties": "العقارات"
+    },
+    "btn_text": {
+        "enquiry_now": "استفسر الآن",
+        "download_brochure": "تحميل الكتيب",
+        "read_more": "اقرأ المزيد",
+        "veiw_all_news": "عرض كل الأخبار",
+        "veiw_all_projects": "عرض كل المشاريع",
+        "sold_out": "تم البيع",
+        "load_more": "عرض المزيد"
+    },
+    "pages": {
+        "projects_title": "المشاريع",
+        "projects_subtitle": "المشاريع",
+        "latest_launches": "أحدث الإطلاقات",
+        "units_title": "الوحدات",
+        "units_subtitle": "اكتشف جميع وحداتنا",
+        "media_center_title": "المركز الإعلامي",
+        "no_units_message": "لا توجد وحدات لهذا النوع حالياً",
+        "download_brochure": "تحميل الكتيب",
+        "all": "الكل",
+        "latest_insights": "أحدث الأخبار",
+        "news": "الأخبار",
+        "press_release": "البيانات الصحفية"
+    },
+    "unit_details": {
+        "fill_form": "املأ النموذج",
+        "luxury_apartment": "شقة فاخرة",
+        "area": "المساحة",
+        "bedrooms": "غرف النوم",
+        "bathrooms": "الحمامات",
+        "floor": "الطابق",
+        "price": "السعر",
+        "status": "الحالة",
+        "available": "متاح",
+        "enter_email": "أدخل بريدك الإلكتروني"
+    },
+    "footer": {
+        "copyright": "حقوق الطبع والنشر",
+        "social_desc": "نحن هنا لنغير مستقبلك",
+        "subscribe_title": "اشترك في النشرة البريدية",
+        "subscribe_desc": "ابقَ على اطلاع بآخر أخبارنا ومشاريعنا.",
+        "contact_info": "معلومات التواصل",
+        "terms_of_service": "شروط الخدمة",
+        "privacy_policy": "سياسة الخصوصية"
+    },
+    "form": {
+        "name": "الاسم الكامل",
+        "email": "البريد الإلكتروني",
+        "phone": "رقم الهاتف",
+        "message": "الرسالة",
+        "submit": "إرسال",
+        "success_msg": "تم إرسال رسالتك بنجاح!",
+        "success_title": "شكرًا لك!",
+        "error_msg": "حدث خطأ أثناء إرسال الرسالة. حاول مرة أخرى من فضلك."
+    },
+    "about": {
+        "vision_title": "رؤيتنا",
+        "vision_subtitle": "نحو المستقبل",
+        "vision_desc": "نسعى لأن نكون الخيار الأول للعملاء في السوق العقاري السعودي من خلال تقديم حلول عقارية مبتكرة ومتميزة تلبي تطلعاتهم وتحقق أحلامهم.",
+        "mission_title": "مهمتنا",
+        "mission_subtitle": "ما نقوم به",
+        "mission_desc": "تقديم منتجات وخدمات عقارية عالية الجودة تجمع بين الحداثة والابتكار، مع الالتزام بأعلى معايير الجودة وخدمة العملاء.",
+        "values_title": "قيمنا",
+        "values_subtitle": "ما نؤمن به",
+        "value_quality": "الجودة",
+        "value_quality_desc": "نلتزم بأعلى معايير الجودة في كل ما نقدمه",
+        "value_innovation": "الابتكار",
+        "value_innovation_desc": "نسعى دائماً للتطوير والتجديد في خدماتنا",
+        "value_trust": "الثقة",
+        "value_trust_desc": "نبني علاقات طويلة الأمد مع عملائنا",
+        "value_excellence": "التميز",
+        "value_excellence_desc": "نسعى للتميز في كل جوانب عملنا",
+        "partners_title": "شركاء النجاح",
+        "partners_subtitle": "معاً نحو القمة",
+        "partners_strategic": "الشركاء الاستراتيجيون",
+        "partners_technology": "الشركاء التقنيون",
+        "project_news_title": "أخبار المشروع",
+        "project_news_desc": "آخر التحديثات حول هذا المشروع",
+        "subsidiaries_title": "الشركات التابعة",
+        "subsidiaries_subtitle": "عائلة وهيج"
+    },
+    "error": {
+        "page_title": "عذراً، حدث خطأ",
+        "page_description": "نعتذر عن الإزعاج. حدث خطأ غير متوقع أثناء تحميل هذه الصفحة.",
+        "try_again": "حاول مرة أخرى",
+        "back_home": "العودة للرئيسية",
+        "not_found_title": "الصفحة غير موجودة",
+        "not_found_description": "عذراً، الصفحة التي تبحث عنها غير موجودة أو تم نقلها.",
+        "view_projects": "المشاريع"
+    }
+}

@@ -1,0 +1,116 @@
+{
+    "HomePage": {
+        "title": "Hello world!",
+        "banner_subTitle":"building your dream",
+        "banner_title": "Real State In Saudi Arabia: idea for living and investing"
+    },
+    "common":{
+        "loading":"loading",
+        "enquiry_now":"enquiry",
+        "play_video":"Play video",
+        "download_brochure":"download brochure",
+        "waheej": "waheej",
+        "location":"location",
+        "social":"Social",
+        "filter":"filter",
+        "follow_us": "Follow Us",
+        "company_description": "We are a leading real estate company in Saudi Arabia, providing innovative and distinguished real estate solutions."
+    },
+    "btn_text":{
+        "enquiry_now":"enquiry now",
+        "download_brochure":"download brochure",
+        "read_more":"Read more",
+        "veiw_all_news":"view all news",
+        "veiw_all_projects": "view all projects",
+        "sold_out":"sold out",
+        "load_more":"load more"
+    },
+    "menu":{
+        "home":"Home",
+        "about_us":"About us",
+        "projects":"Projects",
+        "media_center":"Media Center",
+        "quick_navigation":"Quick navigation",
+        "properties":"Properties"
+    },
+    "pages": {
+        "projects_title": "Projects",
+        "projects_subtitle": "Projects",
+        "latest_launches": "Latest Launches",
+        "units_title": "Units",
+        "units_subtitle": "Discover all our units",
+        "media_center_title": "Media Center",
+        "no_units_message": "No units available for this type",
+        "download_brochure": "Download Brochure",
+        "all": "All",
+        "latest_insights": "Latest Insights",
+        "news": "News",
+        "press_release": "Press Release"
+    },
+    "unit_details": {
+        "fill_form": "Fill Form",
+        "luxury_apartment": "Luxury Apartment",
+        "area": "Area",
+        "bedrooms": "Bedrooms",
+        "bathrooms": "Bathrooms",
+        "floor": "Floor",
+        "price": "Price",
+        "status": "Status",
+        "available": "Available",
+        "enter_email": "Enter your email"
+    },
+    "footer":{
+        "copyright":"Copyright",
+        "social_desc":"we are here to change your future",
+        "subscribe_title":"subscribe to our newsletter",
+        "subscribe_desc":"Stay updated with our latest news and projects.",
+        "contact_info":"Contact Info",
+        "terms_of_service":"Terms of Service",
+        "privacy_policy":"Privacy Policy"
+    },
+    "form":{
+        "name":"Name",
+        "email":"Email",
+        "phone":"Phone",
+        "message":"Message",
+        "submit":"Submit",
+        "success_msg":"Your message has been sent successfully!",
+        "success_title":"Thank you!",
+        "error_msg":"There was an error sending your message. Please try again."
+    },
+    "about": {
+        "vision_title": "Our Vision",
+        "vision_subtitle": "Looking Forward",
+        "vision_desc": "To be the first choice for clients in the Saudi real estate market by providing innovative and distinguished real estate solutions that meet their aspirations and achieve their dreams.",
+        "mission_title": "Our Mission",
+        "mission_subtitle": "What We Do",
+        "mission_desc": "Providing high-quality real estate products and services that combine modernity and innovation, with commitment to the highest standards of quality and customer service.",
+        "values_title": "Our Values",
+        "values_subtitle": "What We Believe In",
+        "value_quality": "Quality",
+        "value_quality_desc": "We commit to the highest quality standards in everything we offer",
+        "value_innovation": "Innovation",
+        "value_innovation_desc": "We constantly seek development and renewal in our services",
+        "value_trust": "Trust",
+        "value_trust_desc": "We build long-term relationships with our clients",
+        "value_excellence": "Excellence",
+        "value_excellence_desc": "We strive for excellence in every aspect of our work",
+        "partners_title": "Partners of Success",
+        "partners_subtitle": "Together to the Top",
+        "partners_strategic": "Strategic Partners",
+        "partners_technology": "Technology Partners",
+        "project_news_title": "Project News",
+        "project_news_desc": "Latest updates about this project",
+        "subsidiaries_title": "Our Subsidiaries",
+        "subsidiaries_subtitle": "Waheej Family"
+    },
+    "error": {
+        "page_title": "Oops, Something Went Wrong",
+        "page_description": "We apologize for the inconvenience. An unexpected error occurred while loading this page.",
+        "try_again": "Try Again",
+        "back_home": "Back to Home",
+        "not_found_title": "Page Not Found",
+        "not_found_description": "Sorry, the page you are looking for does not exist or has been moved.",
+        "view_projects": "View Projects"
+    }
+}

@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+:root {
+    --font-tajawal: "Tajawal", sans-serif;
+    --font-cinzel: "Cinzel", serif;
+    --font-dancing-script: "Dancing Script", cursive;
+    --font-gruppo: "Gruppo", sans-serif;
+}
+
+@theme custom {
+    --font-sans: var(--font-tajawal);
+    --font-cinzel: var(--font-cinzel);
+    --font-dancing-script: var(--font-dancing-script);
+    --font-gruppo: var(--font-gruppo);
+    --color-primary: #175639;
+    --color-dark: #383a40;
+    --color-gray: #f2f2f2;
+    --color-isabelline: #fdf4ec;
+    --text-tiny: 0.625rem;
+    --tracking-1: 0.05em;
+    
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+body {
+    color: var(--color-dark) !important;
+}
+
+h1,h2,h3,h4,h5,h6,p,span,button {
+    line-height: 1.2;
+}
+ .swiper-pagination-bullet {
+    width: 8px !important;
+    height: 8px !important;
+    border-radius: 5px !important;
+    background-color: var(--color-dark) !important;
+    transition: .4s;
+}
+ .swiper-pagination-bullet-active {
+    width: 3em !important;
+}
+
+
+.project-card-page-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card-page-image-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    will-change: clip-path, filter, transform, opacity;
+    transition: clip-path 1s ease-out;
+}
+
+
+
+
+.PhoneInputCountrySelectArrow {
+    width: .5em !important;
+    height: .5em !important;
+}
+.PhoneInputCountryIcon {
+    box-shadow: none !important;
+    border: none !important;
+    background: none !important;
+    width: 2.5em !important;
+    height: 2.5em !important;
+    }
+.PhoneInputCountryIconImg {
+
+
+}
+.PhoneInputCountry {
+    border-inline-end: 1px solid var(--color-gray) !important;
+    padding-inline: 1em;
+    gap: 1em;
+}
+input[type="tel"] {
+    letter-spacing: 0.05em;
+    padding-inline-start: 1em;
+    outline: 0;
+    border: 0;
+}
+
+/* ========== Partners 3D Effects ========== */
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.partner-card {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease-out;
+}
+
+.partner-card:hover {
+    transform: translateZ(20px) rotateX(2deg) rotateY(-2deg);
+}
+
+/* Animated Gradient */
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+}
+
+/* Border Flow Animation */
+@keyframes border-flow {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(200%);
+    }
+}
+
+.animate-border-flow {
+    animation: border-flow 3s ease-in-out infinite;
+}
+
+/* Floating Animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+[lang="ar"] .PhoneInputInput{
+    direction: rtl !important;
+}
+[lang="en"] .PhoneInputInput{
+    direction: ltr !important;
+}
+
