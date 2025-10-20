@@ -103,7 +103,7 @@
                                 <span class="text-danger">{{ $errors->first('order') }}</span>
                             @endif
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             @php $name = "name_" . app()->getLocale(); @endphp
                             <label for="exampleInputProjectId">{{ trans('cruds.' . $path . '.project_id') }}</label>
                             <select class="form-control" id="exampleInputProjectId" name="project_id">
@@ -120,7 +120,7 @@
                             @if ($errors->has('role_id'))
                                 <span class="text-danger">{{ $errors->first('role_id') }}</span>
                             @endif
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <label for="mediaPath">{{ trans('cruds.' . $path . '.' . 'media_path') }}</label>
                             <input type="file" class="form-control-file" id="mediaPath" name="media_path">

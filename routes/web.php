@@ -64,8 +64,8 @@ Route::group(['middleware' => ['localization']], function () {
         Route::post('/roles/{id}/updatePermissions', [RoleController::class, 'updatePermissions'])->name('roles.updatePermissions');
 
         // InfoPages
-        // Route::resource('info_pages', InfoPageController::class);
-        // Route::put('/info_pages/{id}/toggleActivity', [InfoPageController::class, 'toggleActivity'])->name('info_pages.toggleActivity');
+        Route::resource('info_pages', InfoPageController::class);
+        Route::put('/info_pages/{id}/toggleActivity', [InfoPageController::class, 'toggleActivity'])->name('info_pages.toggleActivity');
 
         // News
         Route::resource('news', NewsController::class);

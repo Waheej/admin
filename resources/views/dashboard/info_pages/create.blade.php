@@ -108,7 +108,7 @@
                                 <span class="text-danger">{{ $errors->first('order') }}</span>
                             @endif
                         </div>
-
+{{-- 
                         <div class="form-group">
                             @php $name = "name_" . app()->getLocale(); @endphp
                             <label for="exampleInputProjectId">{{ trans('cruds.' . $path . '.project_id') }}</label>
@@ -126,7 +126,7 @@
                             @if ($errors->has('project_id'))
                                 <span class="text-danger">{{ $errors->first('project_id') }}</span>
                             @endif
-                        </div>
+                        </div> --}}
 
                         <!-- Media Path Upload -->
                         <div class="form-group">

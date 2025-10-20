@@ -51,3 +51,10 @@ Route::get("/projectDetails/{id}", [PortalController::class, 'projectDetails'])-
 
 // Home Page
 Route::get("/homePage", [PortalController::class, 'homePage'])->name('homePage');
+
+// About Us Page
+Route::get("/aboutUsPage", [PortalController::class, 'aboutUsPage'])->name('aboutUsPage');
+
+// News Page
+Route::get("/newsList", [PortalController::class, 'newsList'])->name('newsList');
+Route::get("/newsDetails/{id}", [PortalController::class, 'newsDetails'])->name('newsDetails');
