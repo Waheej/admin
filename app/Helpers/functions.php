@@ -145,9 +145,18 @@ if (!function_exists('uploadMedia')) {
     {
 
         $checkPath = '/' . $folder;
-
-        $fileName = time() . $file->getClientOriginalName();
+        // $fileName = time() . $file->getClientOriginalName();
+        $fileName = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+        $sourcePath = $file->getRealPath();
         Storage::disk(env('FILESYSTEM_DISK', 'local'))->put('public/' . $checkPath . '/' . $fileName, file_get_contents($file->getPathname()));
+        if (env('APP_ENV') != 'local') {
+            $destinationPath = public_path('storage/' . $folder);
+            if (!\Illuminate\Support\Facades\File::exists($destinationPath)) {
+                \Illuminate\Support\Facades\File::makeDirectory($destinationPath, 0755, true);
+            }
+
+            \Illuminate\Support\Facades\File::copy($sourcePath, $destinationPath . '/' . $fileName);
+        }
         return $fileName;
     }
 }

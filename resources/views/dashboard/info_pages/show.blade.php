@@ -140,12 +140,12 @@
                             <input type="text" class="form-control" id="exampleInputCreatedAt"
                                 value="{{ \Carbon\Carbon::parse($record->created_at)->diffForHumans() ?? '' }}" disabled>
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             @php $name = "name_".app()->getLocale(); @endphp
                             <label for="exampleInputProjectId">{{ trans('cruds.' . $path . '.project_id') }}</label>
                             <input type="text" class="form-control" id="exampleInputproject"
                                 value="{{ $record->project?->$name }}" disabled>
-                        </div>
+                        </div> --}}
                     </div>
                 </form>
             </div>

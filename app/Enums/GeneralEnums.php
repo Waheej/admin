@@ -65,20 +65,22 @@ enum GeneralEnums
     // InfoPages
     const InfoPageTypes = [
         'en' => [
-            'privacy_policy' => 'Privacy Policy',
-            'terms_conditions' => 'Terms Conditions',
-            'faq' => 'FAQ',
+            // 'privacy_policy' => 'Privacy Policy',
+            // 'terms_conditions' => 'Terms Conditions',
+            // 'faq' => 'FAQ',
             // 'news' => 'News',
             'mission' => 'Our Mission',
             'vision' => 'Our Vision',
+            'values' => 'Our Values',
         ],
         'ar' => [
-            'privacy_policy' => 'سياسة الخصوصيه',
-            'terms_conditions' => 'الشروط و الأحكام',
-            'faq' => 'الاسئله المتكرره',
+            // 'privacy_policy' => 'سياسة الخصوصيه',
+            // 'terms_conditions' => 'الشروط و الأحكام',
+            // 'faq' => 'الاسئله المتكرره',
             // 'news' => 'الأخبار',
             'mission' => 'مهمتنا',
             'vision' => 'رؤيتنا',
+            'values' => 'قيمنا',
         ]
     ];
 
@@ -209,21 +211,15 @@ enum GeneralEnums
     const SEOPages = [
         'en' => [
             'home' => 'Home',
-            'privacy_policy' => 'Privacy Policy',
-            'terms_conditions' => 'Terms Conditions',
-            'faq' => 'FAQ',
+            'about_us' => 'About Us',
+            'projects' => 'Projects',
             'news' => 'News',
-            'mission' => 'Our Mission',
-            'vision' => 'Our Vision',
         ],
         'ar' => [
             'home' => 'الرئيسية',
-            'privacy_policy' => 'سياسة الخصوصيه',
-            'terms_conditions' => 'الشروط و الأحكام',
-            'faq' => 'الاسئله المتكرره',
+            'about_us' => 'من نحن',
+            'projects' => 'المشاريع',
             'news' => 'الأخبار',
-            'mission' => 'مهمتنا',
-            'vision' => 'رؤيتنا',
         ],
     ];
 }

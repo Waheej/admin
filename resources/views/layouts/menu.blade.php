@@ -65,7 +65,7 @@
             </li>
         @endif
 
-        {{-- @if (canPass('info_pages_index'))
+        @if (canPass('info_pages_index'))
             <li class="nav-item">
                 <a href="{{ route('admin.info_pages.index') }}"
                     class="{{ str_contains($currentRoute, 'info_pages') ? 'nav-link active' : 'nav-link' }}">
@@ -73,7 +73,7 @@
                     <p>{{ trans('cruds.info_pages.title_plural') }}</p>
                 </a>
             </li>
-        @endif --}}
+        @endif
 
         @if (canPass('news_index'))
             <li class="nav-item">

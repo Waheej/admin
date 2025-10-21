@@ -60,9 +60,9 @@
                                 <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'status') }}
                                 </th>
-                                <th class="text-center">
+                                {{-- <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'price') }}
-                                </th>
+                                </th> --}}
                                 <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'parent_id') }}
                                 </th>
@@ -104,9 +104,9 @@
                                     <td class="text-center">
                                         {{ \App\Enums\GeneralEnums::ProjectStatuses[app()->getLocale()][$record->status] ?? '' }}
                                     </td>
-                                    <td class="text-center">
+                                    {{-- <td class="text-center">
                                         {{ $record->price }}
-                                    </td>
+                                    </td> --}}
                                     <td class="text-center">
                                         <a href="{{ $record->parent_id ? route('admin.' . $path . '.show', $record->parent_id) : "#" }}">
                                             {{ $record->parent ? $record->parent->{'name_' . app()->getLocale()} : '-' }}
