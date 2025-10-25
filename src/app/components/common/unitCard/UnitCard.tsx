@@ -6,13 +6,14 @@ import { useLocale, useTranslations } from "next-intl";
 import React from "react";
 import { PiFilePdf } from "react-icons/pi";
 
-const UnitCard = ({ data }: { data: any }) => {
+const UnitCard = ({ data,showProjectLabel }: { data: any ,showProjectLabel?:boolean }) => {
     const t = useTranslations();
     const lang = useLocale();
     return (
         <div className="unit-card p-4 rounded-3xl bg-white">
             <div className="unit-card-image relative h-80 overflow-hidden rounded-2xl">
                 <ParallaxImage alt={data?.name} src={data?.image || "/images/banner.png"} />
+                {showProjectLabel && <div className="unit-card-image-label rounded-full bg-primary text-white py-2 px-4 absolute z-[1] top-4 left-4 shadow-md">{data?.name}</div>}
                 {/* <div className="unit-card-image-labels absolute z-[1] top-4 px-4 flex items-center gap-2">
                     <div className="label px-4 bg-primary text-white rounded-full py-2 uppercase text-sm flex items-center h-[3rem]">{t("btn_text.sold_out")}</div>
                     <GeneralButton icon={pdfIcon} isBlack />

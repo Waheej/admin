@@ -84,7 +84,7 @@ const ProjectUnitsSection = ({ projects }: { projects: any }) => {
                             <div className="hidden md:grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 gap-6">
                                 {filteredProjects.map((project: any) => (
                                     <div key={`${activeTab}-${project.id}`} className="unit-card">
-                                        <UnitCard data={project} />
+                                        <UnitCard data={project}/>
                                     </div>
                                 ))}
                             </div>

@@ -2,9 +2,8 @@ import { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
-    output: 'standalone',
     images: {
-        domains: ["admin.waheejsa.com"],
+        domains: ["admin.waheejsa.com", "127.0.0.1"],
     },
 };
 
