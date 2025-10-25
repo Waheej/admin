@@ -3,6 +3,7 @@ import FilterTabs from "@/app/components/common/filterTabs/FilterTabs";
 import GeneralButton from "@/app/components/common/generalButton/GeneralButton";
 import HeaderSection from "@/app/components/common/headerSection/HeaderSection";
 import ProjectCard from "@/app/components/common/projectCard/ProjectCard";
+import UnitCard from "@/app/components/common/unitCard/UnitCard";
 import GeneralContainer from "@/app/components/wrappers/generalContainer/GeneralContainer";
 import { plusIcon } from "@/app/data/data";
 import { useGSAP } from "@gsap/react";
@@ -48,8 +49,10 @@ const FeaturedProjects = ({data}:any) => {
                 <HeaderSection title={data?.title} description={data?.description } showBtn btnTitle={t("btn_text.veiw_all_projects")} btnUrl="/projects" />
                 {/* <FilterTabs btnUrl="/projects" btnText={t("btn_text.veiw_all_projects")} /> */}
                 <div className="featured-project-container grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 mt-8 gap-6">
-                    {data?.data?.map((data:any,index:any) => (
-                        <ProjectCard key={data?.id} project_data={data} index={ index+1} />
+                    {data?.data?.map((data: any, index: any) => (
+                        data?.children?.map((unit: any) => (
+                            <UnitCard data={unit} key={unit.id}/>
+                        ))
                     ))}
                 </div>
                 {/* <GeneralButton title={t("btn_text.load_more")} customClass="mt-8 mx-auto" isBlack isPillEffect icon={plusIcon}/> */}

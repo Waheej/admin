@@ -13,7 +13,6 @@ const tajawal = Tajawal({
 });
 const cinzel = Cinzel({
     variable: '--font-cinzel',
-    subsets: ['latin'],
     weight: ['400', '700']
 })
 export const metadata: Metadata = {
