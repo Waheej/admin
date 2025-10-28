@@ -50,23 +50,43 @@ class HomePageResource extends JsonResource
                         'lat',
                         'long',
                         'price',
-                        'parent_id',
+                        // 'parent_id',
                         "city_{$locale} as city",
-                        'apartment_type as apartment_type_key',
+                        // 'apartment_type as apartment_type_key',
                         'status as status_key'
                     )
                         ->where('is_active', true)
+                        ->where('parent_id', null)
                         ->where('show_in_home_screen', true)
                         ->orderBy('order', 'ASC')
+                        ->with(['units' => function ($query) use ($locale) {
+                            $query->select(
+                                'id',
+                                'parent_id',
+                                "name_{$locale} as name",
+                                "description_{$locale} as description",
+                                'lat',
+                                'long',
+                                'price',
+                                'space_area',
+                                'order',
+                                "city_{$locale} as city",
+                                'apartment_type as apartment_type_key',
+                            )->orderBy('order', 'ASC');
+                        }])
                         ->get();
 
                     foreach ($obj as $record) {
-                        if (isset($record?->apartment_type_key)) {
-                            $record['apartment_type_value'] = GeneralEnums::PropertyTypes[$locale][$record->apartment_type_key] ?? $record->apartment_type_key;
-                        }
-
                         if (isset($record?->status_key)) {
                             $record['status_value'] = GeneralEnums::ProjectStatuses[$locale][$record->status_key] ?? $record->status_key;
+                        }
+
+                        if (isset($record?->units) && $record->units->count() > 0) {
+                            foreach ($record->units as $child) {
+                                if (isset($child->apartment_type_key)) {
+                                    $child['apartment_type_value'] = GeneralEnums::PropertyTypes[$locale][$child->apartment_type_key] ?? $child->apartment_type_key;
+                                }
+                            }
                         }
                     }
 

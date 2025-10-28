@@ -221,6 +221,13 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="card-body" id="units-section">
+                        <label>{{ trans('cruds.units.title_plural') }}</label>
+                        <div style="border:1px solid #ddd; padding:15px; background:#fff;">
+                            @include('dashboard.projects.partial_units', ['records' => $record->units, 'path' => 'units'])
+                        </div>
+                    </div>
                 </form>
             </div>
             <!-- /.card -->

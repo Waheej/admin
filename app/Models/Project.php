@@ -185,7 +185,7 @@ class Project extends Model
     /**
      * Get the child projects of the current project.
      */
-    public function children()
+    public function units()
     {
         return $this->hasMany(Project::class, 'parent_id', 'id')->where('is_active', true);
     }
