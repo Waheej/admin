@@ -145,7 +145,8 @@ class PortalController
                         'order',
                         "city_{$locale} as city",
                         'apartment_type as apartment_type_key',
-                    )->orderBy('order', 'ASC');
+                    )->orderBy('order', 'ASC')
+                        ->where('is_active', true);
                 }])
                 ->first();
 
@@ -160,11 +161,11 @@ class PortalController
             if (isset($record->status_key)) {
                 $record['status_value'] = GeneralEnums::ProjectStatuses[$locale][$record->status_key] ?? $record->status_key;
             }
-            
+
             // if (isset($record->apartment_type_key)) {
             //     $record['apartment_type_value'] = GeneralEnums::PropertyTypes[$locale][$record->apartment_type_key] ?? $record->apartment_type_key;
             // }
-            
+
             // if (isset($record?->parent?->status_key)) {
             //     $record->parent['status_value'] = GeneralEnums::ProjectStatuses[$locale][$record->parent->status_key] ?? $record->parent->status_key;
             // }

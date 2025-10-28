@@ -72,7 +72,9 @@ class HomePageResource extends JsonResource
                                 'order',
                                 "city_{$locale} as city",
                                 'apartment_type as apartment_type_key',
-                            )->orderBy('order', 'ASC');
+                            )->orderBy('order', 'ASC')
+                                ->where('is_active', true)
+                                ->where('show_in_home_screen', true);
                         }])
                         ->get();
 
