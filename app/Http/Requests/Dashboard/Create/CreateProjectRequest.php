@@ -59,16 +59,16 @@ class CreateProjectRequest extends FormRequest
                 'required',
                 'string',
             ],
-            'apartment_type' => [
-                'required',
-                'string',
-                Rule::in(array_keys(\App\Enums\GeneralEnums::PropertyTypes['en'])),
-            ],
-            'parent_id' => [
-                'nullable',
-                'integer',
-                Rule::exists('projects', 'id'),
-            ],
+            // 'apartment_type' => [
+            //     'required',
+            //     'string',
+            //     Rule::in(array_keys(\App\Enums\GeneralEnums::PropertyTypes['en'])),
+            // ],
+            // 'parent_id' => [
+            //     'nullable',
+            //     'integer',
+            //     Rule::exists('projects', 'id'),
+            // ],
             'price' => [
                 'required',
                 'string',

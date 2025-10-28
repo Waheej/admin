@@ -2,39 +2,43 @@
 
 @section('content')
     <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1 class="m-0 text-dark">{{ trans('cruds.' . $path . '.title_plural') }}</h1>
-                    </div>
+                    </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a style="color:{{ PRIMARY_COLOR_HEX }};"
                                     href="{{ route('admin.home') }}">{{ trans('cruds.home') }}</a></li>
-                            <li class="breadcrumb-item active">{{ trans('cruds.' . $path . '.title_singular') }}</li>
+                            <li class="breadcrumb-item active">{{ trans('cruds.' . $path . '.title_plural') }}</li>
                         </ol>
-                    </div>
-                </div>
-            </div>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
         </div>
+        <!-- /.content-header -->
 
+        <!-- Main content -->
         <section class="content">
+            <!-- Default box -->
             <div class="{{ 'card card-' . PRIMARY_COLOR }}">
                 <div class="card-header">
                     <h3 style="font-size: 1.1rem;font-weight: 400;">{{ trans('cruds.' . $path . '.title_singular') }}</h3>
                 </div>
-
-                <form role="form" method="POST" enctype="multipart/form-data"
-                    action="{{ route('admin.projects.update', $record->id) }}">
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form role="form" method="POST" action="{{ route('admin.units.store') }}"
+                    enctype="multipart/form-data">
                     @csrf
-                    @method('PUT')
                     <div class="card-body">
 
                         <div class="form-group">
                             <label for="exampleInputNameEn">{{ trans('cruds.' . $path . '.' . 'name_en') }}</label>
                             <input type="text" class="form-control" id="exampleInputNameEn" name="{{ 'name_en' }}"
-                                value="{{ old('name_en', $record->name_en) }}"
+                                value="{{ old('name_en') }}"
                                 placeholder="{{ trans('cruds.' . $path . '.' . 'name_en') }}">
                             @if ($errors->has('name_en'))
                                 <span class="text-danger">{{ $errors->first('name_en') }}</span>
@@ -43,7 +47,7 @@
                         <div class="form-group">
                             <label for="exampleInputNameAr">{{ trans('cruds.' . $path . '.' . 'name_ar') }}</label>
                             <input type="text" class="form-control" id="exampleInputNameAr" name="{{ 'name_ar' }}"
-                                value="{{ old('name_ar', $record->name_ar) }}"
+                                value="{{ old('name_ar') }}"
                                 placeholder="{{ trans('cruds.' . $path . '.' . 'name_ar') }}">
                             @if ($errors->has('name_ar'))
                                 <span class="text-danger">{{ $errors->first('name_ar') }}</span>
@@ -55,8 +59,8 @@
                             </label>
                             <textarea class="form-control" id="description_en" name="description_en"
                                 placeholder="{{ trans('cruds.' . $path . '.' . 'description_en') }}">
-                                    {{ old('description_en', $record->description_en) }}
-                                </textarea>
+                                {{ old('description_en') }}
+                            </textarea>
 
                             @if ($errors->has('description_en'))
                                 <span class="text-danger">{{ $errors->first('description_en') }}</span>
@@ -68,20 +72,22 @@
                             </label>
                             <textarea class="form-control" id="description_ar" name="description_ar"
                                 placeholder="{{ trans('cruds.' . $path . '.' . 'description_ar') }}">
-                                    {{ old('description_ar', $record->description_ar) }}
-                                </textarea>
+                                {{ old('description_ar') }}
+                            </textarea>
 
                             @if ($errors->has('description_ar'))
                                 <span class="text-danger">{{ $errors->first('description_ar') }}</span>
                             @endif
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputStatus">{{ trans('cruds.' . $path . '.' . 'status') }}</label>
+                        {{-- <div class="form-group">
+                            <label for="exampleInputType">{{ trans('cruds.' . $path . '.' . 'status') }}</label>
                             <select class="form-control" id="exampleInputStatus" name="status">
-                                <option value="" disabled>{{ trans('global.pleaseSelect') }}</option>
-                                @foreach (\App\Enums\GeneralEnums::ProjectStatuses[app()->getLocale()] as $key => $value)
-                                    <option value="{{ $key }}"
-                                        {{ old('status', $record->status) == $key ? 'selected' : '' }}>
+                                <option value="" disabled selected>
+                                    {{ __('global.please_select', ['col' => trans('cruds.' . $path . '.status')]) }}
+                                </option>
+                                @php $statuses = \App\Enums\GeneralEnums::ProjectStatuses[app()->getLocale()]; @endphp
+                                @foreach ($statuses as $key => $value)
+                                    <option value="{{ $key }}" {{ old('status') == $key ? 'selected' : '' }}>
                                         {{ $value }}
                                     </option>
                                 @endforeach
@@ -89,20 +95,28 @@
                             @if ($errors->has('status'))
                                 <span class="text-danger">{{ $errors->first('status') }}</span>
                             @endif
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <label for="exampleInputPrice">{{ trans('cruds.' . $path . '.' . 'price') }}</label>
                             <input type="number" class="form-control" id="exampleInputPrice" name="{{ 'price' }}"
-                                value="{{ old('price', $record->price) }}"
-                                placeholder="{{ trans('cruds.' . $path . '.' . 'price') }}">
+                                value="{{ old('price') }}" placeholder="{{ trans('cruds.' . $path . '.' . 'price') }}">
                             @if ($errors->has('price'))
                                 <span class="text-danger">{{ $errors->first('price') }}</span>
                             @endif
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputSpaceArea">{{ trans('cruds.' . $path . '.' . 'space_area') }}</label>
+                            <input type="number" class="form-control" id="exampleInputSpaceArea"
+                                name="{{ 'space_area' }}" value="{{ old('space_area') }}"
+                                placeholder="{{ trans('cruds.' . $path . '.' . 'space_area') }}">
+                            @if ($errors->has('space_area'))
+                                <span class="text-danger">{{ $errors->first('space_area') }}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputCityEn">{{ trans('cruds.' . $path . '.' . 'city_en') }}</label>
                             <input type="text" class="form-control" id="exampleInputCityEn" name="{{ 'city_en' }}"
-                                value="{{ old('city_en', $record->city_en) }}"
+                                value="{{ old('city_en') }}"
                                 placeholder="{{ trans('cruds.' . $path . '.' . 'city_en') }}">
                             @if ($errors->has('city_en'))
                                 <span class="text-danger">{{ $errors->first('city_en') }}</span>
@@ -111,7 +125,7 @@
                         <div class="form-group">
                             <label for="exampleInputCityAr">{{ trans('cruds.' . $path . '.' . 'city_ar') }}</label>
                             <input type="text" class="form-control" id="exampleInputCityAr" name="{{ 'city_ar' }}"
-                                value="{{ old('city_ar', $record->city_ar) }}"
+                                value="{{ old('city_ar') }}"
                                 placeholder="{{ trans('cruds.' . $path . '.' . 'city_ar') }}">
                             @if ($errors->has('city_ar'))
                                 <span class="text-danger">{{ $errors->first('city_ar') }}</span>
@@ -121,19 +135,23 @@
                             <label
                                 for="exampleInputApartmentType">{{ trans('cruds.' . $path . '.' . 'apartment_type') }}</label>
                             <input type="text" class="form-control" id="exampleInputApartmentType"
-                                name="{{ 'apartment_type' }}" value="{{ old('apartment_type', $record->apartment_type) }}"
+                                name="{{ 'apartment_type' }}" value="{{ old('apartment_type') }}"
                                 placeholder="{{ trans('cruds.' . $path . '.' . 'apartment_type') }}">
                             @if ($errors->has('apartment_type'))
                                 <span class="text-danger">{{ $errors->first('apartment_type') }}</span>
                             @endif
                         </div> --}}
-                        {{-- <div class="form-group">
-                            <label for="exampleInputApartmentType">{{ trans('cruds.' . $path . '.' . 'apartment_type') }}</label>
+                        <div class="form-group">
+                            <label
+                                for="exampleInputApartmentType">{{ trans('cruds.' . $path . '.' . 'apartment_type') }}</label>
                             <select class="form-control" id="exampleInputApartmentType" name="apartment_type">
-                                <option value="" disabled>{{ trans('global.pleaseSelect') }}</option>
-                                @foreach (\App\Enums\GeneralEnums::PropertyTypes[app()->getLocale()] as $key => $value)
+                                <option value="" disabled selected>
+                                    {{ __('global.please_select', ['col' => trans('cruds.' . $path . '.apartment_type')]) }}
+                                </option>
+                                @php $apartmentTypes = \App\Enums\GeneralEnums::PropertyTypes[app()->getLocale()]; @endphp
+                                @foreach ($apartmentTypes as $key => $value)
                                     <option value="{{ $key }}"
-                                        {{ old('apartment_type', $record->apartment_type) == $key ? 'selected' : '' }}>
+                                        {{ old('apartment_type') == $key ? 'selected' : '' }}>
                                         {{ $value }}
                                     </option>
                                 @endforeach
@@ -141,26 +159,25 @@
                             @if ($errors->has('apartment_type'))
                                 <span class="text-danger">{{ $errors->first('apartment_type') }}</span>
                             @endif
-                        </div> --}}
+                        </div>
                         <div class="form-group">
                             <label for="exampleInputOrder">{{ trans('cruds.' . $path . '.' . 'order') }}</label>
                             <input type="number" class="form-control" id="exampleInputOrder" name="{{ 'order' }}"
-                                value="{{ old('order', $record->order) }}"
-                                placeholder="{{ trans('cruds.' . $path . '.' . 'order') }}">
+                                value="{{ old('order') }}" placeholder="{{ trans('cruds.' . $path . '.' . 'order') }}">
                             @if ($errors->has('order'))
                                 <span class="text-danger">{{ $errors->first('order') }}</span>
                             @endif
                         </div>
-                        {{-- <div class="form-group">
+                        <div class="form-group">
                             @php $name = "name_" . app()->getLocale(); @endphp
-                            <label for="exampleInputParentId">{{ trans('cruds.' . $path . '.parent_id') }}</label>
-                            <select class="form-control" id="exampleInputParentId" name="parent_id">
-                                <option value="{{ null }}">
+                            <label for="exampleInputProjectId">{{ trans('cruds.' . $path . '.parent_id') }}</label>
+                            <select class="form-control" id="exampleInputProjectId" name="parent_id">
+                                <option value="" disabled selected>
                                     {{ __('global.please_select', ['col' => trans('cruds.' . $path . '.parent_id')]) }}
                                 </option>
                                 @foreach ($projects as $project)
                                     <option value="{{ $project->id }}"
-                                        {{ old('parent_id', $record->parent_id) == $project->id ? 'selected' : '' }}>
+                                        {{ old('parent_id') == $project->id ? 'selected' : '' }}>
                                         {{ $project->$name }}
                                     </option>
                                 @endforeach
@@ -168,14 +185,13 @@
                             @if ($errors->has('parent_id'))
                                 <span class="text-danger">{{ $errors->first('parent_id') }}</span>
                             @endif
-                        </div> --}}
-                        <!-- Leaflet Map -->
+                        </div>
+                        <!-- Latitude and Longitude with Leaflet Map -->
                         <div class="form-group">
                             <label for="map">{{ trans('cruds.' . $path . '.' . 'location') }}</label>
                             <div id="map" style="height: 400px; border: 1px solid #ccc;"></div>
-                            <input type="hidden" id="lat" name="lat" value="{{ old('lat', $record->lat) }}">
-                            <input type="hidden" id="long" name="long"
-                                value="{{ old('long', $record->long) }}">
+                            <input type="hidden" id="lat" name="lat" value="{{ old('lat') }}">
+                            <input type="hidden" id="long" name="long" value="{{ old('long') }}">
                             @if ($errors->has('lat'))
                                 <span class="text-danger">{{ $errors->first('lat') }}</span>
                             @endif
@@ -183,6 +199,8 @@
                                 <span class="text-danger">{{ $errors->first('long') }}</span>
                             @endif
                         </div>
+
+                        <!-- map Upload -->
                         <div class="form-group">
                             <label for="map">{{ trans('cruds.' . $path . '.' . 'map') }}</label>
                             <input type="file" class="form-control-file" id="map" name="map">
@@ -211,88 +229,74 @@
                                 <span class="text-danger">{{ $errors->first('video') }}</span>
                             @endif
                         </div>
+
                         <div class="form-group">
                             <label for="rendered_images">{{ trans('cruds.' . $path . '.' . 'rendered_images') }}</label>
-                            <input type="file" class="form-control-file" id="rendered_images" name="rendered_images[]" multiple>
-                            @if ($record->rendered_images)
-                                <p>{{ trans('cruds.' . $path . '.' . 'rendered_images') }}:</p>
-                                @foreach ($record->rendered_images as $renderedImage)
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <img src="{{ $renderedImage }}"
-                                                alt="Rendered Image" style="max-width: 200px; max-height: 200px;">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <a href="{{ route('admin.projects.delete_image', ['id' => $record->id, 'file_name' => $renderedImage, 'label' => 'rendered_images']) }}"
-                                                class="btn btn-danger" style="margin-top: 10px;">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endif
+                            <input type="file" class="form-control-file" id="rendered_images"
+                                name="rendered_images[]" multiple>
                             @if ($errors->has('rendered_images'))
                                 <span class="text-danger">{{ $errors->first('rendered_images') }}</span>
                             @endif
                         </div>
+
                         <div class="form-group">
-                            <label for="rendered_images_mobile">{{ trans('cruds.' . $path . '.' . 'rendered_images_mobile') }}</label>
-                            <input type="file" class="form-control-file" id="rendered_images_mobile" name="rendered_images_mobile[]" multiple>
-                            @if ($record->rendered_images_mobile)
-                                <p>{{ trans('cruds.' . $path . '.' . 'rendered_images_mobile') }}:</p>
-                                @foreach ($record->rendered_images_mobile as $renderedImage)
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <img src="{{ $renderedImage }}"
-                                                alt="Rendered Image" style="max-width: 200px; max-height: 200px;">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <a href="{{ route('admin.projects.delete_image', ['id' => $record->id, 'file_name' => $renderedImage, 'label' => 'rendered_images_mobile']) }}"
-                                                class="btn btn-danger" style="margin-top: 10px;">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endif
+                            <label
+                                for="rendered_images_mobile">{{ trans('cruds.' . $path . '.' . 'rendered_images_mobile') }}</label>
+                            <input type="file" class="form-control-file" id="rendered_images_mobile"
+                                name="rendered_images_mobile[]" multiple>
                             @if ($errors->has('rendered_images_mobile'))
                                 <span class="text-danger">{{ $errors->first('rendered_images_mobile') }}</span>
                             @endif
                         </div>
                         <div>
-                            <button class="btn button-purple btn-lg" type="submit">{{ trans('global.update') }}</button>
+                            <button class="btn button-purple btn-lg" type="submit">
+                                {{ trans('global.create') }}
+                            </button>
                         </div>
                     </div>
                 </form>
             </div>
+            <!-- /.card -->
         </section>
+        <!-- /.content -->
     </div>
     <script>
-        ClassicEditor.create(document.querySelector('#description_en')).catch(error => console.error(error));
-        ClassicEditor.create(document.querySelector('#description_ar')).catch(error => console.error(error));
+        ClassicEditor
+            .create(document.querySelector('#description_en'))
+            .catch(error => {
+                console.error('Error initializing CKEditor:', error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#description_ar'))
+            .catch(error => {
+                console.error('Error initializing CKEditor:', error);
+            });
     </script>
     <!-- Include Leaflet.js -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
     <script>
-        var lat = {{ $record->lat ?? 0 }};
-        var long = {{ $record->long ?? 0 }};
-        var map = L.map('map').setView([lat, long], 13);
+        // Initialize the map
+        var map = L.map('map').setView([30.0444, 31.2357], 13); // Default to Cairo
 
+        // Add OpenStreetMap tiles
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
         }).addTo(map);
 
-        var marker = L.marker([lat, long], {
+        // Add a marker
+        var marker = L.marker([30.0444, 31.2357], {
             draggable: true
         }).addTo(map);
 
+        // Update hidden inputs when marker is dragged
         marker.on('dragend', function(e) {
             var latLng = marker.getLatLng();
             document.getElementById('lat').value = latLng.lat;
             document.getElementById('long').value = latLng.lng;
         });
 
+        // Update marker when clicking on the map
         map.on('click', function(e) {
             var latLng = e.latlng;
             marker.setLatLng(latLng);

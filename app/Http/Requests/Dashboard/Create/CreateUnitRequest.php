@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Dashboard\Update;
+namespace App\Http\Requests\Dashboard\Create;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateProjectRequest extends FormRequest
+class CreateUnitRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,43 +24,58 @@ class UpdateProjectRequest extends FormRequest
     {
         return [
             'name_en' => [
+                'required',
                 'string',
             ],
             'name_ar' => [
+                'required',
                 'string',
             ],
             'description_en' => [
+                'required',
                 'string',
             ],
             'description_ar' => [
+                'required',
                 'string',
             ],
             'status' => [
+                'required',
                 'string',
             ],
             'lat' => [
+                'required',
                 'string',
             ],
             'long' => [
+                'required',
                 'string',
             ],
             'city_en' => [
+                'required',
                 'string',
             ],
             'city_ar' => [
+                'required',
                 'string',
             ],
-            // 'apartment_type' => [
-            //     'string',
-            //     Rule::in(array_keys(\App\Enums\GeneralEnums::PropertyTypes['en'])),
-            // ],
-            // 'parent_id' => [
-            //     'nullable',
-            //     'integer',
-            //     Rule::exists('projects', 'id'),
-            // ],
-            'price' => [
+            'apartment_type' => [
+                'required',
                 'string',
+                Rule::in(array_keys(\App\Enums\GeneralEnums::PropertyTypes['en'])),
+            ],
+            'parent_id' => [
+                'nullable',
+                'integer',
+                Rule::exists('projects', 'id'),
+            ],
+            'price' => [
+                'required',
+                'string',
+            ],
+            'area_space' => [
+                'required',
+                'integer',
             ],
             'order' => [
                 'nullable',
@@ -68,13 +83,13 @@ class UpdateProjectRequest extends FormRequest
                 'min:0',
             ],
             'map' => [
-                'nullable',
+                'required',
                 'file',
                 'mimes:jpeg,png,jpg,gif,svg,webp',
                 'max:10000', // Max size in KB
             ],
             'image' => [
-                'nullable',
+                'required',
                 'file',
                 'mimes:jpeg,png,jpg,gif,svg,webp',
                 'max:10000', // Max size in KB
@@ -89,25 +104,25 @@ class UpdateProjectRequest extends FormRequest
                 'nullable',
                 'file',
                 'mimes:mp4,avi,mov',
-                'max:10240', // Max size in KB
+                'max:10240', // Max size 10MB
             ],
             'rendered_images' => [
                 'nullable',
                 'array',
             ],
             'rendered_images.*' => [
-                'file',
+               'file',
                 'mimes:jpeg,png,jpg,gif,svg,webp',
-                'max:10000', // Max size in KB
+                'max:10000', // Max size 10MB
             ],
             'rendered_images_mobile' => [
                 'nullable',
                 'array',
             ],
             'rendered_images_mobile.*' => [
-                'file',
+              'file',
                 'mimes:jpeg,png,jpg,gif,svg,webp',
-                'max:10000', // Max size in KB
+                'max:10000', // Max size 10MB
             ],
         ];
     }

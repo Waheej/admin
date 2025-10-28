@@ -57,24 +57,24 @@
                                 <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'name_ar') }}
                                 </th>
-                                <th class="text-center">
+                               {{-- <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'status') }}
                                 </th>
-                                {{-- <th class="text-center">
+                                 <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'price') }}
                                 </th> --}}
-                                {{-- <th class="text-center">
+                                <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'parent_id') }}
-                                </th> --}}
+                                </th>
                                 <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'city_en') }}
                                 </th>
                                 <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'city_ar') }}
                                 </th>
-                                {{-- <th class="text-center">
+                                <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'apartment_type') }}
-                                </th> --}}
+                                </th>
                                 <th class="text-center">
                                     {{ trans('cruds.' . $path . '.' . 'order') }}
                                 </th>
@@ -101,26 +101,26 @@
                                     <td class="text-center">
                                         {{ $record->name_ar }}
                                     </td>
-                                    <td class="text-center">
+                                    {{-- <td class="text-center">
                                         {{ \App\Enums\GeneralEnums::ProjectStatuses[app()->getLocale()][$record->status] ?? '' }}
                                     </td>
-                                    {{-- <td class="text-center">
+                                    <td class="text-center">
                                         {{ $record->price }}
                                     </td> --}}
-                                    {{-- <td class="text-center">
+                                    <td class="text-center">
                                         <a href="{{ $record->parent_id ? route('admin.' . $path . '.show', $record->parent_id) : "#" }}">
                                             {{ $record->parent ? $record->parent->{'name_' . app()->getLocale()} : '-' }}
                                         </a>
-                                    </td> --}}
+                                    </td>
                                     <td class="text-center">
                                         {{ $record->city_en }}
                                     </td>
                                     <td class="text-center">
                                         {{ $record->city_ar }}
                                     </td>
-                                    {{-- <td class="text-center">
+                                    <td class="text-center">
                                         {{ \App\Enums\GeneralEnums::PropertyTypes[app()->getLocale()][$record->apartment_type] ?? '' }}
-                                    </td> --}}
+                                    </td>
                                     <td class="text-center">
                                         {{ $record->order }}
                                     </td>

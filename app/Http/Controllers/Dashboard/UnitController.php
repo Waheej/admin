@@ -4,18 +4,18 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Enums\GeneralEnums;
 use App\Models\Project as Model;
-use App\Http\Requests\Dashboard\Create\CreateProjectRequest as CreateRequest;
-use App\Http\Requests\Dashboard\Update\UpdateProjectRequest as UpdateRequest;
+use App\Http\Requests\Dashboard\Create\CreateUnitRequest as CreateRequest;
+use App\Http\Requests\Dashboard\Update\UpdateUnitRequest as UpdateRequest;
 use App\Http\Controllers\Controller;
 use App\Services\FileService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 
-class ProjectController extends Controller
+class UnitController extends Controller
 {
     protected $itemPerPage = GeneralEnums::ITEM_PER_PAGE;
-    protected $path = Model::FILE_UPLOAD_PATH;
+    protected $path = 'units';
 
     /**
      * Get All Records
@@ -27,7 +27,7 @@ class ProjectController extends Controller
         try {
 
             $query = Model::orderBy('order', 'ASC')
-            ->whereNull('parent_id');
+                ->whereNotNull('parent_id');
 
             // Filter data based on query string parameters
             if ($request->has('filter')) {
@@ -38,7 +38,7 @@ class ProjectController extends Controller
             }
 
             $records = $query->paginate(GeneralEnums::ITEM_PER_PAGE);
-            $path = Model::FILE_UPLOAD_PATH;
+            $path = 'units';
             return view('dashboard.' . $this->path . '.index', compact('records', 'path'));
         } catch (\Throwable $th) {
             Log::error($th);
@@ -55,7 +55,7 @@ class ProjectController extends Controller
         abort_if(!canPass($this->path . '_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         try {
             $record = Model::find($id);
-            $path = Model::FILE_UPLOAD_PATH;
+            $path = 'units';
             return view('dashboard.' . $this->path . '.show', compact('record', 'path'));
         } catch (\Throwable $th) {
             Log::error($th);
@@ -70,8 +70,10 @@ class ProjectController extends Controller
     {
         abort_if(!canPass($this->path . '_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         try {
-            $path = Model::FILE_UPLOAD_PATH;
-            $projects = Model::whereIsActive(true)->get();
+            $path = 'units';
+            $projects = Model::whereIsActive(true)
+                ->whereNull('parent_id')
+                ->get();
             return view('dashboard.' . $this->path . '.create', compact('path', 'projects'));
         } catch (\Throwable $th) {
             Log::error($th);
@@ -190,10 +192,10 @@ class ProjectController extends Controller
     {
         abort_if(!canPass($this->path . '_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         try {
-            $path = Model::FILE_UPLOAD_PATH;
+            $path = 'units';
             $record = Model::findOrFail($id);
             $projects = Model::whereIsActive(true)
-                ->where('id', '!=', $id)
+                ->whereNull('parent_id')
                 ->get();
             return view('dashboard.' . $this->path . '.edit', compact('record', 'path', 'projects'));
         } catch (\Throwable $th) {

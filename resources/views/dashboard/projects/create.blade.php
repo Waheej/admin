@@ -132,7 +132,7 @@
                                 <span class="text-danger">{{ $errors->first('apartment_type') }}</span>
                             @endif
                         </div> --}}
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="exampleInputApartmentType">{{ trans('cruds.' . $path . '.' . 'apartment_type') }}</label>
                             <select class="form-control" id="exampleInputApartmentType" name="apartment_type">
                                 <option value="" disabled selected>
@@ -148,7 +148,7 @@
                             @if ($errors->has('apartment_type'))
                                 <span class="text-danger">{{ $errors->first('apartment_type') }}</span>
                             @endif
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <label for="exampleInputOrder">{{ trans('cruds.' . $path . '.' . 'order') }}</label>
                             <input type="number" class="form-control" id="exampleInputOrder" name="{{ 'order' }}"
@@ -157,7 +157,7 @@
                                 <span class="text-danger">{{ $errors->first('order') }}</span>
                             @endif
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             @php $name = "name_" . app()->getLocale(); @endphp
                             <label for="exampleInputProjectId">{{ trans('cruds.' . $path . '.parent_id') }}</label>
                             <select class="form-control" id="exampleInputProjectId" name="parent_id">
@@ -174,7 +174,7 @@
                             @if ($errors->has('parent_id'))
                                 <span class="text-danger">{{ $errors->first('parent_id') }}</span>
                             @endif
-                        </div>
+                        </div> --}}
                         <!-- Latitude and Longitude with Leaflet Map -->
                         <div class="form-group">
                             <label for="map">{{ trans('cruds.' . $path . '.' . 'location') }}</label>

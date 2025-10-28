@@ -73,16 +73,21 @@
                                 <span class="text-danger">{{ $errors->first('description_ar') }}</span>
                             @endif
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="exampleInputStatus">{{ trans('cruds.' . $path . '.' . 'status') }}</label>
                             <input type="text" class="form-control" id="exampleInputStatus"
                                 value="{{ \App\Enums\GeneralEnums::ProjectStatuses[app()->getLocale()][$record->status] ?? '' }}"
                                 disabled>
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <label for="exampleInputPrice">{{ trans('cruds.' . $path . '.' . 'price') }}</label>
                             <input type="text" class="form-control" id="exampleInputPrice"
                                 value="{{ $record->price ?? '' }}" disabled>
+                        </div>
+                         <div class="form-group">
+                            <label for="exampleInputSpaceArea">{{ trans('cruds.' . $path . '.' . 'space_area') }}</label>
+                            <input type="text" class="form-control" id="exampleInputSpaceArea"
+                                value="{{ $record->space_area ?? '' }}" disabled>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputCityEn">{{ trans('cruds.' . $path . '.' . 'city_en') }}</label>
@@ -94,19 +99,19 @@
                             <input type="text" class="form-control" id="exampleInputCityAr"
                                 value="{{ $record->city_ar ?? '' }}" disabled>
                         </div>
-                        {{-- <div class="form-group">
+                        <div class="form-group">
                             <label
                                 for="exampleInputApartmentType">{{ trans('cruds.' . $path . '.' . 'apartment_type') }}</label>
                             <input type="text" class="form-control" id="exampleInputApartmentType"
                                 value="{{ \App\Enums\GeneralEnums::PropertyTypes[app()->getLocale()][$record->apartment_type] ?? '' }}"
                                 disabled>
-                        </div> --}}
-                        {{-- <div class="form-group">
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputParentId">{{ trans('cruds.' . $path . '.' . 'parent_id') }}</label>
                             <input type="text" class="form-control" id="exampleInputParentId"
                                 value="{{ $record->parent ? $record->parent->{'name_' . app()->getLocale()} : '' }}"
                                 disabled>
-                        </div> --}}
+                        </div>
                         <div class="form-group">
                             <label for="exampleInputOrder">{{ trans('cruds.' . $path . '.' . 'order') }}</label>
                             <input type="text" class="form-control" id="exampleInputOrder"

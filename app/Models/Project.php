@@ -36,6 +36,7 @@ class Project extends Model
         'price',
         'city_en',
         'city_ar',
+        'space_area',
         'apartment_type',
         'parent_id',
         'is_active',

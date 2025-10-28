@@ -12,6 +12,7 @@ use App\Http\Controllers\Dashboard\PartnersAndSubsidiaryController;
 use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\SeoController;
+use App\Http\Controllers\Dashboard\UnitController;
 use App\Http\Controllers\HomeController;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
@@ -82,6 +83,11 @@ Route::group(['middleware' => ['localization']], function () {
         Route::resource('projects', ProjectController::class);
         Route::put('/projects/{id}/toggleActivity/{key}', [ProjectController::class, 'toggleActivity'])->name('projects.toggleActivity');
         Route::get('/projects/{id}/delete_image', [ProjectController::class, 'deleteImage'])->name('projects.delete_image');
+
+        // Units
+        Route::resource('units', UnitController::class);
+        Route::put('/units/{id}/toggleActivity/{key}', [UnitController::class, 'toggleActivity'])->name('units.toggleActivity');
+        Route::get('/units/{id}/delete_image', [UnitController::class, 'deleteImage'])->name('units.delete_image');
 
 
         // AppSettings

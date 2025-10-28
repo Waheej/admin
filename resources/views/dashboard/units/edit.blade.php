@@ -26,7 +26,7 @@
                 </div>
 
                 <form role="form" method="POST" enctype="multipart/form-data"
-                    action="{{ route('admin.projects.update', $record->id) }}">
+                    action="{{ route('admin.units.update', $record->id) }}">
                     @csrf
                     @method('PUT')
                     <div class="card-body">
@@ -99,6 +99,15 @@
                                 <span class="text-danger">{{ $errors->first('price') }}</span>
                             @endif
                         </div>
+                            <div class="form-group">
+                            <label for="exampleInputSpaceArea">{{ trans('cruds.' . $path . '.' . 'space_area') }}</label>
+                            <input type="number" class="form-control" id="exampleInputSpaceArea" name="{{ 'space_area' }}"
+                                value="{{ old('space_area', $record->space_area) }}"
+                                placeholder="{{ trans('cruds.' . $path . '.' . 'space_area') }}">
+                            @if ($errors->has('space_area'))
+                                <span class="text-danger">{{ $errors->first('space_area') }}</span>
+                            @endif
+                        </div>
                         <div class="form-group">
                             <label for="exampleInputCityEn">{{ trans('cruds.' . $path . '.' . 'city_en') }}</label>
                             <input type="text" class="form-control" id="exampleInputCityEn" name="{{ 'city_en' }}"
@@ -127,7 +136,7 @@
                                 <span class="text-danger">{{ $errors->first('apartment_type') }}</span>
                             @endif
                         </div> --}}
-                        {{-- <div class="form-group">
+                        <div class="form-group">
                             <label for="exampleInputApartmentType">{{ trans('cruds.' . $path . '.' . 'apartment_type') }}</label>
                             <select class="form-control" id="exampleInputApartmentType" name="apartment_type">
                                 <option value="" disabled>{{ trans('global.pleaseSelect') }}</option>
@@ -141,7 +150,7 @@
                             @if ($errors->has('apartment_type'))
                                 <span class="text-danger">{{ $errors->first('apartment_type') }}</span>
                             @endif
-                        </div> --}}
+                        </div>
                         <div class="form-group">
                             <label for="exampleInputOrder">{{ trans('cruds.' . $path . '.' . 'order') }}</label>
                             <input type="number" class="form-control" id="exampleInputOrder" name="{{ 'order' }}"
@@ -151,7 +160,7 @@
                                 <span class="text-danger">{{ $errors->first('order') }}</span>
                             @endif
                         </div>
-                        {{-- <div class="form-group">
+                        <div class="form-group">
                             @php $name = "name_" . app()->getLocale(); @endphp
                             <label for="exampleInputParentId">{{ trans('cruds.' . $path . '.parent_id') }}</label>
                             <select class="form-control" id="exampleInputParentId" name="parent_id">
@@ -168,7 +177,7 @@
                             @if ($errors->has('parent_id'))
                                 <span class="text-danger">{{ $errors->first('parent_id') }}</span>
                             @endif
-                        </div> --}}
+                        </div>
                         <!-- Leaflet Map -->
                         <div class="form-group">
                             <label for="map">{{ trans('cruds.' . $path . '.' . 'location') }}</label>

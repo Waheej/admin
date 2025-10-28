@@ -64,6 +64,15 @@
                 </a>
             </li>
         @endif
+        @if (canPass('units_index'))
+            <li class="nav-item">
+                <a href="{{ route('admin.units.index') }}"
+                    class="{{ str_contains($currentRoute, 'units') ? 'nav-link active' : 'nav-link' }}">
+                    <i class="nav-icon fas fa-solid fa-city"></i>
+                    <p>{{ trans('cruds.units.title_plural') }}</p>
+                </a>
+            </li>
+        @endif
 
         @if (canPass('info_pages_index'))
             <li class="nav-item">

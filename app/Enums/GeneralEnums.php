@@ -170,6 +170,7 @@ enum GeneralEnums
             'clinic' => 'Clinic',
             'office' => 'Office',
             'retail' => 'Retail',
+            'land' => 'Land',
         ],
         'ar' => [
             'apartment' => 'شقة',
@@ -184,6 +185,7 @@ enum GeneralEnums
             'clinic' => 'عيادة',
             'office' => 'مكتب',
             'retail' => 'متجر',
+            'land' => 'قطعة أرض',
         ],
     ];
 

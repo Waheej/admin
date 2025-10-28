@@ -5,7 +5,7 @@ namespace App\Http\Requests\Dashboard\Update;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateProjectRequest extends FormRequest
+class UpdateUnitRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -50,17 +50,21 @@ class UpdateProjectRequest extends FormRequest
             'city_ar' => [
                 'string',
             ],
-            // 'apartment_type' => [
-            //     'string',
-            //     Rule::in(array_keys(\App\Enums\GeneralEnums::PropertyTypes['en'])),
-            // ],
-            // 'parent_id' => [
-            //     'nullable',
-            //     'integer',
-            //     Rule::exists('projects', 'id'),
-            // ],
+            'apartment_type' => [
+                'string',
+                Rule::in(array_keys(\App\Enums\GeneralEnums::PropertyTypes['en'])),
+            ],
+            'parent_id' => [
+                'nullable',
+                'integer',
+                Rule::exists('projects', 'id'),
+            ],
             'price' => [
                 'string',
+            ],
+            'space_area' => [
+                'nullable',
+                'integer',
             ],
             'order' => [
                 'nullable',
