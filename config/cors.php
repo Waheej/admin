@@ -19,7 +19,12 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://162.254.35.6:3000'],
+    'allowed_origins' => [
+        'http://162.254.35.6:3000',
+        'http://162.254.35.6:3000/',
+        'https://162.254.35.6:3000',
+        'https://162.254.35.6:3000/',
+    ],
 
     'allowed_origins_patterns' => [],
 

@@ -4,6 +4,7 @@ use App\Enums\MapEnums;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\Portal\PortalController;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,3 +59,10 @@ Route::get("/aboutUsPage", [PortalController::class, 'aboutUsPage'])->name('abou
 // News Page
 Route::get("/newsList", [PortalController::class, 'newsList'])->name('newsList');
 Route::get("/newsDetails/{id}", [PortalController::class, 'newsDetails'])->name('newsDetails');
+
+Route::get('/clear-cache', function () {
+    Artisan::call('config:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    return 'Cache cleared';
+});
