@@ -3,7 +3,7 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
     images: {
-        domains: ["admin.waheejsa.com", "127.0.0.1"],
+        domains: ["admin.waheejsa.com", "127.0.0.1","waheejsa.com"],
     },
 };
 
