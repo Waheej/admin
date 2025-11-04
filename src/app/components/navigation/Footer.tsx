@@ -88,32 +88,61 @@ const Footer = () => {
 
     // ✅ تجميع المشاريع حسب النوع
     const projectsByCategory = useMemo(() => {
-        if (!projectsData?.data) return [];
+        // 1) طبعًا هنعمل normalize للداتا قبل ما نلمسها
+        const raw = projectsData?.data;
 
-        const grouped: any = {};
-        projectsData.data.forEach((project: any) => {
-            const typeKey = project.apartment_type_key || "other";
-            const typeValue = project.apartment_type_value || project.apartment_type_key || "Other";
+        const list: any[] =
+            Array.isArray(raw)
+                ? raw
+                : typeof raw === "string"
+                    ? (() => {
+                        try {
+                            const parsed = JSON.parse(raw);
+                            return Array.isArray(parsed) ? parsed : [];
+                        } catch {
+                            return [];
+                        }
+                    })()
+                    : Array.isArray((raw as any)?.items)
+                        ? (raw as any).items
+                        : [];
+
+        if (list.length === 0) return [];
+
+        // 2) نجمع حسب النوع بأمان
+        const grouped: Record<string, { categoryName: string; projects: any[] }> = {};
+
+        for (const item of list) {
+            const project = item ?? {}; // أمان
+            const typeKey =
+                project.apartment_type_key ??
+                project.apartment_type ??
+                "other";
+
+            const typeValue =
+                project.apartment_type_value ??
+                project.apartment_type ??
+                project.apartment_type_key ??
+                "Other";
 
             if (!grouped[typeKey]) {
-                grouped[typeKey] = {
-                    categoryName: typeValue,
-                    projects: [],
-                };
+                grouped[typeKey] = { categoryName: String(typeValue), projects: [] };
             }
             grouped[typeKey].projects.push(project);
-        });
+        }
 
-        // تحويل لـ array
-        return Object.entries(grouped).map(([key, value]: [string, any]) => ({
-            categoryName: value.categoryName,
-            projects: value.projects.slice(0, 4).map((project: any) => ({
-                id: project.id,
-                name: project.name,
-                link: `/projects/${project.id}`,
+        // 3) رجّع Array بالشكل المطلوب
+        return Object.values(grouped).map(({ categoryName, projects }) => ({
+            categoryName,
+            projects: projects.slice(0, 4).map((p: any) => ({
+                id: p.id,
+                name: p.name,
+                link: `/projects/${p.id}`,
             })),
         }));
-    }, [projectsData]);
+        // خليك محدد في الـ deps عشان ما تعيد الحساب من غير داعي
+    }, [projectsData?.data]);
+
 
     useGSAP(
         () => {
