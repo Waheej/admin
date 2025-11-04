@@ -32,11 +32,11 @@ const Navbar = () => {
     const { setChildren } = useGeneralPopUp((state) => state);
     const t = useTranslations();
     const { closeMenu } = useToggleMenu();
-    const { isNotFoundPage } = useNotFoundPage();
+    const { isNotFoundPage, isErrorPage } = useNotFoundPage();
     return (
         <header className="header absolute top-10 left-1/2 -translate-x-1/2 w-[95%]  z-30 ">
             <GeneralContainer customClass="flex items-center justify-between">
-                <Logo isDark={isNotFoundPage} />
+                <Logo isDark={isNotFoundPage || isErrorPage} />
                 <div className="flex items-center gap-2">
                     <GeneralButton
                         title={t("common.enquiry_now")}

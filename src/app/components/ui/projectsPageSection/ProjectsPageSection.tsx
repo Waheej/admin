@@ -16,7 +16,7 @@ const ProjectsPageSection = ({ data }: any) => {
     // 🧠 Build the tabs dynamically
     const projectType = useMemo(() => {
         if (!data) return [];
-        const types = data.map((item: any) => ({
+        const types = data?.map((item: any) => ({
             label: item?.apartment_type_value,
             value: item?.apartment_type_key,
         }));
@@ -99,18 +99,14 @@ const ProjectsPageSection = ({ data }: any) => {
                 />
 
                 <div className="project-page-section-container flex flex-col gap-4">
-                    {filteredProjects?.length > 0 ? (
-                        filteredProjects.map((project: any, index: number) => (
+                    {filteredProjects?.length > 0 && (
+                        filteredProjects?.map((project: any, index: number) => (
                             <ProjectCardPage
                                 key={project.id}
                                 reversed={index % 2 !== 0}
                                 data={project}
                             />
                         ))
-                    ) : (
-                        <p className="text-center py-8 text-gray-500">
-                            لا توجد مشاريع لهذا النوع حاليًا
-                        </p>
                     )}
                 </div>
             </GeneralContainer>

@@ -91,21 +91,20 @@ const Footer = () => {
         // 1) طبعًا هنعمل normalize للداتا قبل ما نلمسها
         const raw = projectsData?.data;
 
-        const list: any[] =
-            Array.isArray(raw)
-                ? raw
-                : typeof raw === "string"
-                    ? (() => {
-                        try {
-                            const parsed = JSON.parse(raw);
-                            return Array.isArray(parsed) ? parsed : [];
-                        } catch {
-                            return [];
-                        }
-                    })()
-                    : Array.isArray((raw as any)?.items)
-                        ? (raw as any).items
-                        : [];
+        const list: any[] = Array.isArray(raw)
+            ? raw
+            : typeof raw === "string"
+            ? (() => {
+                  try {
+                      const parsed = JSON.parse(raw);
+                      return Array.isArray(parsed) ? parsed : [];
+                  } catch {
+                      return [];
+                  }
+              })()
+            : Array.isArray((raw as any)?.items)
+            ? (raw as any).items
+            : [];
 
         if (list.length === 0) return [];
 
@@ -114,16 +113,9 @@ const Footer = () => {
 
         for (const item of list) {
             const project = item ?? {}; // أمان
-            const typeKey =
-                project.apartment_type_key ??
-                project.apartment_type ??
-                "other";
+            const typeKey = project.apartment_type_key ?? project.apartment_type ?? "other";
 
-            const typeValue =
-                project.apartment_type_value ??
-                project.apartment_type ??
-                project.apartment_type_key ??
-                "Other";
+            const typeValue = project.apartment_type_value ?? project.apartment_type ?? project.apartment_type_key ?? "Other";
 
             if (!grouped[typeKey]) {
                 grouped[typeKey] = { categoryName: String(typeValue), projects: [] };
@@ -142,7 +134,6 @@ const Footer = () => {
         }));
         // خليك محدد في الـ deps عشان ما تعيد الحساب من غير داعي
     }, [projectsData?.data]);
-
 
     useGSAP(
         () => {
@@ -237,35 +228,36 @@ const Footer = () => {
                             ))}
                         </ul>
                     </div>
-
-                    <div className="footer-projects col-span-1">
-                        <div className="overflow-hidden">
-                            <h2 className="text-white text-xl mb-4 reveal-ele uppercase">{t("menu.projects")}</h2>
-                        </div>
-                        <div className="space-y-6 grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-4 ">
-                            {projectsByCategory.map((category, idx) => (
-                                <div key={idx}>
-                                    <div className="overflow-hidden">
-                                        <h3 className="text-white text-sm mb-3 reveal-ele uppercase font-medium">{category.categoryName}</h3>
-                                    </div>
-                                    <ol className="flex flex-col gap-2">
-                                        {category.projects.map((project: any) => (
-                                            <div className="overflow-hidden" key={project.id}>
-                                                <li className="reveal-ele  flex items-center gap-2">
-                                                    <PillEffect>
-                                                        <Link href={project.link} className="uppercase text-white/70 hover:text-white duration-300  text-sm  flex items-center gap-2">
-                                                            {project.name}
-                                                        </Link>
-                                                    </PillEffect>
-                                                </li>
+                    {projectsByCategory?.length > 0 && (
+                        <div className="footer-projects col-span-1">
+                            <div className="overflow-hidden">
+                                <h2 className="text-white text-xl mb-4 reveal-ele uppercase">{t("menu.projects")}</h2>
+                            </div>
+                            <div className="space-y-6 grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-4 ">
+                                {projectsByCategory?.length > 0 &&
+                                    projectsByCategory?.map((category, idx) => (
+                                        <div key={idx}>
+                                            <div className="overflow-hidden">
+                                                <h3 className="text-white text-sm mb-3 reveal-ele uppercase font-medium">{category.categoryName}</h3>
                                             </div>
-                                        ))}
-                                    </ol>
-                                </div>
-                            ))}
+                                            <ol className="flex flex-col gap-2">
+                                                {category.projects.map((project: any) => (
+                                                    <div className="overflow-hidden" key={project.id}>
+                                                        <li className="reveal-ele  flex items-center gap-2">
+                                                            <PillEffect>
+                                                                <Link href={project.link} className="uppercase text-white/70 hover:text-white duration-300  text-sm  flex items-center gap-2">
+                                                                    {project.name}
+                                                                </Link>
+                                                            </PillEffect>
+                                                        </li>
+                                                    </div>
+                                                ))}
+                                            </ol>
+                                        </div>
+                                    ))}
+                            </div>
                         </div>
-                    </div>
-
+                    )}
                     <div className="footer-location col-span-full flex justify-between items-center flex-wrap gap-4 space-y-6 ">
                         {/* Contact Info */}
                         {contactInfo.length > 0 && (

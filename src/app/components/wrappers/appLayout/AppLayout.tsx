@@ -9,7 +9,8 @@ import NavigationInterceptor from "@/app/components/NavigationInterceptor";
 import LoadingRoutePage from "@/app/components/ui/LoadingRoutePage.tsx/LoadingRoutePage";
 import GeneralSmoother from "@/app/components/wrappers/generalSmoother/GeneralSmoother";
 import { useNavigationHandler } from "@/app/hooks/useNavigationHandler";
-import React, { Fragment, ReactNode } from "react";
+import { useInitialLoader } from "@/app/store/useInitialLoader";
+import React, { Fragment, ReactNode, useEffect, useRef } from "react";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 type AppLayoutProps = {
@@ -31,6 +32,37 @@ const queryClient = new QueryClient({
 
 const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
     useNavigationHandler();
+    const { hide: hideInitialLoader, setProgress, show: showLoader } = useInitialLoader();
+    const isFirstLoad = useRef(true);
+
+    // ✅ بس في أول مرة (initial page load)
+    useEffect(() => {
+        if (isFirstLoad.current) {
+            isFirstLoad.current = false;
+            showLoader();
+            setProgress(0);
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 12;
+                if (progress <= 85) {
+                    setProgress(progress);
+                } else {
+                    clearInterval(interval);
+                }
+            }, 100);
+
+            setTimeout(() => {
+                setProgress(100);
+                setTimeout(() => {
+                    hideInitialLoader();
+                }, 500);
+            }, 1500);
+
+            return () => clearInterval(interval);
+        }
+    }, []);
+
     return (
         <Fragment>
             <InitialLoadingPage />

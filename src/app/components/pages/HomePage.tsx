@@ -7,15 +7,13 @@ import ContactSection from "@/app/components/ui/contactSection/ContactSection";
 import FeaturedProjects from "@/app/components/ui/featuredProjects/FeaturedProjects";
 import NewsSection from "@/app/components/ui/newsSection/NewsSection";
 import PartnerSection from "@/app/components/ui/partnerSection/PartnerSection";
-import { useInitialLoader } from "@/app/store/useInitialLoader";
 import { useQuery } from "@tanstack/react-query";
 import { useLocale, useTranslations } from "next-intl";
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 
 const HomePage = () => {
     const t = useTranslations();
     const userLang = useLocale();
-    const { hide: hideInitialLoader, setProgress } = useInitialLoader();
     
     const { data, isLoading, isError, error } = useQuery({
         queryKey: ["homePage", userLang],
@@ -30,25 +28,6 @@ const HomePage = () => {
         staleTime: 1000 * 60 * 5,
         retry: 2,
     });
-
-    useEffect(() => {
-        if (isLoading) {
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += 10;
-                if (progress <= 90) {
-                    setProgress(progress);
-                } else {
-                    clearInterval(interval);
-                }
-            }, 100);
-
-            return () => clearInterval(interval);
-        } else if (data || isError) {
-            setProgress(100);
-            setTimeout(() => hideInitialLoader(), 500);
-        }
-    }, [isLoading, data, isError, setProgress, hideInitialLoader]);
 
     // Error state
     if (isError) {

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Link } from '@/i18n/navigation' // ✅ استخدام Link من next-intl
+import { Link } from '@/i18n/navigation' 
 import React from 'react'
 
 type Tlogo = {
@@ -8,15 +8,13 @@ type Tlogo = {
 
 const Logo: React.FC<Tlogo> = ({isDark}) => {
   return (
-    <Link href="/" className="logo relative">
+    <Link href="/" className="logo relative block" style={{ width: '160px', height: '56px' }}>
       <Image
         src={isDark ? "/images/logo/logo-rect-dark.svg" : "/images/logo/logo-rect-light.svg"}
         alt="Logo"
-        width={150}
-        height={100}
+        fill
         priority
-        style={{ height: "auto", width: "auto" }}
-        className="h-14 w-auto"
+        className="object-contain"
       />
     </Link>
   )

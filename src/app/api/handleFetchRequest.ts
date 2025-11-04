@@ -6,7 +6,9 @@ export const handleFetchRequest = async (url: string, method: "GET" | "POST" | "
             url,
             method,
             data,
-            headers: { lang: lang },
+            headers: { 
+                "Accept-Language": lang,
+            },
         });
         
         return res.data;

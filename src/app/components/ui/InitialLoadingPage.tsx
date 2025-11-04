@@ -42,33 +42,28 @@ const InitialLoadingPage: React.FC = () => {
         });
         tl.fromTo([logoWrapperRef.current, ".logo-text"], { y: -100, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", stagger: 0.15 });
 
-        const counterObj = { val: progress || 0 };
-        gsap.to(counterObj, {
-            val: 100,
-            duration: 2,
-            ease: "linear",
-            onUpdate: () => {
-                const current = Math.round(counterObj.val);
-                setProgress(current);
-                if (counterRef.current) counterRef.current.textContent = current + "%";
-            },
-            onComplete: () => {
-                // خروج العناصر لفوق
-                const exit = gsap.timeline({
-                    onComplete: () => hide(),
-                });
-                exit.to([logoWrapperRef.current, ".logo-text"], { y: -100, opacity: 0, duration: 0.6, ease: "power2.in", stagger: 0.1 })
-                .to(blackLayerRef.current, { clipPath: "ellipse(100% 0% at 50% 100%)", duration: 1, ease: "power3.inOut" })
-                .to(whiteLayerRef.current, { clipPath: "ellipse(100% 0% at 50% 100%)", duration: 1, ease: "power3.inOut" }, "-=0.3")
-                .to(containerRef.current, { opacity: 0, duration: 0.2 }, "-=0.2");
-            },
-        });
-
         return () => {
             tl.kill();
-            gsap.killTweensOf(counterObj);
         };
-    }, [visible, setProgress, hide]);
+    }, [visible]);
+
+    // ✅ تحديث العداد بناءً على الـ progress من الـ store
+    useEffect(() => {
+        if (counterRef.current) {
+            counterRef.current.textContent = progress + "%";
+        }
+
+        // ✅ لو وصل 100%، نبدأ أنيميشن الخروج
+        if (progress >= 100 && visible) {
+            const exit = gsap.timeline({
+                onComplete: () => hide(),
+            });
+            exit.to([logoWrapperRef.current, ".logo-text"], { y: -100, opacity: 0, duration: 0.6, ease: "power2.in", stagger: 0.1 })
+            .to(blackLayerRef.current, { clipPath: "ellipse(100% 0% at 50% 100%)", duration: 1, ease: "power3.inOut" })
+            .to(whiteLayerRef.current, { clipPath: "ellipse(100% 0% at 50% 100%)", duration: 1, ease: "power3.inOut" }, "-=0.3")
+            .to(containerRef.current, { opacity: 0, duration: 0.2 }, "-=0.2");
+        }
+    }, [progress, visible, hide]);
 
     if (!visible) return null;
 

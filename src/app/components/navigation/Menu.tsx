@@ -65,79 +65,93 @@ const Menu = () => {
         if (!infoData?.data) return null;
         return infoData.data.find((item: any) => item.key === 'address');
     }, [infoData]);
+    // إنشاء وتحديث الأنيميشن
     useGSAP(
         () => {
             if (!containerRef.current || !darkLayerRef.current || !whiteLayerRef.current) return;
 
-            tl.current = gsap.timeline({
-                paused: true,
-                defaults: { ease: "power3.inOut", duration: 0.6 },
-            });
+            const menuItemsElements = containerRef.current.querySelectorAll(".menu-item");
+            const wasOpen = tl.current && tl.current.progress() === 1;
 
-            // إعداد البداية
+            // تنضيف أي timeline قديم
+            if (tl.current) {
+                tl.current.kill();
+            }
+
+            // إعداد البداية - حسب حالة المنيو
             gsap.set([darkLayerRef.current, whiteLayerRef.current], {
-                clipPath: "ellipse(100% 0% at 50% 100%)",
+                clipPath: (isOpen || wasOpen) ? "ellipse(100% 120% at 50% 98%)" : "ellipse(100% 0% at 50% 100%)",
                 visibility: "visible",
             });
-            gsap.set(containerRef.current, { visibility: "hidden" });
+            gsap.set(containerRef.current, { visibility: (isOpen || wasOpen) ? "visible" : "hidden" });
+            gsap.set(menuItemsElements, { y: (isOpen || wasOpen) ? 0 : 100, opacity: (isOpen || wasOpen) ? 1 : 0 });
 
-            // الخط الزمني
+            // إنشاء timeline جديد
+            tl.current = gsap.timeline({
+                paused: true,
+                defaults: { ease: "power3.inOut" },
+            });
+
+            // الخط الزمني - الفتح
             tl.current
                 .set(containerRef.current, { visibility: "visible" })
-                // أول حاجة: الداكن يفتح
                 .to(whiteLayerRef.current, {
                     clipPath: "ellipse(100% 120% at 50% 98%)",
-                    duration: 1,
+                    duration: 0.8,
                 })
-                // بعده الأبيض
                 .to(
                     darkLayerRef.current,
                     {
                         clipPath: "ellipse(100% 120% at 50% 98%)",
-                        duration: 1,
+                        duration: 0.8,
                     },
-                    "-=0.3",
-                ) // overlap مع الداكن
-                // بعدين العناصر - مع تحقق من وجودها
-                .add(() => {
-                    const menuItems = containerRef.current?.querySelectorAll(".menu-item");
-                    if (menuItems && menuItems.length > 0) {
-                        gsap.fromTo(menuItems, 
-                            { y: 100, opacity: 0 }, 
-                            { y: 0, opacity: 1, stagger: 0.05, duration: 0.5, ease: "power3.out" }
-                        );
-                    }
+                    "-=0.4",
+                )
+                .to(menuItemsElements, {
+                    y: 0,
+                    opacity: 1,
+                    stagger: 0.05,
+                    duration: 0.5,
+                    ease: "power3.out",
                 }, "-=0.2");
+
+            // لو المنيو مفتوح، خلي الأنيميشن في النهاية
+            if (isOpen || wasOpen) {
+                tl.current.progress(1);
+            }
         },
         { scope: containerRef, dependencies: [addressInfo, socialMedia] },
     );
 
+    // التحكم في فتح وإغلاق المنيو
     useEffect(() => {
-        if (!tl.current) return;
+        if (!tl.current || !containerRef.current) return;
         
         if (isOpen) {
-            // إعادة إنشاء الأنيميشن إذا تغيرت البيانات
-            if (tl.current.isActive()) {
-                tl.current.kill();
-            }
-            
-            // إعادة تشغيل الأنيميشن مع البيانات الجديدة
-            setTimeout(() => {
-                if (tl.current) {
-                    tl.current.play();
-                }
-            }, 50);
-            
             lenis?.stop();
+            const progress = tl.current.progress();
+            if (progress < 1) {
+                tl.current.play();
+            }
         } else {
-            tl.current.reverse().eventCallback("onReverseComplete", () => {
-                if (containerRef.current) {
-                    gsap.set(containerRef.current, { visibility: "hidden" });
+            // استنى شوية علشان الـ useGSAP يخلص re-create
+            const timeoutId = setTimeout(() => {
+                if (!tl.current) return;
+                
+                const progress = tl.current.progress();
+                if (progress >= 0.9) {
+                    tl.current.reverse().eventCallback("onReverseComplete", () => {
+                        if (containerRef.current) {
+                            gsap.set(containerRef.current, { visibility: "hidden" });
+                        }
+                        lenis?.start();
+                    });
                 }
-                lenis?.start();
-            });
+            }, 100);
+
+            return () => clearTimeout(timeoutId);
         }
-    }, [isOpen, lenis, addressInfo, socialMedia]);
+    }, [isOpen, lenis]);
     const menuItems = [
         { label: t("menu.home"), ariaLabel: "Go to home page", link: "/" },
         { label: t("menu.about_us"), ariaLabel: "Learn about us", link: "/about-us" },

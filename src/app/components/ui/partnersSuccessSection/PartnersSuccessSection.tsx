@@ -1,5 +1,6 @@
 "use client";
 import CustomTabs from "@/app/components/common/customTabs/CustomTabs";
+import GeneralButton from "@/app/components/common/generalButton/GeneralButton";
 import LogoLoop from "@/app/components/module/logoLoop/LogoLoop";
 import GeneralContainer from "@/app/components/wrappers/generalContainer/GeneralContainer";
 import { useGSAP } from "@gsap/react";
@@ -7,127 +8,109 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { GoArrowRight } from "react-icons/go";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PartnersSuccessSection = () => {
+type PartnersAndSubsidiaries = {
+    id: number;
+    name: string;
+    description: string;
+    img: string;
+    url: string;
+    type: string;
+};
+type PartnersSuccessSectionProps = {
+    partner: PartnersAndSubsidiaries[];
+    subsidiary: PartnersAndSubsidiaries[];
+};
+
+const PartnersSuccessSection = ({ partners_and_subsidiaries }: { partners_and_subsidiaries: PartnersSuccessSectionProps }) => {
     const sectionRef = useRef<HTMLDivElement>(null);
     const t = useTranslations();
-    const [activeTab, setActiveTab] = useState("strategic");
 
-    // Strategic Partners Data
-    const strategicPartners = [
-        {
-            id: 1,
-            logo: "/images/partners/partner1.svg",
-            name: "Saudi Investment Bank",
-            description: "Financial partner for real estate investments",
-            size: "large", // للـ Bento Grid
-        },
-        {
-            id: 2,
-            logo: "/images/partners/partner2.svg",
-            name: "Real Estate Fund",
-            description: "Investment and development",
-            size: "medium",
-        },
-        {
-            id: 3,
-            logo: "/images/partners/partner3.svg",
-            name: "Construction Group",
-            description: "Building and development",
-            size: "medium",
-        },
-        {
-            id: 4,
-            logo: "/images/partners/partner1.svg",
-            name: "Legal Advisory",
-            description: "Legal consultation",
-            size: "small",
-        },
-        {
-            id: 5,
-            logo: "/images/partners/partner2.svg",
-            name: "Marketing Agency",
-            description: "Marketing and branding",
-            size: "small",
-        },
-    ];
+    // تحديد أول tab متاح بناءً على البيانات
+    const initialTab = useMemo(() => {
+        if (partners_and_subsidiaries?.partner && partners_and_subsidiaries.partner.length > 0) {
+            return "partner";
+        }
+        if (partners_and_subsidiaries?.subsidiary && partners_and_subsidiaries.subsidiary.length > 0) {
+            return "subsidiary";
+        }
+        return "partner"; // default fallback
+    }, [partners_and_subsidiaries]);
 
-    // Technology Partners Data
-    const technologyPartners = [
-        {
-            id: 1,
-            logo: "/images/partners/partner3.svg",
-            name: "Smart Home Systems",
-            description: "IoT and automation",
-            size: "large",
-        },
-        {
-            id: 2,
-            logo: "/images/partners/partner1.svg",
-            name: "Construction Tech",
-            description: "Building technology",
-            size: "medium",
-        },
-        {
-            id: 3,
-            logo: "/images/partners/partner2.svg",
-            name: "PropTech Solutions",
-            description: "Property technology",
-            size: "medium",
-        },
-        {
-            id: 4,
-            logo: "/images/partners/partner3.svg",
-            name: "Digital Platform",
-            description: "Web solutions",
-            size: "small",
-        },
-        {
-            id: 5,
-            logo: "/images/partners/partner1.svg",
-            name: "Security Systems",
-            description: "Smart security",
-            size: "small",
-        },
-    ];
+    const [activeTab, setActiveTab] = useState(initialTab);
 
-    const currentPartners = activeTab === "strategic" ? strategicPartners : technologyPartners;
+    // تحديث activeTab لما البيانات توصل
+    useEffect(() => {
+        if (initialTab && initialTab !== activeTab) {
+            setActiveTab(initialTab);
+        }
+    }, [initialTab]);
 
-    const tabsData = [
-        { label: t("about.partners_strategic"), value: "strategic" },
-        { label: t("about.partners_technology"), value: "technology" },
-    ];
+    // فلترة البيانات حسب النوع مع إضافة sizes للـ Bento Grid
+    const { partnersData, subsidiariesData, tabsData } = useMemo(() => {
+        const partners = partners_and_subsidiaries?.partner || [];
+        const subsidiaries = partners_and_subsidiaries?.subsidiary || [];
+
+        // إضافة sizes بناءً على الترتيب للـ Bento Grid effect
+        const addSizes = (items: any[]) => {
+            return items.map((item: any, index: number) => {
+                let size = "small";
+                if (index === 0) size = "large";
+                else if (index % 3 === 1 || index % 3 === 2) size = "medium";
+
+                return {
+                    ...item,
+                    size,
+                };
+            });
+        };
+
+        // إنشاء الـ tabs بناءً على البيانات الموجودة
+        const tabs = [];
+        if (partners && partners.length > 0) {
+            tabs.push({ label: t("about.partners"), value: "partner" });
+        }
+        if (subsidiaries && subsidiaries.length > 0) {
+            tabs.push({ label: t("about.subsidiary"), value: "subsidiary" });
+        }
+
+        return {
+            partnersData: addSizes(partners),
+            subsidiariesData: addSizes(subsidiaries),
+            tabsData: tabs,
+        };
+    }, [partners_and_subsidiaries, t]);
+
+    const currentPartners = activeTab === "partner" ? partnersData : subsidiariesData;
 
     // Header Animation - once only
     useGSAP(
         () => {
-            if (!sectionRef.current) return;
+            if (!sectionRef.current || !partners_and_subsidiaries) return;
 
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: sectionRef.current,
                     start: "top 70%",
-                    once: true, // ✅ مرة واحدة بس
+                    once: true,
                 },
             });
 
-            tl.fromTo(
-                ".partners-header .reveal-ele",
-                { opacity: 0, y: 30 },
-                { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 }
-            );
+            tl.fromTo(".partners-header .reveal-ele", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 });
 
             return () => tl.kill();
         },
-        { scope: sectionRef }
+        { scope: sectionRef, dependencies: [partners_and_subsidiaries] },
     );
 
-    // Partners Animation - simplified for performance
     useGSAP(
         () => {
+            if (!currentPartners || currentPartners.length === 0) return;
+
             gsap.fromTo(
                 ".partner-card",
                 { opacity: 0, y: 20, scale: 0.95 },
@@ -138,11 +121,11 @@ const PartnersSuccessSection = () => {
                     duration: 0.5,
                     stagger: 0.08,
                     ease: "power2.out",
-                    clearProps: "all", // ✅ ينضف الـ properties بعد الأنيميشن
-                }
+                    clearProps: "all",
+                },
             );
         },
-        { dependencies: [activeTab] }
+        { dependencies: [activeTab, currentPartners] },
     );
 
     // Get card classes based on size (Bento Grid)
@@ -175,67 +158,77 @@ const PartnersSuccessSection = () => {
                     </div>
                 </div>
 
-                {/* Tabs */}
-                <div className="flex justify-center mb-12">
-                    <CustomTabs tabsData={tabsData} activeTab={activeTab} setActiveTab={setActiveTab} />
-                </div>
+                {/* Tabs - يظهر بس لو في أكتر من نوع */}
+                {tabsData && tabsData.length > 1 && (
+                    <div className="flex justify-center mb-12">
+                        <CustomTabs tabsData={tabsData} activeTab={activeTab} setActiveTab={setActiveTab} />
+                    </div>
+                )}
 
                 {/* Partners Bento Grid */}
-                <div className="partners-grid grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 auto-rows-auto perspective-1000">
-                    {currentPartners.map((partner, index) => (
-                        <div
-                            key={`${activeTab}-${partner.id}`}
-                            className={getCardClasses(partner.size, index)}
-                            style={{
-                                transformStyle: "preserve-3d",
-                            }}>
-                            {/* Simple hover background */}
-                            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                {currentPartners && currentPartners.length > 0 && (
+                    <div className="partners-grid grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 auto-rows-auto perspective-1000">
+                        {currentPartners.map((partner, index) => (
+                            <div
+                                key={`${activeTab}-${partner.id}`}
+                                className={getCardClasses(partner.size, index)}
+                                style={{
+                                    transformStyle: "preserve-3d",
+                                }}>
+                                {/* Simple hover background */}
+                                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                            {/* Content */}
-                            <div className="relative h-full bg-white rounded-3xl p-8 flex flex-col justify-between">
-                                {/* Logo */}
-                                <div className="flex items-center justify-center flex-1">
-                                    <div className="relative w-full h-32">
-                                        <Image 
-                                            src={partner.logo} 
-                                            alt={partner.name} 
-                                            fill 
-                                            className="object-contain filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300" 
-                                        />
+                                {/* Content */}
+                                <div className="relative h-full bg-white rounded-3xl p-8 flex flex-col justify-between">
+                                    {/* Logo */}
+                                    {partner.img && (
+                                        <div className="flex items-center justify-center flex-1">
+                                            <div className="relative w-full h-32">
+                                                <Image
+                                                    src={partner.img || "/images/logo/logo-dark.png"}
+                                                    alt={partner.name}
+                                                    fill
+                                                    className="object-contain filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Info - slides up on hover */}
+                                    <div className="space-y-2 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <h3 className="font-bold text-lg uppercase">{partner.name}</h3>
+                                        <div className="text-sm text-dark/60" dangerouslySetInnerHTML={{ __html: partner.description }} />
+                                        {partner.url && (
+                                            <GeneralButton
+                                                isBlack
+                                                isPillEffect
+                                                icon={<GoArrowRight size={20} />}
+                                                customClass="inline-block mt-2 text-primary text-xs"
+                                                title={t("about.visit_website")}
+                                                url={partner.url}
+                                            />
+                                        )}
                                     </div>
                                 </div>
-
-                                {/* Info - slides up on hover */}
-                                <div className="space-y-2 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <h3 className="font-bold text-lg uppercase">{partner.name}</h3>
-                                    <p className="text-sm text-dark/60">{partner.description}</p>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Simplified Logo Grid - بدل Logo Loop */}
-                <div className="pt-16 relative">
-                    <div className="flex items-center justify-center gap-8 flex-wrap grayscale hover:grayscale-0 transition-all duration-500">
-                        {currentPartners.map((partner) => (
-                            <div key={partner.id} className="relative w-32 h-20 opacity-60 hover:opacity-100 transition-opacity duration-300">
-                                <Image
-                                    src={partner.logo}
-                                    alt={partner.name}
-                                    fill
-                                    className="object-contain"
-                                />
                             </div>
                         ))}
                     </div>
+                )}
 
-                    {/* Decorative bottom text */}
-                    <div className="text-center mt-8">
-                        <p className="text-sm text-dark/40 uppercase tracking-wider">Trusted by industry leaders</p>
+                {/* Simplified Logo Grid - بدل Logo Loop */}
+                {currentPartners && currentPartners.length > 0 && (
+                    <div className="pt-16 relative">
+                        <div className="flex items-center justify-center gap-8 flex-wrap grayscale hover:grayscale-0 transition-all duration-500">
+                            {currentPartners
+                                .filter((p) => p.img)
+                                .map((partner) => (
+                                    <div key={partner.id} className="relative w-32 h-20 opacity-60 hover:opacity-100 transition-opacity duration-300">
+                                        <Image src={partner.img} alt={partner.name} fill className="object-contain" />
+                                    </div>
+                                ))}
+                        </div>
                     </div>
-                </div>
+                )}
             </GeneralContainer>
         </section>
     );

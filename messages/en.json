@@ -14,6 +14,7 @@
         "social":"Social",
         "filter":"filter",
         "follow_us": "Follow Us",
+        "contact_us": "Contact Us",
         "company_description": "We are a leading real estate company in Saudi Arabia, providing innovative and distinguished real estate solutions."
     },
     "btn_text":{
@@ -97,12 +98,13 @@
         "value_excellence_desc": "We strive for excellence in every aspect of our work",
         "partners_title": "Partners of Success",
         "partners_subtitle": "Together to the Top",
-        "partners_strategic": "Strategic Partners",
-        "partners_technology": "Technology Partners",
+        "partners": "Partners",
+        "subsidiary": "Subsidiaries",
         "project_news_title": "Project News",
         "project_news_desc": "Latest updates about this project",
         "subsidiaries_title": "Our Subsidiaries",
-        "subsidiaries_subtitle": "Waheej Family"
+        "subsidiaries_subtitle": "Waheej Family",
+        "visit_website": "Visit Website"
     },
     "error": {
         "page_title": "Oops, Something Went Wrong",

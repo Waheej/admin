@@ -43,7 +43,7 @@ const ContactSection = ({data}:any) => {
         <section className="contact-section bg-gray rounded-3xl" id="contact" data-parallax >
             <GeneralContainer isSection customClass="flex justify-between flex-wrap gap-8">
                 <div className="contact-section-title xl:max-w-1/2 lg-max-w-1/3 md:max-w-1/2 max-w-full">
-                    <HeaderSection title={data?.title}   customClass="!mb-0" />
+                    <HeaderSection title={t("common.contact_us")}   customClass="!mb-0" />
                     <div className="contact-section-title-follow">
                         <span className="text-dark/70 inline-block reveal-ele">{t("common.follow_us")}</span>
                         <div className="contact-section-title-follow-btn flex items-center gap-2 mt-4">

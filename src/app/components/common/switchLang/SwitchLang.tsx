@@ -1,6 +1,7 @@
 "use client";
 import GeneralButton from '@/app/components/common/generalButton/GeneralButton';
 import { useInitialLoader } from '@/app/store/useInitialLoader';
+import useToggleMenu from '@/app/store/useToggleMenu';
 import clsx from 'clsx';
 import { useLocale } from 'next-intl';
 import { useRouter, usePathname } from 'next/navigation';
@@ -14,6 +15,7 @@ const SwitchLang: React.FC<Props> = ({customClass}) => {
   const router = useRouter();
   const pathname = usePathname();
   const { show: showLoader, setProgress } = useInitialLoader();
+  const { closeMenu } = useToggleMenu();
   const isChangingLang = useRef(false);
   
   // ✅ لما اللغة تتغير، نخفي اللودر
@@ -31,6 +33,9 @@ const SwitchLang: React.FC<Props> = ({customClass}) => {
   
   const changeLang = () => {
     const newLang = lang === 'en' ? 'ar' : 'en';
+
+    // ✅ نقفل المنيو الأول قبل تغيير اللغة
+    closeMenu();
 
     // ✅ نشغل Initial Loader
     isChangingLang.current = true;

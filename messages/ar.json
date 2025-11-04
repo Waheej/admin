@@ -14,6 +14,7 @@
         "social": "وسائل التواصل الاجتماعي",
         "filter": "تصفية",
         "follow_us": "تابعنا",
+        "contact_us": "اتصل بنا",
         "company_description": "نحن شركة رائدة في مجال العقارات في المملكة العربية السعودية، نقدم حلول عقارية مبتكرة ومتميزة."
     },
     "menu": {
@@ -97,12 +98,13 @@
         "value_excellence_desc": "نسعى للتميز في كل جوانب عملنا",
         "partners_title": "شركاء النجاح",
         "partners_subtitle": "معاً نحو القمة",
-        "partners_strategic": "الشركاء الاستراتيجيون",
-        "partners_technology": "الشركاء التقنيون",
+        "partners": "الشركاء ",
+        "subsidiary": "الشركات التابعة",
         "project_news_title": "أخبار المشروع",
         "project_news_desc": "آخر التحديثات حول هذا المشروع",
         "subsidiaries_title": "الشركات التابعة",
-        "subsidiaries_subtitle": "عائلة وهيج"
+        "subsidiaries_subtitle": "عائلة وهيج",
+        "visit_website": "زيارة الموقع"
     },
     "error": {
         "page_title": "عذراً، حدث خطأ",
