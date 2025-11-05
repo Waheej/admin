@@ -29,25 +29,7 @@ const HomePage = () => {
         retry: 2,
     });
 
-    // Error state
-    if (isError) {
-        return (
-            <div className="min-h-screen flex items-center justify-center p-4">
-                <div className="text-center max-w-md">
-                    <h2 className="text-2xl font-bold mb-4">فشل تحميل البيانات</h2>
-                    <p className="text-dark/60 mb-6">
-                        {(error as any)?.message || "حدث خطأ أثناء تحميل الصفحة"}
-                    </p>
-                    <button
-                        onClick={() => window.location.reload()}
-                        className="px-6 py-3 bg-black text-white rounded-lg hover:bg-black/90 transition"
-                    >
-                        إعادة المحاولة
-                    </button>
-                </div>
-            </div>
-        );
-    }
+
     
     return (
         <Fragment>
@@ -56,10 +38,10 @@ const HomePage = () => {
                 isDownloadBorochure
                 title={data?.data?.sections?.[0]?.title}
                 description={data?.data?.sections?.[0]?.description}
-                // isVideo
+                isVideo
                 imageSrc={data?.data?.sections?.[0]?.media?.[0]}
-                // videoSrc="/videos/video.mp4"
-                // VideoPopupSrc="/videos/video.mp4"
+                videoSrc={data?.data?.sections?.[0]?.video?.[0]}
+                VideoPopupSrc={data?.data?.sections?.[0]?.video?.[0]}
             />
             <AboutSection data={data?.data?.sections?.[1] } />
             <FeaturedProjects data={data?.data?.sections?.[2]} />

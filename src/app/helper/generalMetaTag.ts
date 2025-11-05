@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export async function generalMetaTag(path: string, lang: string = "en"): Promise<Metadata> {
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://waheejsa.com";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ;
     
     // Default fallback metadata
     const defaultMetadata: Metadata = {
@@ -37,7 +37,7 @@ export async function generalMetaTag(path: string, lang: string = "en"): Promise
     };
 
     try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL_STAGING || "https://admin.waheejsa.com/api/";
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL_STAGING ;
         const apiPath = path.startsWith("/") ? path.slice(1) : path;
         const fullUrl = `${baseUrl}${apiPath}`;
 
@@ -71,7 +71,8 @@ export async function generalMetaTag(path: string, lang: string = "en"): Promise
         }
 
         const { title, description, canonical_url, url, robots, keywords, og, twitter } = seo;
-
+        console.log(title,"sss");
+        
         const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://waheejsa.com";
         const ogImage = og?.image || `${siteUrl}/images/logo/logo-rect-light.svg`;
         const twitterImage = twitter?.image || `${siteUrl}/images/logo/logo-rect-light.svg`;

@@ -36,6 +36,8 @@ const Footer = () => {
         queryFn: () => handleFetchRequest("projectsList", "GET", null, lang),
         staleTime: 1000 * 60 * 5,
     });
+    console.log(projectsData,"projectsData");
+    
 
     // ✅ جلب معلومات التواصل من API
     const { data: infoData } = useQuery({
@@ -89,7 +91,7 @@ const Footer = () => {
     // ✅ تجميع المشاريع حسب النوع
     const projectsByCategory = useMemo(() => {
         // 1) طبعًا هنعمل normalize للداتا قبل ما نلمسها
-        const raw = projectsData?.data;
+        const raw = projectsData?.data?.sections;
 
         const list: any[] = Array.isArray(raw)
             ? raw
@@ -113,9 +115,9 @@ const Footer = () => {
 
         for (const item of list) {
             const project = item ?? {}; // أمان
-            const typeKey = project.apartment_type_key ?? project.apartment_type ?? "other";
+            const typeKey = project.apartment_type_key ?? project.apartment_type ?? null;
 
-            const typeValue = project.apartment_type_value ?? project.apartment_type ?? project.apartment_type_key ?? "Other";
+            const typeValue = project.apartment_type_value ?? project.apartment_type ?? project.apartment_type_key ?? "";
 
             if (!grouped[typeKey]) {
                 grouped[typeKey] = { categoryName: String(typeValue), projects: [] };

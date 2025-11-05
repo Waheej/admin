@@ -36,6 +36,15 @@ const GeneralVideo = forwardRef<HTMLDivElement, TGeneralVideo>((props, ref) => {
         setIsPlaying(true);
     };
 
+    // ✅ نوقف الفيديو قبل ما الكومبوننت يتشال
+    useEffect(() => {
+        return () => {
+            if (playerRef.current) {
+                setIsPlaying(false);
+            }
+        };
+    }, []);
+
     return (
         <div className={clsx("general-video w-full h-full  overflow-hidden", customClass)}>
             <ReactPlayer

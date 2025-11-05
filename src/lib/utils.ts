@@ -29,7 +29,7 @@ export function formatCurrency(
  */
 export function formatNumber(
   value: number,
-  locale: string = "ar-SA"
+  locale: string = "en-SA"
 ): string {
   return new Intl.NumberFormat(locale).format(value);
 }

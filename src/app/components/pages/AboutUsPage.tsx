@@ -13,7 +13,7 @@ const AboutUsPage = () => {
     const t = useTranslations();
     const userLang = useLocale();
     const { data, isLoading, isError, error } = useQuery({
-        queryKey: ["homePage", userLang],
+        queryKey: ["aboutUsPage", userLang],
         queryFn: async () => {
             try {
                 const res = await handleFetchRequest("aboutUsPage", "GET", null, userLang);
@@ -25,14 +25,13 @@ const AboutUsPage = () => {
         staleTime: 1000 * 60 * 5,
         retry: 2,
     });
-    console.log(data?.data?.sections?.mission);
-    
+
     return (
         <Fragment>
-            <GeneralBanner title={t("menu.about_us")} description="Real State In Saudi Arabia: idea for living and investing" imageSrc="/images/about.png" />
+            <GeneralBanner title={t("menu.about_us")} imageSrc={"/images/about_us.png"} />
             <VisionMissionSection mission={data?.data?.sections?.mission} vision={data?.data?.sections?.vision} />
             <ValuesSection />
-            <PartnersSuccessSection partners_and_subsidiaries={data?.data?.sections?.partners_and_subsidiaries}/>
+            <PartnersSuccessSection partners_and_subsidiaries={data?.data?.sections?.partners_and_subsidiaries} />
             <ContactSection />
         </Fragment>
     );

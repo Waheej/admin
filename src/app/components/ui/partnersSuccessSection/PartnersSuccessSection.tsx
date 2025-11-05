@@ -6,7 +6,7 @@ import GeneralContainer from "@/app/components/wrappers/generalContainer/General
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { GoArrowRight } from "react-icons/go";
@@ -29,7 +29,7 @@ type PartnersSuccessSectionProps = {
 const PartnersSuccessSection = ({ partners_and_subsidiaries }: { partners_and_subsidiaries: PartnersSuccessSectionProps }) => {
     const sectionRef = useRef<HTMLDivElement>(null);
     const t = useTranslations();
-
+    const userLang = useLocale();
     // تحديد أول tab متاح بناءً على البيانات
     const initialTab = useMemo(() => {
         if (partners_and_subsidiaries?.partner && partners_and_subsidiaries.partner.length > 0) {
@@ -202,31 +202,16 @@ const PartnersSuccessSection = ({ partners_and_subsidiaries }: { partners_and_su
                                             <GeneralButton
                                                 isBlack
                                                 isPillEffect
+                                                isFlip={userLang !== "ar"}
                                                 icon={<GoArrowRight size={20} />}
                                                 customClass="inline-block mt-2 text-primary text-xs"
                                                 title={t("about.visit_website")}
-                                                url={partner.url}
-                                            />
+                                                url={partner.url} />
                                         )}
                                     </div>
                                 </div>
                             </div>
                         ))}
-                    </div>
-                )}
-
-                {/* Simplified Logo Grid - بدل Logo Loop */}
-                {currentPartners && currentPartners.length > 0 && (
-                    <div className="pt-16 relative">
-                        <div className="flex items-center justify-center gap-8 flex-wrap grayscale hover:grayscale-0 transition-all duration-500">
-                            {currentPartners
-                                .filter((p) => p.img)
-                                .map((partner) => (
-                                    <div key={partner.id} className="relative w-32 h-20 opacity-60 hover:opacity-100 transition-opacity duration-300">
-                                        <Image src={partner.img} alt={partner.name} fill className="object-contain" />
-                                    </div>
-                                ))}
-                        </div>
                     </div>
                 )}
             </GeneralContainer>

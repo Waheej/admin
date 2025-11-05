@@ -76,7 +76,7 @@ const AboutSection = ({data}:any) => {
     return (
         <section  ref={ref} className="about-section bg-white h-screen flex items-center justify-center  overflow-hidden">
             <div className="about-section-image w-1/2 h-[40vh] relative rounded-3xl overflow-hidden">
-                <Image src={data?.media?.[0] || "/images/banner.png"} alt="About" fill sizes="(max-width: 768px) 100vw, 50vw" />
+                <Image src={data?.media?.[0] || "/images/about_section.png"} alt="About" fill sizes="(max-width: 768px) 100vw, 50vw" />
                 <div className="about-section-image-overlay absolute inset-0 top-0 left-0 bg-black/50 w-full h-full">
                     <GeneralContainer isSection customClass=" flex flex-col justify-between h-full">
                         <div className="about-section-image-overlay-header text-white">

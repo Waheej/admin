@@ -60,7 +60,7 @@ const SingleProjectPage = ({ slug }: { slug: string }) => {
                 download_btn={t("pages.download_brochure")}
                 isDownloadBorochure
             />
-            <ProjectUnitsSection projects={data?.data?.children} />
+            <ProjectUnitsSection projects={data?.data?.units} />
             <ProjectMap projects={data?.data?.children} />
             {data?.data?.news && data?.data?.news.length > 0 && (
                 <NewsSection data={data?.data?.news} isProjectNews={true} />

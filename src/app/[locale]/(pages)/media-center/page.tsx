@@ -2,9 +2,9 @@ import MediaCenterPage from '@/app/components/pages/MediaCenterPage'
 import { generalMetaTag } from '@/app/helper/generalMetaTag';
 import type { Metadata } from 'next';
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-    const { locale } = await params;
-    return await generalMetaTag("/media-center", locale);
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+  const lang = params.locale || "en";
+  return await generalMetaTag("/newsList", lang);
 }
 
 export default function page() {

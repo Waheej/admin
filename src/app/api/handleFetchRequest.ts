@@ -8,6 +8,7 @@ export const handleFetchRequest = async (url: string, method: "GET" | "POST" | "
             data,
             headers: { 
                 "Accept-Language": lang,
+                lang:lang
             },
         });
         

@@ -50,8 +50,8 @@ const FeaturedProjects = ({data}:any) => {
                 {/* <FilterTabs btnUrl="/projects" btnText={t("btn_text.veiw_all_projects")} /> */}
                 <div className="featured-project-container grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 mt-8 gap-6">
                     {data?.data?.map((data: any, index: any) => (
-                        data?.children?.map((unit: any) => (
-                            <UnitCard data={unit} key={unit.id} showProjectLabel/>
+                        data?.units?.map((unit: any) => (
+                            <UnitCard data={unit} key={unit.id} showProjectLabel isLink/>
                         ))
                     ))}
                 </div>

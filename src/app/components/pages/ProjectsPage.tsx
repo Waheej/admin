@@ -25,7 +25,7 @@ const ProjectsPage = () => {
                 title={t("pages.projects_title")}
                 imageSrc="/images/banner.png"
             />
-            <ProjectsPageSection data={data?.data} />
+            <ProjectsPageSection data={data?.data?.sections} />
         </>
     );
 };

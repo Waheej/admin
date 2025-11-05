@@ -122,7 +122,7 @@ const VisionMissionSection = ({ mission, vision }: VisionMissionSectionProps) =>
 
             {/* Mission Section */}
             {missionData?.missionData && (
-                <section ref={missionRef} className="mission-section bg-white">
+                <section ref={missionRef} className="mission-section bg-white xl:px-20 lg:px-20 p-0">
                     <GeneralContainer isSection customClass="px-0!">
                         <div className="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-1 grid-cols-1 gap-10 items-center justify-between">
                             <div className="space-y-6 xl:order-1 lg:order-1 md:order-2 order-2">
