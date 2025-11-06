@@ -39,9 +39,9 @@ const HomePage = () => {
                 title={data?.data?.sections?.[0]?.title}
                 description={data?.data?.sections?.[0]?.description}
                 isVideo
-                imageSrc={data?.data?.sections?.[0]?.media?.[0]}
-                videoSrc={data?.data?.sections?.[0]?.video?.[0]}
-                VideoPopupSrc={data?.data?.sections?.[0]?.video?.[0]}
+                imageSrc={!data?.data?.sections?.[0]?.videos?.[0] && data?.data?.sections?.[0]?.media?.[0]}
+                videoSrc={data?.data?.sections?.[0]?.videos?.[0]}
+                VideoPopupSrc={data?.data?.sections?.[0]?.videos?.[0]}
             />
             <AboutSection data={data?.data?.sections?.[1] } />
             <FeaturedProjects data={data?.data?.sections?.[2]} />
