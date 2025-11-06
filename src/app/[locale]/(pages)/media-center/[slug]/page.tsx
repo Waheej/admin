@@ -10,5 +10,6 @@ export async function generateMetadata({ params }: { params: { locale: string; s
 
 export default function page({ params }: { params: { locale: string; slug: string } }) {
   const slug = params.slug || "";
+  // @ts-ignore
   return <SingleMediaCenterPage slug={slug} />;
 }
