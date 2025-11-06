@@ -1,5 +1,6 @@
 "use client";
 import GeneralButton from "@/app/components/common/generalButton/GeneralButton";
+import GeneralForm from "@/app/components/common/generalForm/GeneralForm";
 import GeneralVideo from "@/app/components/common/generalVideo/GeneralVideo";
 import VideoElement from "@/app/components/common/videoElement/VideoElement";
 import ParallaxImage from "@/app/components/module/parallaxImage/ParallaxImage";
@@ -8,9 +9,11 @@ import { downLoadIcon, playVideo, sendIcon } from "@/app/data/data";
 import useGeneralPopUp from "@/app/store/useGeneralPopUp";
 import { useInitialLoader } from "@/app/store/useInitialLoader";
 import { useLoadingRoutePage } from "@/app/store/useLoadingRoutePage";
+import useToggleMenu from "@/app/store/useToggleMenu";
 import { useGSAP } from "@gsap/react";
 import clsx from "clsx";
 import gsap from "gsap";
+import { useLenis } from "lenis/react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import React, { useEffect, useRef } from "react";
@@ -89,6 +92,8 @@ const GeneralBanner: React.FC<TGeneralBanner> = ({
         }
     }, [visible, isTransitioning]);
     const lang = useLocale();
+    const lenis = useLenis();
+    const { closeMenu } = useToggleMenu();
     return (
         <section
             ref={containerRef}
@@ -133,7 +138,22 @@ const GeneralBanner: React.FC<TGeneralBanner> = ({
                                             </div>
                                         )}
                                         {/* {isDownloadBorochure && <GeneralButton title={t("common.download_brochure")} isWhite icon={downLoadIcon} isPillEffect />} */}
-                                        {enquiry_btn && <GeneralButton title={enquiry_btn} isWhite icon={sendIcon} isPillEffect />}
+                                        {enquiry_btn && <GeneralButton title={enquiry_btn} isWhite icon={sendIcon} isPillEffect customClick={() => {
+                                            const section = document.querySelector("#contact");
+                                            if (section) {
+                                                setTimeout(() => {
+                                                    lenis?.start()
+                                                    lenis?.scrollTo(section as HTMLElement, {
+                                                        offset: 0,
+                                                        duration: 2,
+                                                        easing: (t) => 1 - Math.pow(1 - t, 3),
+                                                    });
+                                                }, 2000);
+                                            } else {
+                                                setChildren(<GeneralForm customClass="!bg-white mx-auto xl:w-1/2 lg:w-1/2 md:w-1/2 w-full p-8 rounded-2xl" />, "contact");
+                                                closeMenu()
+                                            }
+                                        }} />}
                                     </div>
                                 </div>
                             </div>
