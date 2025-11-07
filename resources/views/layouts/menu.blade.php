@@ -94,8 +94,7 @@
                 </a>
             </li>
         @endif
-
-        {{-- @if (canPass('partners_and_subsidiaries_index'))
+        @if (canPass('partners_and_subsidiaries_index'))
             <li class="nav-item">
                 <a href="{{ route('admin.partners_and_subsidiaries.index') }}"
                     class="{{ str_contains($currentRoute, 'partners_and_subsidiaries') ? 'nav-link active' : 'nav-link' }}">
@@ -103,8 +102,7 @@
                     <p>{{ trans('cruds.partners_and_subsidiaries.title_plural') }}</p>
                 </a>
             </li>
-        @endif --}}
-
+        @endif
         @if (canPass('contact_messages_index'))
             <li class="nav-item">
                 <a href="{{ route('admin.contact_messages.index') }}"
