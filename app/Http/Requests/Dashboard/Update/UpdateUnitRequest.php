@@ -60,6 +60,7 @@ class UpdateUnitRequest extends FormRequest
                 Rule::exists('projects', 'id'),
             ],
             'price' => [
+                'nullable',
                 'string',
             ],
             'space_area' => [

@@ -70,7 +70,7 @@ class CreateUnitRequest extends FormRequest
                 Rule::exists('projects', 'id'),
             ],
             'price' => [
-                'required',
+                'nullable',
                 'string',
             ],
             'area_space' => [
