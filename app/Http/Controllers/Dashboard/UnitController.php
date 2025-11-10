@@ -92,12 +92,13 @@ class UnitController extends Controller
         abort_if(!canPass($this->path . '_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         try {
             $record = Model::create($request->validated());
+            $mainPath = Model::FILE_UPLOAD_PATH;
             if ($request->has('map') && $request->map  != null) {
-                $fileName = uploadMedia($request->map, $this->path);
+                $fileName = uploadMedia($request->map, $mainPath);
                 (new FileService)->addFile(
                     $record,
                     $fileName,
-                    $this->path,
+                    $mainPath,
                     'map',
                     $request->map->getClientOriginalExtension(),
                     'attachments',
@@ -106,11 +107,11 @@ class UnitController extends Controller
             }
 
             if ($request->has('image') && $request->image  != null) {
-                $fileName = uploadMedia($request->image, $this->path);
+                $fileName = uploadMedia($request->image, $mainPath);
                 (new FileService)->addFile(
                     $record,
                     $fileName,
-                    $this->path,
+                    $mainPath,
                     'image',
                     $request->image->getClientOriginalExtension(),
                     'attachments',
@@ -119,11 +120,11 @@ class UnitController extends Controller
             }
 
             if ($request->has('image_mobile') && $request->image_mobile  != null) {
-                $fileName = uploadMedia($request->image_mobile, $this->path);
+                $fileName = uploadMedia($request->image_mobile, $mainPath);
                 (new FileService)->addFile(
                     $record,
                     $fileName,
-                    $this->path,
+                    $mainPath,
                     'image_mobile',
                     $request->image_mobile->getClientOriginalExtension(),
                     'attachments',
@@ -132,11 +133,11 @@ class UnitController extends Controller
             }
 
             if ($request->has('video') && $request->video  != null) {
-                $fileName = uploadMedia($request->video, $this->path);
+                $fileName = uploadMedia($request->video, $mainPath);
                 (new FileService)->addFile(
                     $record,
                     $fileName,
-                    $this->path,
+                    $mainPath,
                     'video',
                     $request->video->getClientOriginalExtension(),
                     'attachments',
@@ -147,12 +148,12 @@ class UnitController extends Controller
 
             if ($request->has('rendered_images') && is_array($request->rendered_images)) {
                 foreach ($request->rendered_images as $renderImages) {
-                    $fileName = uploadMedia($renderImages, $this->path);
+                    $fileName = uploadMedia($renderImages, $mainPath);
 
                     (new FileService)->addFile(
                         $record,
                         $fileName,
-                        $this->path,
+                        $mainPath,
                         'rendered_images',
                         $renderImages->getClientOriginalExtension(),
                         'attachments',
@@ -163,12 +164,12 @@ class UnitController extends Controller
 
             if ($request->has('rendered_images_mobile') && is_array($request->rendered_images_mobile)) {
                 foreach ($request->rendered_images_mobile as $renderImages) {
-                    $fileName = uploadMedia($renderImages, $this->path);
+                    $fileName = uploadMedia($renderImages, $mainPath);
 
                     (new FileService)->addFile(
                         $record,
                         $fileName,
-                        $this->path,
+                        $mainPath,
                         'rendered_images_mobile',
                         $renderImages->getClientOriginalExtension(),
                         'attachments',
@@ -215,21 +216,22 @@ class UnitController extends Controller
         try {
             $record = Model::findOrFail($id);
             $record->update($request->validated());
+            $mainPath = Model::FILE_UPLOAD_PATH;
             if ($request->has('map') && $request->map  != null) {
                 if ($record->map != null) {
                     (new FileService)->deleteFile(
                         $record->map,
-                        $this->path,
+                        $mainPath,
                         'map',
                         $record->id
                     );
                 }
-                $fileName = uploadMedia($request->map, $this->path);
+                $fileName = uploadMedia($request->map, $mainPath);
 
                 (new FileService)->addFile(
                     $record,
                     $fileName,
-                    $this->path,
+                    $mainPath,
                     'map',
                     $request->map->getClientOriginalExtension(),
                     'attachments',
@@ -241,17 +243,17 @@ class UnitController extends Controller
                 if ($record->image != null) {
                     (new FileService)->deleteFile(
                         $record->image,
-                        $this->path,
+                        $mainPath,
                         'image',
                         $record->id
                     );
                 }
-                $fileName = uploadMedia($request->image, $this->path);
+                $fileName = uploadMedia($request->image, $mainPath);
 
                 (new FileService)->addFile(
                     $record,
                     $fileName,
-                    $this->path,
+                    $mainPath,
                     'image',
                     $request->image->getClientOriginalExtension(),
                     'attachments',
@@ -263,17 +265,17 @@ class UnitController extends Controller
                 if ($record->image_mobile != null) {
                     (new FileService)->deleteFile(
                         $record->image_mobile,
-                        $this->path,
+                        $mainPath,
                         'image_mobile',
                         $record->id
                     );
                 }
-                $fileName = uploadMedia($request->image_mobile, $this->path);
+                $fileName = uploadMedia($request->image_mobile, $mainPath);
 
                 (new FileService)->addFile(
                     $record,
                     $fileName,
-                    $this->path,
+                    $mainPath,
                     'image_mobile',
                     $request->image_mobile->getClientOriginalExtension(),
                     'attachments',
@@ -285,17 +287,17 @@ class UnitController extends Controller
                 if ($record->video != null) {
                     (new FileService)->deleteFile(
                         $record->video,
-                        $this->path,
+                        $mainPath,
                         'video',
                         $record->id
                     );
                 }
-                $fileName = uploadMedia($request->video, $this->path);
+                $fileName = uploadMedia($request->video, $mainPath);
 
                 (new FileService)->addFile(
                     $record,
                     $fileName,
-                    $this->path,
+                    $mainPath,
                     'video',
                     $request->video->getClientOriginalExtension(),
                     'attachments',
@@ -305,12 +307,12 @@ class UnitController extends Controller
 
             if ($request->has('rendered_images') && is_array($request->rendered_images)) {
                 foreach ($request->rendered_images as $renderImages) {
-                    $fileName = uploadMedia($renderImages, $this->path);
+                    $fileName = uploadMedia($renderImages, $mainPath);
 
                     (new FileService)->addFile(
                         $record,
                         $fileName,
-                        $this->path,
+                        $mainPath,
                         'rendered_images',
                         $renderImages->getClientOriginalExtension(),
                         'attachments',
@@ -321,12 +323,12 @@ class UnitController extends Controller
 
             if ($request->has('rendered_images_mobile') && is_array($request->rendered_images_mobile)) {
                 foreach ($request->rendered_images_mobile as $renderImages) {
-                    $fileName = uploadMedia($renderImages, $this->path);
+                    $fileName = uploadMedia($renderImages, $mainPath);
 
                     (new FileService)->addFile(
                         $record,
                         $fileName,
-                        $this->path,
+                        $mainPath,
                         'rendered_images_mobile',
                         $renderImages->getClientOriginalExtension(),
                         'attachments',
