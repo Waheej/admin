@@ -39,16 +39,12 @@ class CreateUnitRequest extends FormRequest
                 'required',
                 'string',
             ],
-            'status' => [
-                'required',
-                'string',
-            ],
             'lat' => [
-                'required',
+                'nullable',
                 'string',
             ],
             'long' => [
-                'required',
+                'nullable',
                 'string',
             ],
             'city_en' => [
@@ -73,7 +69,7 @@ class CreateUnitRequest extends FormRequest
                 'nullable',
                 'string',
             ],
-            'area_space' => [
+            'space_area' => [
                 'required',
                 'integer',
             ],
@@ -83,13 +79,13 @@ class CreateUnitRequest extends FormRequest
                 'min:0',
             ],
             'map' => [
-                'required',
+                'nullable',
                 'file',
                 'mimes:jpeg,png,jpg,gif,svg,webp',
                 'max:10000', // Max size in KB
             ],
             'image' => [
-                'required',
+                'nullable',
                 'file',
                 'mimes:jpeg,png,jpg,gif,svg,webp',
                 'max:10000', // Max size in KB
@@ -111,7 +107,7 @@ class CreateUnitRequest extends FormRequest
                 'array',
             ],
             'rendered_images.*' => [
-               'file',
+                'file',
                 'mimes:jpeg,png,jpg,gif,svg,webp',
                 'max:10000', // Max size 10MB
             ],
@@ -120,7 +116,7 @@ class CreateUnitRequest extends FormRequest
                 'array',
             ],
             'rendered_images_mobile.*' => [
-              'file',
+                'file',
                 'mimes:jpeg,png,jpg,gif,svg,webp',
                 'max:10000', // Max size 10MB
             ],

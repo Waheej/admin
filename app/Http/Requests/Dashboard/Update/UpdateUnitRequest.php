@@ -35,13 +35,12 @@ class UpdateUnitRequest extends FormRequest
             'description_ar' => [
                 'string',
             ],
-            'status' => [
-                'string',
-            ],
             'lat' => [
+                'nullable',
                 'string',
             ],
             'long' => [
+                'nullable',
                 'string',
             ],
             'city_en' => [
@@ -68,7 +67,6 @@ class UpdateUnitRequest extends FormRequest
                 'integer',
             ],
             'order' => [
-                'nullable',
                 'integer',
                 'min:0',
             ],
